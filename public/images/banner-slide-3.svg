@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" width="100%" height="100%" fill="none" preserveAspectRatio="xMaxYMid slice">
+  <defs>
+    <!-- Daylight Modern Lab Ambient Gradient -->
+    <linearGradient id="bgLight3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+
+    <linearGradient id="shelfGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+
+    <linearGradient id="qrStandGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#F8FAFC" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <filter id="softShadow3" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+
+    <filter id="cardGlow3" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0256D0" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Lab Background - Fills Full 100% -->
+  <rect width="600" height="260" fill="url(#bgLight3)"/>
+
+  <!-- Architectural Wall Grid Pattern -->
+  <pattern id="dotGrid3" width="20" height="20" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1" fill="#CBD5E1" fill-opacity="0.45"/>
+  </pattern>
+  <rect width="600" height="260" fill="url(#dotGrid3)"/>
+
+  <!-- Left Fade Gradient to blend with slide text seamlessly -->
+  <rect width="180" height="260" fill="url(#bgLight3)" fill-opacity="0.95"/>
+
+  <!-- LAB POSTER ON WALL (Rules Lab RPL) -->
+  <g filter="url(#softShadow3)">
+    <rect x="180" y="25" width="85" height="110" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2"/>
+    <text x="190" y="44" font-family="system-ui, sans-serif" font-size="6" font-weight="700" fill="#0256D0" letter-spacing="0.5">RULES LAB RPL</text>
+    <line x1="190" y1="50" x2="255" y2="50" stroke="#E2E8F0" stroke-width="0.8"/>
+    <text x="190" y="63" font-family="system-ui, sans-serif" font-size="5.5" font-weight="600" fill="#334155">• Pinjam</text>
+    <text x="190" y="74" font-family="system-ui, sans-serif" font-size="5.5" font-weight="600" fill="#334155">• Gunakan</text>
+    <text x="190" y="85" font-family="system-ui, sans-serif" font-size="5.5" font-weight="600" fill="#334155">• Kembalikan</text>
+    <text x="190" y="96" font-family="system-ui, sans-serif" font-size="5.5" font-weight="600" fill="#0256D0">• Bersama</text>
+    <text x="190" y="108" font-family="system-ui, sans-serif" font-size="5" font-weight="500" fill="#64748B">Jaga Fasilitas Kita</text>
+  </g>
+
+  <!-- HANGING GREEN POTHOS PLANT (Top Mid) -->
+  <g>
+    <path d="M 285 0 L 285 36" stroke="#94A3B8" stroke-width="1.2"/>
+    <ellipse cx="285" cy="38" rx="10" ry="5" fill="#64748B"/>
+    <path d="M 285 40 Q 278 65 281 95 Q 274 120 277 140" fill="none" stroke="#22C55E" stroke-width="1.2"/>
+    <path d="M 286 40 Q 296 62 292 88 Q 300 112 296 132" fill="none" stroke="#16A34A" stroke-width="1.2"/>
+    <ellipse cx="277" cy="62" rx="4.5" ry="7" fill="#22C55E" transform="rotate(-25 277 62)"/>
+    <ellipse cx="291" cy="70" rx="5" ry="8" fill="#15803D" transform="rotate(30 291 70)"/>
+    <ellipse cx="279" cy="90" rx="4.5" ry="7" fill="#4ADE80" transform="rotate(-15 279 90)"/>
+    <ellipse cx="297" cy="100" rx="5" ry="8" fill="#16A34A" transform="rotate(25 297 100)"/>
+    <ellipse cx="275" cy="116" rx="4" ry="6.5" fill="#22C55E" transform="rotate(-20 275 116)"/>
+  </g>
+
+  <!-- INDUSTRIAL STORAGE SHELVES - SPANS TO FAR RIGHT (x=600) -->
+  <g filter="url(#softShadow3)">
+    <!-- Vertical Posts -->
+    <rect x="310" y="15" width="6" height="200" rx="1.5" fill="#CBD5E1"/>
+    <rect x="405" y="15" width="6" height="200" rx="1.5" fill="#CBD5E1"/>
+    <rect x="505" y="15" width="6" height="200" rx="1.5" fill="#CBD5E1"/>
+    <rect x="594" y="15" width="6" height="200" rx="1.5" fill="#CBD5E1"/>
+
+    <!-- Shelf 1 (Top) -->
+    <rect x="305" y="48" width="295" height="6" rx="1.5" fill="url(#shelfGrad3)" stroke="#94A3B8" stroke-width="0.8"/>
+    <!-- Camera Unit on Top Shelf -->
+    <rect x="330" y="26" width="38" height="22" rx="4" fill="#1E293B"/>
+    <circle cx="349" cy="37" r="8.5" fill="#0F172A" stroke="#0256D0" stroke-width="1.5"/>
+    <circle cx="349" cy="37" r="4.5" fill="#38BDF8"/>
+    <rect x="334" y="23" width="9" height="4" rx="1" fill="#475569"/>
+    <!-- Projector on Top Shelf -->
+    <rect x="420" y="24" width="65" height="24" rx="3.5" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+    <circle cx="436" cy="36" r="5.5" fill="#1E293B" stroke="#64748B" stroke-width="1.2"/>
+    <text x="448" y="38" font-family="system-ui, sans-serif" font-size="5.5" font-weight="600" fill="#334155">EPSON EB</text>
+    <!-- Right Storage Box on Top Shelf -->
+    <rect x="520" y="24" width="70" height="24" rx="3.5" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+    <text x="532" y="38" font-family="system-ui, sans-serif" font-size="5.5" font-weight="700" fill="#0256D0">CANON DSLR</text>
+
+    <!-- Shelf 2 (Middle) -->
+    <rect x="305" y="105" width="295" height="6" rx="1.5" fill="url(#shelfGrad3)" stroke="#94A3B8" stroke-width="0.8"/>
+    <!-- Headphones on Stand -->
+    <path d="M 336 105 L 336 75 C 336 63, 360 63, 360 75 L 360 105" fill="none" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+    <rect x="330" y="82" width="7.5" height="17" rx="3" fill="#0256D0"/>
+    <rect x="358.5" y="82" width="7.5" height="17" rx="3" fill="#0256D0"/>
+    <!-- LABTOOLS Bin -->
+    <rect x="420" y="78" width="68" height="27" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+    <rect x="432" y="87" width="44" height="9" rx="2" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="0.8"/>
+    <text x="438" y="94" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#0256D0">LABTOOLS</text>
+    <!-- SENSOR Bin on Right -->
+    <rect x="520" y="78" width="70" height="27" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+    <rect x="532" y="87" width="46" height="9" rx="2" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="0.8"/>
+    <text x="538" y="94" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#0256D0">ARDUINO KIT</text>
+
+    <!-- Shelf 3 (Lower) -->
+    <rect x="305" y="160" width="295" height="6" rx="1.5" fill="url(#shelfGrad3)" stroke="#94A3B8" stroke-width="0.8"/>
+    <!-- Stacked Laptops in Charging Station -->
+    <rect x="328" y="130" width="48" height="30" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+    <line x1="335" y1="138" x2="369" y2="138" stroke="#0256D0" stroke-width="1.5"/>
+    <line x1="335" y1="146" x2="369" y2="146" stroke="#38BDF8" stroke-width="1.5"/>
+    <line x1="335" y1="154" x2="369" y2="154" stroke="#94A3B8" stroke-width="1.5"/>
+    <!-- Tool Case on Lower Shelf -->
+    <rect x="410" y="132" width="175" height="28" rx="4.5" fill="#1E293B" stroke="#0F172A" stroke-width="1.2"/>
+    <rect x="465" y="128" width="30" height="4.5" rx="1.5" fill="#64748B"/>
+    <text x="445" y="150" font-family="system-ui, sans-serif" font-size="6.5" font-weight="bold" fill="#38BDF8">NETWORK TESTER KIT</text>
+  </g>
+
+  <!-- FOREGROUND DESK SURFACE - EXTENDS TO X=600 -->
+  <path d="M 0 205 L 600 205 L 600 260 L 0 260 Z" fill="#FFFFFF"/>
+  <line x1="0" y1="205" x2="600" y2="205" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="0" y="205" width="600" height="4" fill="#F8FAFC"/>
+
+  <!-- DESK ITEMS (Books, Acrylic QR Stand, Laptop) -->
+  <g filter="url(#softShadow3)">
+    <!-- Stacked Books on Desk -->
+    <rect x="180" y="190" width="80" height="15" rx="2" fill="#0256D0"/>
+    <rect x="180" y="180" width="75" height="11" rx="2" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="0.8"/>
+    <text x="188" y="188" font-family="system-ui, sans-serif" font-size="5.5" font-weight="700" fill="#0256D0">Buku Inventaris Lab</text>
+    <rect x="178" y="190" width="4" height="15" rx="1" fill="#1D4ED8"/>
+
+    <!-- Pen Holder -->
+    <rect x="270" y="172" width="22" height="34" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2"/>
+    <line x1="275" y1="175" x2="270" y2="156" stroke="#0256D0" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="280" y1="175" x2="280" y2="152" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+    <line x1="285" y1="175" x2="290" y2="157" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- ACRYLIC QR CODE SCAN STAND -->
+    <g filter="url(#cardGlow3)">
+      <path d="M 308 160 L 354 152 L 360 206 L 312 208 Z" fill="url(#qrStandGrad3)" stroke="#CBD5E1" stroke-width="1.2"/>
+      <path d="M 306 208 L 362 206 L 364 211 L 304 212 Z" fill="#94A3B8"/>
+
+      <text x="318" y="167" font-family="system-ui, sans-serif" font-size="4" font-weight="700" fill="#0256D0" transform="rotate(-3 318 167)">SCAN QR UNTUK</text>
+      <text x="319" y="172.5" font-family="system-ui, sans-serif" font-size="4.5" font-weight="800" fill="#0F172A" transform="rotate(-3 319 172.5)">PINJAM SEKARANG</text>
+
+      <g transform="translate(320, 175.5) rotate(-3)">
+        <rect width="21" height="21" fill="#FFFFFF" rx="1.5"/>
+        <rect x="1.5" y="1.5" width="6" height="6" fill="#0256D0"/>
+        <rect x="3" y="3" width="3" height="3" fill="#FFFFFF"/>
+        <rect x="13.5" y="1.5" width="6" height="6" fill="#0256D0"/>
+        <rect x="15" y="3" width="3" height="3" fill="#FFFFFF"/>
+        <rect x="1.5" y="13.5" width="6" height="6" fill="#0256D0"/>
+        <rect x="3" y="15" width="3" height="3" fill="#FFFFFF"/>
+        <rect x="9" y="3" width="2.5" height="2.5" fill="#0F172A"/>
+        <rect x="9" y="7.5" width="3" height="2.5" fill="#0256D0"/>
+        <rect x="4.5" y="9" width="2.5" height="3" fill="#0F172A"/>
+        <rect x="13.5" y="9" width="3" height="3" fill="#0256D0"/>
+        <rect x="9" y="13.5" width="3" height="3" fill="#0256D0"/>
+      </g>
+    </g>
+
+    <!-- LAPTOP ON DESK (Right Desk) -->
+    <path d="M 385 198 L 505 198 L 518 208 L 372 208 Z" fill="#1E293B"/>
+    <path d="M 389 134 L 500 134 L 505 198 L 385 198 Z" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <rect x="394" y="141" width="102" height="52" rx="1.5" fill="#0256D0"/>
+    <rect x="399" y="146" width="92" height="9" rx="1.5" fill="#FFFFFF"/>
+    <text x="402" y="153" font-family="system-ui, sans-serif" font-size="4" font-weight="bold" fill="#0256D0">PINJAMYUK • DASHBOARD SISWA</text>
+    <rect x="399" y="158" width="43" height="30" rx="1.5" fill="#1E293B"/>
+    <rect x="446" y="158" width="45" height="30" rx="1.5" fill="#FFFFFF"/>
+  </g>
+</svg>

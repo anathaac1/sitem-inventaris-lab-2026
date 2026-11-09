@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile UI Screens - Sistem Inventaris Lab RPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: #0B1220;
+            color: #E2E8F0;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            border-radius: 44px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 10px #1E293B, 0 0 0 12px #334155;
+            background: #F8FAFC;
+            color: #0F172A;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 26px;
+            background: #1E293B;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 50;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="p-8 min-h-screen">
+
+    <div class="max-w-7xl mx-auto mb-10 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-3">
+            UKK / SKKNI: J.612000.007.01 Merancang Mobile Interface
+        </div>
+        <h1 class="text-3xl font-extrabold text-white tracking-tight">Desain Antarmuka Mobile (Role Siswa)</h1>
+        <p class="text-slate-400 text-sm mt-2 max-w-2xl mx-auto">
+            Halaman ini siap di-capture menggunakan plugin <strong>HTML to Figma</strong> langsung di browser untuk menghasilkan frame vector editable di Figma.
+        </p>
+    </div>
+
+    <!-- CANVAS WRAPPER (4 MOBILE SCREENS) -->
+    <div class="flex flex-wrap items-start justify-center gap-10">
+
+        <!-- SCREEN 1: LOGIN -->
+        <div class="flex flex-col items-center gap-3">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">01. Login Screen</span>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <!-- Status bar -->
+                <div class="h-10 px-6 pt-3 flex justify-between items-center text-[10px] font-bold text-slate-800 shrink-0">
+                    <span>09:41</span>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                        <div class="w-4 h-2 rounded-xs border border-current p-0.5"><div class="h-full bg-current w-3/4"></div></div>
+                    </div>
+                </div>
+
+                <!-- Login Content -->
+                <div class="flex-1 px-6 flex flex-col justify-center bg-gradient-to-br from-[#F0F7FF] via-[#E4EFFD] to-[#D8E8FA] relative">
+                    <div class="bg-white rounded-3xl p-6 shadow-xl border border-white">
+                        <div class="flex flex-col items-center text-center mb-5">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center p-2 mb-3 shadow-xs">
+                                <img src="/images/app-logo.png" class="w-10 h-10 object-contain" alt="Logo">
+                            </div>
+                            <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Selamat Datang!</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Sistem Inventaris Lab RPL</p>
+                        </div>
+
+                        <div class="space-y-3.5 text-xs">
+                            <div>
+                                <label class="font-semibold text-slate-700 block mb-1">Username / Email Siswa</label>
+                                <input type="text" value="siswa1" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-900 bg-slate-50 font-medium" readonly>
+                            </div>
+                            <div>
+                                <label class="font-semibold text-slate-700 block mb-1">Kata Sandi</label>
+                                <div class="relative">
+                                    <input type="password" value="password" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-900 bg-slate-50 font-medium" readonly>
+                                    <span class="absolute right-3 top-2.5 text-slate-400">👁</span>
+                                </div>
+                            </div>
+                            <button class="w-full py-3 rounded-xl bg-[#0256D0] text-white font-bold text-xs shadow-md shadow-blue-500/25 mt-2">
+                                Masuk ke Sistem
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom home bar -->
+                <div class="h-6 flex items-center justify-center shrink-0"><div class="w-32 h-1 bg-slate-300 rounded-full"></div></div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: DASHBOARD -->
+        <div class="flex flex-col items-center gap-3">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">02. Beranda Siswa</span>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <!-- Status bar -->
+                <div class="h-10 px-6 pt-3 flex justify-between items-center text-[10px] font-bold text-slate-800 shrink-0 bg-white">
+                    <span>09:41</span>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                        <div class="w-4 h-2 rounded-xs border border-current p-0.5"><div class="h-full bg-current w-3/4"></div></div>
+                    </div>
+                </div>
+
+                <!-- App Header -->
+                <div class="px-4 py-2.5 bg-white border-b border-slate-100 flex items-center justify-between shrink-0">
+                    <div class="flex items-center gap-2">
+                        <img src="/images/app-logo.png" class="w-7 h-7 object-contain" alt="Logo">
+                        <span class="text-sm font-extrabold text-[#0256D0]">Pinjam<span class="text-slate-900">Yuk!</span></span>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-blue-100 text-[#0256D0] font-bold text-xs flex items-center justify-center">AR</div>
+                </div>
+
+                <!-- Scrollable Body -->
+                <div class="flex-1 overflow-y-auto p-4 space-y-4 hide-scrollbar">
+                    <!-- Greeting -->
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-sm font-extrabold text-slate-900">Hi, Ahmad Rizky! 👋</h2>
+                            <p class="text-[11px] text-slate-500">Mau pinjam alat praktikum apa?</p>
+                        </div>
+                        <span class="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-1 rounded-full border border-blue-200">XII RPL A</span>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="relative">
+                        <span class="absolute left-3 top-2.5 text-slate-400">🔍</span>
+                        <input type="text" placeholder="Cari laptop, mouse, kabel..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 bg-white text-xs text-slate-800" readonly>
+                    </div>
+
+                    <!-- Banner Carousel Hero -->
+                    <div class="rounded-2xl bg-gradient-to-r from-[#0256D0] to-blue-600 p-4 text-white shadow-md shadow-blue-500/15">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-200 bg-white/10 px-2 py-0.5 rounded">Lab Praktikum RPL</span>
+                        <h3 class="text-sm font-extrabold mt-1">Pinjam Alat Praktikum Cepat & Praktis</h3>
+                        <p class="text-[10px] text-blue-100 mt-1">Kembalikan tepat waktu sebelum jam pelajaran selesai.</p>
+                    </div>
+
+                    <!-- Category Quick Grid -->
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900 mb-2">Kategori Perangkat</h4>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="bg-white border border-slate-200 rounded-xl p-2.5 flex flex-col items-center gap-1">
+                                <span class="text-lg">💻</span>
+                                <span class="text-[10px] font-semibold text-slate-700">Laptop</span>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl p-2.5 flex flex-col items-center gap-1">
+                                <span class="text-lg">🖱️</span>
+                                <span class="text-[10px] font-semibold text-slate-700">Peripheral</span>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl p-2.5 flex flex-col items-center gap-1">
+                                <span class="text-lg">🔧</span>
+                                <span class="text-[10px] font-semibold text-slate-700">Tools</span>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl p-2.5 flex flex-col items-center gap-1">
+                                <span class="text-lg">⚡</span>
+                                <span class="text-[10px] font-semibold text-slate-700">Elektrikal</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Available Tools List -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-xs font-bold text-slate-900">Alat Siap Pinjam</h4>
+                            <span class="text-[11px] text-[#0256D0] font-semibold">Lihat Semua →</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div class="bg-white border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center shadow-2xs">
+                                <div class="w-full h-16 bg-slate-50 rounded-lg flex items-center justify-center text-2xl mb-2">💻</div>
+                                <span class="text-[9px] font-mono font-bold bg-slate-100 px-1.5 py-0.5 rounded text-slate-600 mb-1">LP-001</span>
+                                <h5 class="text-xs font-bold text-slate-900 truncate w-full">Laptop Asus ROG</h5>
+                                <span class="text-[10px] font-semibold text-emerald-600 mt-1">● 6 Tersedia</span>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center shadow-2xs">
+                                <div class="w-full h-16 bg-slate-50 rounded-lg flex items-center justify-center text-2xl mb-2">🖱️</div>
+                                <span class="text-[9px] font-mono font-bold bg-slate-100 px-1.5 py-0.5 rounded text-slate-600 mb-1">PR-002</span>
+                                <h5 class="text-xs font-bold text-slate-900 truncate w-full">Mouse Logitech</h5>
+                                <span class="text-[10px] font-semibold text-emerald-600 mt-1">● 12 Tersedia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Navigation Bar -->
+                <div class="h-14 bg-white border-t border-slate-200 px-6 flex items-center justify-between shrink-0">
+                    <div class="flex flex-col items-center text-[#0256D0] font-bold">
+                        <span class="text-sm">🏠</span>
+                        <span class="text-[10px] mt-0.5">Home</span>
+                    </div>
+                    <div class="flex flex-col items-center text-slate-400">
+                        <span class="text-sm">📦</span>
+                        <span class="text-[10px] mt-0.5">Alat</span>
+                    </div>
+                    <div class="flex flex-col items-center text-slate-400">
+                        <span class="text-sm">📋</span>
+                        <span class="text-[10px] mt-0.5">Peminjaman</span>
+                    </div>
+                    <div class="flex flex-col items-center text-slate-400">
+                        <span class="text-sm">👤</span>
+                        <span class="text-[10px] mt-0.5">Profile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: KATALOG ALAT -->
+        <div class="flex flex-col items-center gap-3">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">03. Katalog & Filter</span>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="h-10 px-6 pt-3 flex justify-between items-center text-[10px] font-bold text-slate-800 shrink-0 bg-white">
+                    <span>09:41</span>
+                    <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg></div>
+                </div>
+
+                <div class="px-4 py-2.5 bg-white border-b border-slate-100 flex items-center justify-between shrink-0">
+                    <h2 class="text-sm font-bold text-slate-900">Katalog Alat Lab</h2>
+                    <span class="text-[11px] text-slate-500 font-medium">8 Perangkat</span>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-4 space-y-3 hide-scrollbar">
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Cari nama atau kode alat..." class="flex-1 px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs" readonly>
+                        <button class="px-3 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold">Filter</button>
+                    </div>
+
+                    <!-- Category Chips -->
+                    <div class="flex gap-1.5 overflow-x-auto pb-1 hide-scrollbar text-xs">
+                        <span class="px-3 py-1 rounded-full bg-[#0256D0] text-white font-semibold shrink-0">Semua</span>
+                        <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-600 font-medium shrink-0">Laptop</span>
+                        <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-600 font-medium shrink-0">Peripheral</span>
+                        <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-600 font-medium shrink-0">Tools</span>
+                    </div>
+
+                    <!-- Grid of items -->
+                    <div class="grid grid-cols-2 gap-2.5 pt-1">
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center shadow-2xs">
+                            <div class="w-full h-16 bg-slate-50 rounded-lg flex items-center justify-center text-2xl mb-1.5">💻</div>
+                            <span class="text-[9px] font-mono font-bold bg-slate-100 px-1 py-0.5 rounded text-slate-600 mb-1">LP-001</span>
+                            <h5 class="text-xs font-bold text-slate-900 truncate w-full">Laptop Asus ROG</h5>
+                            <span class="text-[10px] font-semibold text-emerald-600 mt-1">● 6 Tersedia</span>
+                            <button class="w-full mt-2 py-1.5 rounded-lg bg-blue-50 text-[#0256D0] font-bold text-[10px]">Pinjam</button>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center shadow-2xs">
+                            <div class="w-full h-16 bg-slate-50 rounded-lg flex items-center justify-center text-2xl mb-1.5">💻</div>
+                            <span class="text-[9px] font-mono font-bold bg-slate-100 px-1 py-0.5 rounded text-slate-600 mb-1">LP-002</span>
+                            <h5 class="text-xs font-bold text-slate-900 truncate w-full">Laptop ThinkPad</h5>
+                            <span class="text-[10px] font-semibold text-emerald-600 mt-1">● 4 Tersedia</span>
+                            <button class="w-full mt-2 py-1.5 rounded-lg bg-blue-50 text-[#0256D0] font-bold text-[10px]">Pinjam</button>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center shadow-2xs">
+                            <div class="w-full h-16 bg-slate-50 rounded-lg flex items-center justify-center text-2xl mb-1.5">🖱️</div>
+                            <span class="text-[9px] font-mono font-bold bg-slate-100 px-1 py-0.5 rounded text-slate-600 mb-1">PR-002</span>
+                            <h5 class="text-xs font-bold text-slate-900 truncate w-full">Mouse Logitech</h5>
+                            <span class="text-[10px] font-semibold text-emerald-600 mt-1">● 12 Tersedia</span>
+                            <button class="w-full mt-2 py-1.5 rounded-lg bg-blue-50 text-[#0256D0] font-bold text-[10px]">Pinjam</button>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center shadow-2xs">
+                            <div class="w-full h-16 bg-slate-50 rounded-lg flex items-center justify-center text-2xl mb-1.5">🔧</div>
+                            <span class="text-[9px] font-mono font-bold bg-slate-100 px-1 py-0.5 rounded text-slate-600 mb-1">TL-004</span>
+                            <h5 class="text-xs font-bold text-slate-900 truncate w-full">Tang Crimping RJ45</h5>
+                            <span class="text-[10px] font-semibold text-rose-500 mt-1">● Habis Dipinjam</span>
+                            <button class="w-full mt-2 py-1.5 rounded-lg bg-slate-100 text-slate-400 font-bold text-[10px]" disabled>Habis</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-14 bg-white border-t border-slate-200 px-6 flex items-center justify-between shrink-0">
+                    <div class="flex flex-col items-center text-slate-400"><span class="text-sm">🏠</span><span class="text-[10px] mt-0.5">Home</span></div>
+                    <div class="flex flex-col items-center text-[#0256D0] font-bold"><span class="text-sm">📦</span><span class="text-[10px] mt-0.5">Alat</span></div>
+                    <div class="flex flex-col items-center text-slate-400"><span class="text-sm">📋</span><span class="text-[10px] mt-0.5">Peminjaman</span></div>
+                    <div class="flex flex-col items-center text-slate-400"><span class="text-sm">👤</span><span class="text-[10px] mt-0.5">Profile</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: PEMINJAMAN & RIWAYAT -->
+        <div class="flex flex-col items-center gap-3">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">04. Log Peminjaman</span>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="h-10 px-6 pt-3 flex justify-between items-center text-[10px] font-bold text-slate-800 shrink-0 bg-white">
+                    <span>09:41</span>
+                    <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg></div>
+                </div>
+
+                <!-- Tabs: Aktif vs Riwayat -->
+                <div class="bg-white border-b border-slate-200 px-4 pt-1 flex gap-4 shrink-0">
+                    <button class="pb-2.5 text-xs font-bold border-b-2 border-[#0256D0] text-[#0256D0] flex items-center gap-1.5">
+                        <span>Aktif</span>
+                        <span class="px-1.5 py-0.2 rounded-full bg-blue-100 text-blue-700 text-[10px]">2</span>
+                    </button>
+                    <button class="pb-2.5 text-xs font-bold border-b-2 border-transparent text-slate-400 flex items-center gap-1.5">
+                        <span>Riwayat</span>
+                        <span class="px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-500 text-[10px]">7</span>
+                    </button>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-4 space-y-3 hide-scrollbar">
+                    <!-- Active Card 1 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-3.5 shadow-2xs">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-10 h-10 rounded-xl bg-blue-50 text-xl flex items-center justify-center">💻</div>
+                                <div>
+                                    <span class="text-[9px] font-mono font-bold bg-slate-100 px-1.5 py-0.5 rounded text-slate-600">LP-001</span>
+                                    <h4 class="text-xs font-bold text-slate-900 mt-0.5">Laptop Asus ROG</h4>
+                                </div>
+                            </div>
+                            <span class="text-[9px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">Dipinjam</span>
+                        </div>
+                        <div class="mt-3 pt-2.5 border-t border-slate-100 text-[11px] text-slate-500 space-y-1">
+                            <div class="flex justify-between"><span>Tanggal Pinjam:</span><strong class="text-slate-700">23 Okt 2026</strong></div>
+                            <div class="flex justify-between"><span>Batas Kembali:</span><strong class="text-amber-600">Hari ini, 15:00 WIB</strong></div>
+                        </div>
+                        <button class="w-full mt-3 py-2 rounded-xl bg-[#0256D0] text-white font-bold text-xs shadow-xs">
+                            Kembalikan Alat
+                        </button>
+                    </div>
+
+                    <!-- Active Card 2 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-3.5 shadow-2xs">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-10 h-10 rounded-xl bg-blue-50 text-xl flex items-center justify-center">🖱️</div>
+                                <div>
+                                    <span class="text-[9px] font-mono font-bold bg-slate-100 px-1.5 py-0.5 rounded text-slate-600">PR-002</span>
+                                    <h4 class="text-xs font-bold text-slate-900 mt-0.5">Mouse Logitech G102</h4>
+                                </div>
+                            </div>
+                            <span class="text-[9px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">Dipinjam</span>
+                        </div>
+                        <div class="mt-3 pt-2.5 border-t border-slate-100 text-[11px] text-slate-500 space-y-1">
+                            <div class="flex justify-between"><span>Tanggal Pinjam:</span><strong class="text-slate-700">23 Okt 2026</strong></div>
+                            <div class="flex justify-between"><span>Batas Kembali:</span><strong class="text-amber-600">Hari ini, 16:30 WIB</strong></div>
+                        </div>
+                        <button class="w-full mt-3 py-2 rounded-xl bg-[#0256D0] text-white font-bold text-xs shadow-xs">
+                            Kembalikan Alat
+                        </button>
+                    </div>
+                </div>
+
+                <div class="h-14 bg-white border-t border-slate-200 px-6 flex items-center justify-between shrink-0">
+                    <div class="flex flex-col items-center text-slate-400"><span class="text-sm">🏠</span><span class="text-[10px] mt-0.5">Home</span></div>
+                    <div class="flex flex-col items-center text-slate-400"><span class="text-sm">📦</span><span class="text-[10px] mt-0.5">Alat</span></div>
+                    <div class="flex flex-col items-center text-[#0256D0] font-bold"><span class="text-sm">📋</span><span class="text-[10px] mt-0.5">Peminjaman</span></div>
+                    <div class="flex flex-col items-center text-slate-400"><span class="text-sm">👤</span><span class="text-[10px] mt-0.5">Profile</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

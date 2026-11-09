@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" width="100%" height="100%" fill="none" preserveAspectRatio="xMaxYMid slice">
+  <defs>
+    <!-- Dark Midnight Ambient Gradient -->
+    <linearGradient id="bgDark4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050C16"/>
+      <stop offset="50%" stop-color="#071220"/>
+      <stop offset="100%" stop-color="#0A1C33"/>
+    </linearGradient>
+
+    <linearGradient id="warmGlow4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#071220" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="darkShadow4" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+
+    <filter id="cyanGlow4" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="8" flood-color="#38BDF8" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Dark Room Background - Fills Full 100% -->
+  <rect width="600" height="260" fill="url(#bgDark4)"/>
+
+  <!-- Warm / Cool Ambient Highlights -->
+  <circle cx="530" cy="60" r="110" fill="url(#warmGlow4)"/>
+  <circle cx="410" cy="140" r="130" fill="#0284C7" fill-opacity="0.1"/>
+
+  <!-- Left Fade Gradient to blend with slide text smoothly -->
+  <rect width="180" height="260" fill="url(#bgDark4)" fill-opacity="0.95"/>
+
+  <!-- WALL POSTER (Barang Kembali, Manfaat Tetap Berlanjut) -->
+  <g filter="url(#darkShadow4)">
+    <rect x="180" y="24" width="100" height="135" rx="6" fill="#0D1A2D" stroke="#1E293B" stroke-width="1.2"/>
+    <rect x="188" y="34" width="84" height="19" rx="3" fill="#0A1424" stroke="#0284C7" stroke-width="0.6"/>
+    <text x="194" y="43" font-family="system-ui, sans-serif" font-size="6" font-weight="800" fill="#FFFFFF">KEDISIPLINAN LAB</text>
+    <text x="194" y="50" font-family="system-ui, sans-serif" font-size="5" font-weight="600" fill="#38BDF8">Tertib &amp; Bertanggung Jawab</text>
+
+    <!-- Main Message Headline -->
+    <text x="188" y="69" font-family="system-ui, sans-serif" font-size="6.5" font-weight="800" fill="#FFFFFF">Barang Kembali,</text>
+    <text x="188" y="78" font-family="system-ui, sans-serif" font-size="6.5" font-weight="800" fill="#38BDF8">Manfaat Tetap</text>
+    <text x="188" y="87" font-family="system-ui, sans-serif" font-size="6.5" font-weight="800" fill="#38BDF8">Berlanjut.</text>
+
+    <line x1="188" y1="95" x2="272" y2="95" stroke="#1E293B" stroke-width="0.8"/>
+
+    <text x="188" y="106" font-family="system-ui, sans-serif" font-size="5" font-weight="500" fill="#94A3B8">✓ Letakkan sesuai rak</text>
+    <text x="188" y="115" font-family="system-ui, sans-serif" font-size="5" font-weight="500" fill="#94A3B8">✓ Konfirmasi pengembalian</text>
+    <text x="188" y="124" font-family="system-ui, sans-serif" font-size="5" font-weight="500" fill="#94A3B8">✓ Rapikan kabel &amp; port</text>
+
+    <rect x="188" y="132" width="84" height="19" rx="3" fill="#08101C"/>
+    <text x="193" y="141" font-family="system-ui, sans-serif" font-size="4.5" font-weight="600" fill="#64748B">Terima Kasih Telah Menjaga</text>
+    <text x="193" y="148" font-family="system-ui, sans-serif" font-size="4.5" font-weight="700" fill="#38BDF8">Fasilitas Bersama Kita</text>
+  </g>
+
+  <!-- POTTED INDOOR PLANT ON BACKGROUND SHELF -->
+  <g filter="url(#darkShadow4)">
+    <rect x="300" y="110" width="24" height="20" rx="3" fill="#1E293B" stroke="#334155" stroke-width="0.8"/>
+    <path d="M 312 110 Q 300 80 296 55 Q 308 75 312 110" fill="#15803D"/>
+    <path d="M 312 110 Q 312 70 312 45 Q 316 70 312 110" fill="#16A34A"/>
+    <path d="M 312 110 Q 324 75 332 60 Q 320 85 312 110" fill="#22C55E"/>
+    <path d="M 312 110 Q 292 90 288 78 Q 304 95 312 110" fill="#15803D"/>
+  </g>
+
+  <!-- RETURN COUNTER DESK SURFACE - EXTENDS FULL BLEED TO X=600 -->
+  <path d="M 0 205 L 600 205 L 600 260 L 0 260 Z" fill="#0A121E"/>
+  <line x1="0" y1="205" x2="600" y2="205" stroke="#1E293B" stroke-width="2"/>
+  <rect x="0" y="205" width="600" height="4" fill="#101D2F"/>
+
+  <!-- HARDWARE SETUP: RETURN TRAY, SCANNER, LAPTOP -->
+  <g filter="url(#darkShadow4)">
+    <!-- RETURN CHECKLIST BINDER / TRAY (Left) -->
+    <g transform="translate(250, 180)">
+      <rect x="0" y="8" width="70" height="24" rx="3" fill="#080F18" stroke="#1E293B" stroke-width="0.8"/>
+      <rect x="4" y="0" width="62" height="28" rx="2.5" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+      <rect x="27" y="-4" width="16" height="6.5" rx="1.5" fill="#475569"/>
+      <line x1="9" y1="8" x2="60" y2="8" stroke="#0256D0" stroke-width="1.2"/>
+      <text x="9" y="14" font-family="system-ui, sans-serif" font-size="4" font-weight="bold" fill="#0F172A">STATUS PENGEMBALIAN</text>
+      <!-- Green ticks -->
+      <circle cx="12" cy="20" r="2.5" fill="#DCFCE7"/>
+      <path d="M 11 20 L 11.8 20.8 L 13.5 19.2" stroke="#16A34A" stroke-width="0.8" stroke-linecap="round"/>
+      <line x1="17" y1="20" x2="56" y2="20" stroke="#64748B" stroke-width="0.8"/>
+    </g>
+
+    <!-- BARCODE SCANNER ON CRADLE (Center) -->
+    <g transform="translate(335, 155)">
+      <ellipse cx="16" cy="56" rx="14" ry="5" fill="#1E293B" stroke="#334155" stroke-width="0.8"/>
+      <line x1="16" y1="55" x2="16" y2="35" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 8 27 L 27 23 L 33 36 L 9 38 Z" fill="#0F172A" stroke="#0284C7" stroke-width="1.2"/>
+      <rect x="29" y="25" width="3.5" height="9.5" rx="1" fill="#38BDF8" filter="url(#cyanGlow4)"/>
+    </g>
+
+    <!-- LAPTOP DISPLAYING RETURN CONFIRMATION (Right) -->
+    <g transform="translate(380, 135)">
+      <path d="M 0 72 L 130 72 L 144 84 L -12 84 Z" fill="#0F172A" stroke="#1E293B" stroke-width="1.2"/>
+      <path d="M 4 0 L 125 0 L 130 72 L 0 72 Z" fill="#080E18" stroke="#1E293B" stroke-width="1.5"/>
+      <rect x="9" y="6" width="112" height="60" rx="2" fill="#0A1424" stroke="#10B981" stroke-width="0.8"/>
+
+      <!-- App Header -->
+      <rect x="12" y="9" width="106" height="9" rx="1.5" fill="#0F1C30"/>
+      <circle cx="17" cy="13.5" r="2" fill="#10B981"/>
+      <text x="22" y="16" font-family="system-ui, sans-serif" font-size="4" font-weight="bold" fill="#10B981">PENGEMBALIAN SUKSES DIVERIFIKASI</text>
+
+      <!-- Big Checkmark Badge -->
+      <circle cx="65" cy="35" r="11" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+      <path d="M 59.5 35 L 63.5 39 L 70.5 31" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="45" y="52" font-family="system-ui, sans-serif" font-size="4.5" font-weight="bold" fill="#FFFFFF">KONDISI ALAT: LENGKAP</text>
+      <text x="46.5" y="58" font-family="system-ui, sans-serif" font-size="3.5" font-weight="medium" fill="#94A3B8">Stok dikembalikan ke rak otomatis</text>
+    </g>
+  </g>
+</svg>

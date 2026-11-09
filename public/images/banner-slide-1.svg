@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" width="100%" height="100%" fill="none" preserveAspectRatio="xMaxYMid slice">
+  <defs>
+    <!-- Light Ambient Background -->
+    <linearGradient id="bgLight1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#EFF6FF"/>
+    </linearGradient>
+
+    <linearGradient id="laptopBody1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <linearGradient id="screenGlow1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0256D0"/>
+      <stop offset="60%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <filter id="softShadow1" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+
+    <filter id="badgeGlow1" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0256D0" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Light Background - Fills Full Canvas -->
+  <rect width="600" height="260" fill="url(#bgLight1)"/>
+
+  <!-- Subtle Soft Blue Glow Circles -->
+  <circle cx="440" cy="130" r="130" fill="#DBEAFE" fill-opacity="0.45" filter="url(#softShadow1)"/>
+  <circle cx="530" cy="70" r="80" fill="#E0F2FE" fill-opacity="0.5"/>
+
+  <!-- Left Fade to white so slide text is pristine -->
+  <rect width="180" height="260" fill="url(#bgLight1)" fill-opacity="0.95"/>
+
+  <!-- DESK SURFACE FULL BLEED TO RIGHT -->
+  <path d="M 0 205 L 600 205 L 600 260 L 0 260 Z" fill="#FFFFFF"/>
+  <line x1="0" y1="205" x2="600" y2="205" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="0" y="205" width="600" height="4" fill="#F8FAFC"/>
+
+  <!-- HEADSET WITH STAND (Left) -->
+  <g filter="url(#softShadow1)">
+    <path d="M 180 160 C 180 100, 245 100, 245 160" fill="none" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+    <rect x="168" y="148" width="18" height="34" rx="8" fill="#0256D0" stroke="#1E293B" stroke-width="1.5"/>
+    <circle cx="177" cy="165" r="5" fill="#38BDF8"/>
+  </g>
+
+  <!-- LAPTOP STATION (Center) -->
+  <g filter="url(#softShadow1)">
+    <!-- Base Keyboard Deck -->
+    <path d="M 235 190 L 440 190 L 465 215 L 210 215 Z" fill="url(#laptopBody1)"/>
+    <path d="M 235 190 L 440 190 L 465 215 L 210 215 Z" stroke="#334155" stroke-width="1.5"/>
+    <!-- Trackpad -->
+    <rect x="315" y="197" width="45" height="13" rx="2.5" fill="#334155"/>
+    <rect x="245" y="192" width="185" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+
+    <!-- Screen Bezel -->
+    <path d="M 245 48 L 430 48 L 440 190 L 235 190 Z" fill="#0F172A" stroke="#334155" stroke-width="2" rx="4"/>
+    <!-- Display -->
+    <path d="M 255 58 L 420 58 L 430 180 L 245 180 Z" fill="url(#screenGlow1)" rx="3"/>
+
+    <!-- Screen UI Elements -->
+    <rect x="266" y="70" width="60" height="5" rx="2" fill="#38BDF8"/>
+    <rect x="266" y="80" width="100" height="3" rx="1.5" fill="#93C5FD" fill-opacity="0.75"/>
+    <rect x="266" y="88" width="85" height="3" rx="1.5" fill="#93C5FD" fill-opacity="0.6"/>
+
+    <!-- Cards on Screen -->
+    <rect x="266" y="102" width="70" height="64" rx="4" fill="#1E293B" stroke="#38BDF8" stroke-width="1"/>
+    <circle cx="276" cy="112" r="2.5" fill="#EF4444"/>
+    <circle cx="284" cy="112" r="2.5" fill="#F59E0B"/>
+    <circle cx="292" cy="112" r="2.5" fill="#10B981"/>
+    <path d="M 273 124 L 323 124 M 273 132 L 310 132 M 273 140 L 318 140" stroke="#60A5FA" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="273" y="150" width="40" height="9" rx="2" fill="#0284C7"/>
+
+    <rect x="346" y="102" width="72" height="64" rx="4" fill="#1E293B" stroke="#60A5FA" stroke-width="1" stroke-opacity="0.6"/>
+    <rect x="354" y="112" width="56" height="10" rx="2" fill="#0284C7"/>
+    <rect x="354" y="128" width="45" height="4" rx="1" fill="#94A3B8"/>
+    <rect x="354" y="137" width="50" height="4" rx="1" fill="#94A3B8"/>
+    <rect x="354" y="146" width="38" height="4" rx="1" fill="#94A3B8"/>
+
+    <!-- Power accent light -->
+    <path d="M 315 189 L 360 189" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- WIRELESS OPTICAL MOUSE (Right) -->
+  <g filter="url(#softShadow1)">
+    <ellipse cx="495" cy="202" rx="16" ry="20" fill="#1E293B" stroke="#475569" stroke-width="1.5"/>
+    <line x1="495" y1="184" x2="495" y2="197" stroke="#38BDF8" stroke-width="1.5"/>
+    <rect x="493.5" y="190" width="3" height="6" rx="1.5" fill="#38BDF8"/>
+  </g>
+
+  <!-- BOOK STACK ON RIGHT DESK EDGE -->
+  <g filter="url(#softShadow1)">
+    <rect x="525" y="190" width="70" height="15" rx="2" fill="#0256D0"/>
+    <rect x="525" y="180" width="65" height="11" rx="2" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="0.8"/>
+  </g>
+
+  <!-- FLOATING BADGE (Top Right): Unit Terawat • Gunakan Bijak -->
+  <g filter="url(#badgeGlow1)">
+    <rect x="415" y="24" width="155" height="34" rx="17" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1.5"/>
+    <circle cx="433" cy="41" r="9" fill="#EFF6FF"/>
+    <path d="M 429 41 L 432 44 L 437 38" stroke="#0256D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="449" y="38" font-family="system-ui, sans-serif" font-size="8.5" font-weight="bold" fill="#0F172A">Unit Terawat</text>
+    <text x="449" y="48" font-family="system-ui, sans-serif" font-size="7" font-weight="600" fill="#0256D0">Gunakan Bijak</text>
+  </g>
+</svg>

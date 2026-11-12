@@ -1,57 +1,37 @@
-/**
- * ============================================================================
- * Folder  : resources/js/data/
- * Fungsi  : Menyimpan model data tiruan (mock data), data master, dan fungsi penyimpanan lokal (localStorage).
- * File    : inventory-data.ts
- * Fungsi  : Menyediakan struktur tipe data, katalog awal peralatan lab (laptop, charger, tools, dll),
- *           riwayat peminjaman, profil siswa contoh, serta fungsi sinkronisasi inventaris lokal.
- * ============================================================================
- */
-
-/**
- * Struktur objek barang inventaris lab (InventoryItem)
- */
 export interface InventoryItem {
-    id: string;                               // ID unik barang
-    name: string;                             // Nama barang / alat
-    category: 'Laptop' | 'Peripheral' | 'Tools' | 'Elektrikal'; // Kategori inventaris
-    code: string;                             // Kode inventaris barang (contoh: EL-001)
-    stock: number;                            // Jumlah unit yang saat ini tersedia untuk dipinjam
-    total: number;                            // Total keseluruhan unit yang dimiliki lab
-    description: string;                      // Deskripsi fungsional barang
-    image?: string | null;                    // Nama file gambar
-    imageUrl?: string | null;                 // URL lengkap pratinjau gambar
-    imageSizeFormatted?: string | null;       // Ukuran file gambar yang diformat (misal: "1.2 MB")
-    specs: Record<string, string>;            // Rincian spesifikasi teknis barang
-    iconType: 'laptop' | 'charger' | 'mouse' | 'lan' | 'headset' | 'power' | 'screwdriver' | 'speaker' | 'keyboard' | 'scissors' | 'flashdisk'; // Tipe ikon ilustrasi
-    status: 'Tersedia' | 'Dipinjam';          // Status ketersediaan umum
-    isVisibleToStudents?: boolean;            // Hak visibilitas apakah barang dapat dilihat oleh siswa
+    id: string;
+    name: string;
+    category: 'Laptop' | 'Peripheral' | 'Tools' | 'Elektrikal';
+    code: string;
+    stock: number;
+    total: number;
+    description: string;
+    image?: string | null;
+    imageUrl?: string | null;
+    imageSizeFormatted?: string | null;
+    specs: Record<string, string>;
+    iconType: 'laptop' | 'charger' | 'mouse' | 'lan' | 'headset' | 'power' | 'screwdriver' | 'speaker' | 'keyboard' | 'scissors' | 'flashdisk';
+    status: 'Tersedia' | 'Dipinjam';
+    isVisibleToStudents?: boolean;
 }
 
-/**
- * Struktur data transaksi peminjaman barang (LoanItem)
- */
 export interface LoanItem {
-    id: string;                               // ID transaksi peminjaman
-    itemId: string;                           // ID barang yang dipinjam
-    itemName: string;                         // Nama barang yang dipinjam
-    code: string;                             // Kode barang
-    category: string;                         // Kategori barang
-    borrowDate: string;                       // Tanggal peminjaman
-    returnEstimate: string;                   // Estimasi tanggal pengembalian
-    returnDate?: string;                      // Tanggal aktual barang dikembalikan
-    status: 'Sedang Dipinjam' | 'Dikembalikan'; // Status transaksi
-    borrowerName: string;                     // Nama lengkap siswa peminjam
-    borrowerClass: string;                    // Kelas siswa peminjam
-    notes?: string;                           // Catatan keperluan peminjaman
+    id: string;
+    itemId: string;
+    itemName: string;
+    code: string;
+    category: string;
+    borrowDate: string;
+    returnEstimate: string;
+    returnDate?: string;
+    status: 'Sedang Dipinjam' | 'Dikembalikan';
+    borrowerName: string;
+    borrowerClass: string;
+    notes?: string;
 }
 
-// Daftar kategori filter peralatan
 export const CATEGORIES = ['Semua', 'Laptop', 'Peripheral', 'Tools', 'Elektrikal'] as const;
 
-/**
- * Data katalog awal alat dan fasilitas laboratorium RPL
- */
 export const INVENTORY_ITEMS: InventoryItem[] = [
     {
         id: 'laptop-lenovo',
@@ -311,9 +291,6 @@ export const INVENTORY_ITEMS: InventoryItem[] = [
     }
 ];
 
-/**
- * Data peminjaman aktif awal untuk keperluan tampilan dashboard
- */
 export const INITIAL_ACTIVE_LOANS: LoanItem[] = [
     {
         id: 'loan-1',
@@ -395,9 +372,6 @@ export const INITIAL_ACTIVE_LOANS: LoanItem[] = [
     }
 ];
 
-/**
- * Data riwayat peminjaman yang sudah selesai / dikembalikan
- */
 export const INITIAL_LOAN_HISTORY: LoanItem[] = [
     {
         id: 'hist-1',
@@ -471,9 +445,6 @@ export const INITIAL_LOAN_HISTORY: LoanItem[] = [
     }
 ];
 
-/**
- * Data contoh identitas siswa yang sedang aktif
- */
 export const USER_PROFILE = {
     name: 'Ahmad Rizky Pratama',
     role: 'Siswa / Peminjam',
@@ -487,9 +458,6 @@ export const USER_PROFILE = {
 const ITEMS_STORAGE_KEY = 'lab_inventory_items_v1';
 const LOANS_STORAGE_KEY = 'lab_inventory_loans_v4';
 
-/**
- * Mengambil daftar inventaris barang dari localStorage
- */
 export function getStoredItems(): InventoryItem[] {
     if (typeof window === 'undefined') {
         return INVENTORY_ITEMS;
@@ -507,9 +475,6 @@ export function getStoredItems(): InventoryItem[] {
     }
 }
 
-/**
- * Menyimpan pembaruan data barang inventaris ke localStorage dan menyiarkan event perubahan
- */
 export function saveStoredItems(items: InventoryItem[]): void {
     if (typeof window === 'undefined') return;
     try {
@@ -520,9 +485,6 @@ export function saveStoredItems(items: InventoryItem[]): void {
     }
 }
 
-/**
- * Mengambil data seluruh transaksi peminjaman (aktif & riwayat) dari localStorage
- */
 export function getStoredLoans(): LoanItem[] {
     const defaultList = [...INITIAL_ACTIVE_LOANS, ...INITIAL_LOAN_HISTORY];
     if (typeof window === 'undefined') {
@@ -551,9 +513,6 @@ export function getStoredLoans(): LoanItem[] {
     }
 }
 
-/**
- * Menyimpan pembaruan daftar peminjaman ke localStorage dan menyiarkan event perubahan
- */
 export function saveStoredLoans(loans: LoanItem[]): void {
     if (typeof window === 'undefined') return;
     try {

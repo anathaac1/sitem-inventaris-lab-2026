@@ -1,28 +1,15 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : dropdown-menu.tsx
- * Fungsi  : Kumpulan komponen menu tarik-turun (Dropdown Menu) berbasis Radix UI Dropdown Menu
- *           untuk menampilkan daftar aksi kontekstual, navigasi opsi, sub-menu, checkbox, dan radio item.
- * ============================================================================
- */
-
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen pembungkus status dan state menu dropdown
 function DropdownMenu({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />
 }
 
-// Portal render menu dropdown agar tidak terpotong kontainer ber-overflow
 function DropdownMenuPortal({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Portal>) {
@@ -31,7 +18,6 @@ function DropdownMenuPortal({
   )
 }
 
-// Elemen pemicu klik untuk menampilkan menu dropdown
 function DropdownMenuTrigger({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
@@ -43,7 +29,6 @@ function DropdownMenuTrigger({
   )
 }
 
-// Wadah popover konten daftar item dropdown
 function DropdownMenuContent({
   className,
   sideOffset = 4,
@@ -64,7 +49,6 @@ function DropdownMenuContent({
   )
 }
 
-// Komponen pengelompokan kumpulan menu item
 function DropdownMenuGroup({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Group>) {
@@ -73,7 +57,6 @@ function DropdownMenuGroup({
   )
 }
 
-// Item aksi individu di dalam dropdown menu
 function DropdownMenuItem({
   className,
   inset,
@@ -97,7 +80,6 @@ function DropdownMenuItem({
   )
 }
 
-// Item dropdown dengan status centang (checkbox item)
 function DropdownMenuCheckboxItem({
   className,
   children,
@@ -124,7 +106,6 @@ function DropdownMenuCheckboxItem({
   )
 }
 
-// Grup seleksi tunggal (radio group) dalam menu dropdown
 function DropdownMenuRadioGroup({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>) {
@@ -136,7 +117,6 @@ function DropdownMenuRadioGroup({
   )
 }
 
-// Item opsi radio individu di dalam DropdownMenuRadioGroup
 function DropdownMenuRadioItem({
   className,
   children,
@@ -161,7 +141,6 @@ function DropdownMenuRadioItem({
   )
 }
 
-// Teks label judul kategori di dalam dropdown
 function DropdownMenuLabel({
   className,
   inset,
@@ -182,7 +161,6 @@ function DropdownMenuLabel({
   )
 }
 
-// Garis pemisah horizontal tipis antar item dropdown
 function DropdownMenuSeparator({
   className,
   ...props
@@ -196,7 +174,6 @@ function DropdownMenuSeparator({
   )
 }
 
-// Indikator pintasan keyboard di sisi kanan menu item
 function DropdownMenuShortcut({
   className,
   ...props
@@ -213,14 +190,12 @@ function DropdownMenuShortcut({
   )
 }
 
-// Wadah sub-menu bersarang di dalam menu dropdown
 function DropdownMenuSub({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Sub>) {
   return <DropdownMenuPrimitive.Sub data-slot="dropdown-menu-sub" {...props} />
 }
 
-// Elemen pemicu hover/klik pembuka sub-menu bertingkat
 function DropdownMenuSubTrigger({
   className,
   inset,
@@ -245,7 +220,6 @@ function DropdownMenuSubTrigger({
   )
 }
 
-// Wadah konten tingkat kedua (sub-menu content)
 function DropdownMenuSubContent({
   className,
   ...props

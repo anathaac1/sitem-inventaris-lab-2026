@@ -1,13 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/profile/
- * Fungsi  : Kumpulan komponen antarmuka manajemen profil akun Administrator laboratorium.
- * File    : admin-profile-edit-modal.tsx
- * Fungsi  : Dialog modal formulir untuk mengubah data profil administrator, termasuk nama lengkap,
- *           username login, jabatan/posisi kerja, alamat surel, dan nomor kontak.
- * ============================================================================
- */
-
 import React, { useState } from 'react';
 import {
     Dialog,
@@ -18,19 +8,19 @@ import {
 import { Button } from '@/components/ui/button';
 
 export interface AdminProfileFormData {
-    name: string;                                              // Nama lengkap dan gelar
-    username: string;                                          // Username login
-    email: string;                                             // Alamat email
-    class: string;                                             // Jabatan struktural / posisi
-    phone: string;                                             // Nomor telepon / WA
+    name: string;
+    username: string;
+    email: string;
+    class: string;
+    phone: string;
 }
 
 interface AdminProfileEditModalProps {
-    isOpen: boolean;                                           // Penanda modal terbuka / tertutup
-    onClose: () => void;                                       // Callback untuk menutup modal
-    onSubmit: (data: AdminProfileFormData) => void;            // Handler submit formulir profil
-    initialData: AdminProfileFormData;                         // Data profil awal
-    isSubmitting?: boolean;                                    // Status pemuatan pengiriman data
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (data: AdminProfileFormData) => void;
+    initialData: AdminProfileFormData;
+    isSubmitting?: boolean;
 }
 
 export function AdminProfileEditModal({
@@ -40,17 +30,14 @@ export function AdminProfileEditModal({
     initialData,
     isSubmitting = false
 }: AdminProfileEditModalProps) {
-    // State lokal data isian formulir
     const [formData, setFormData] = useState<AdminProfileFormData>(initialData);
 
-    // Sinkronisasi data awal setiap kali modal dibuka atau initialData berubah
     React.useEffect(() => {
         if (isOpen) {
             setFormData(initialData);
         }
     }, [isOpen, initialData]);
 
-    // Menangani aksi submit form
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(formData);
@@ -59,7 +46,6 @@ export function AdminProfileEditModal({
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
             <DialogContent className="max-w-md p-6 bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden max-h-[90vh] overflow-y-auto">
-                {/* Header Judul Modal */}
                 <DialogHeader className="pb-3 border-b border-slate-100">
                     <DialogTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
                         <span>Edit Profil Administrator</span>
@@ -67,7 +53,6 @@ export function AdminProfileEditModal({
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit} className="space-y-3.5 mt-2">
-                    {/* 1. Input Nama Lengkap & Gelar */}
                     <div>
                         <label className="block text-xs font-semibold text-slate-700 mb-1">
                             Nama Lengkap & Gelar
@@ -82,7 +67,6 @@ export function AdminProfileEditModal({
                         />
                     </div>
 
-                    {/* 2. Grid Username & Jabatan Struktural */}
                     <div className="grid grid-cols-2 gap-3">
                         <div>
                             <label className="block text-xs font-semibold text-slate-700 mb-1">
@@ -112,7 +96,6 @@ export function AdminProfileEditModal({
                         </div>
                     </div>
 
-                    {/* 3. Input Alamat Email */}
                     <div>
                         <label className="block text-xs font-semibold text-slate-700 mb-1">
                             Email Administrator
@@ -127,7 +110,6 @@ export function AdminProfileEditModal({
                         />
                     </div>
 
-                    {/* 4. Input Nomor Telepon / WA */}
                     <div>
                         <label className="block text-xs font-semibold text-slate-700 mb-1">
                             Nomor Kontak / WhatsApp
@@ -141,7 +123,6 @@ export function AdminProfileEditModal({
                         />
                     </div>
 
-                    {/* Tombol Aksi Batal dan Simpan */}
                     <div className="flex gap-2 justify-end pt-3 border-t border-slate-100">
                         <Button
                             type="button"

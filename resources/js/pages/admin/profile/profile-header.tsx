@@ -1,24 +1,13 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/profile/
- * Fungsi  : Kumpulan komponen antarmuka manajemen profil akun Administrator laboratorium.
- * File    : profile-header.tsx
- * Fungsi  : Komponen header bagian atas halaman profil admin, menyediakan navigasi kembali
- *           ke dashboard utama serta tombol cepat pemicu modal edit profil.
- * ============================================================================
- */
-
 import { ChevronLeft, Edit3 } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
 interface ProfileHeaderProps {
-    onOpenEditModal?: () => void;                              // Callback untuk memicu dialog modal edit profil
+    onOpenEditModal?: () => void;
 }
 
 export function ProfileHeader({ onOpenEditModal }: ProfileHeaderProps) {
     return (
         <div className="flex items-center justify-between">
-            {/* Navigasi Kembali ke Dashboard dan Judul Halaman */}
             <div className="flex items-center gap-2.5">
                 <Link
                     href="/admin"
@@ -37,7 +26,6 @@ export function ProfileHeader({ onOpenEditModal }: ProfileHeaderProps) {
                 </div>
             </div>
 
-            {/* Tombol Pemicu Dialog Edit Profil */}
             {onOpenEditModal && (
                 <button
                     type="button"

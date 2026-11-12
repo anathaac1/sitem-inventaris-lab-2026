@@ -1,32 +1,22 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/siswa/
- * Fungsi  : Kumpulan komponen antarmuka manajemen akun pengguna lab (Siswa & Administrator) untuk Administrator.
- * File    : siswa-filter-bar.tsx
- * Fungsi  : Bilah kontrol penyaringan akun pengguna berdasarkan nama lengkap, peran akun (Siswa/Admin),
- *           kelas jurusan RPL, username, NISN, tombol reset filter, serta tombol pemicu pembuatan akun baru.
- * ============================================================================
- */
-
 import React from 'react';
 import { UserPlus, ChevronDown, X } from 'lucide-react';
 import { RPL_CLASSES } from '@/data/auth-store';
 
 export interface SiswaFilterValues {
-    name: string;                                              // Kata kunci pencarian nama lengkap
-    username: string;                                          // Kata kunci username
-    role: 'all' | 'siswa' | 'admin';                           // Filter peran akun
-    studentClass: string;                                      // Filter kelas siswa
-    nisn: string;                                              // Kata kunci nomor NISN
+    name: string;
+    username: string;
+    role: 'all' | 'siswa' | 'admin';
+    studentClass: string;
+    nisn: string;
 }
 
 interface SiswaFilterBarProps {
-    filters: SiswaFilterValues;                                // Nilai filter saat ini
-    onFilterChange: (filters: SiswaFilterValues) => void;      // Handler saat nilai filter diperbarui
-    onReset: () => void;                                       // Callback reset filter
-    onApply: () => void;                                       // Callback terapkan filter
-    totalAccounts: number;                                     // Total akun pengguna terdaftar
-    onOpenCreateModal: () => void;                             // Callback membuka modal tambah user baru
+    filters: SiswaFilterValues;
+    onFilterChange: (filters: SiswaFilterValues) => void;
+    onReset: () => void;
+    onApply: () => void;
+    totalAccounts: number;
+    onOpenCreateModal: () => void;
 }
 
 export function SiswaFilterBar({
@@ -36,7 +26,6 @@ export function SiswaFilterBar({
     onApply,
     onOpenCreateModal
 }: SiswaFilterBarProps) {
-    // Memperbarui salah satu field filter secara dinamis
     const handleFieldChange = (field: keyof SiswaFilterValues, value: string) => {
         onFilterChange({
             ...filters,
@@ -44,7 +33,6 @@ export function SiswaFilterBar({
         });
     };
 
-    // Menerapkan filter saat pengguna menekan tombol Enter
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
             onApply();
@@ -53,7 +41,6 @@ export function SiswaFilterBar({
 
     return (
         <div className="p-4 sm:p-5 border-b border-slate-200 bg-white">
-            {/* Bagian Atas: Tombol Aksi Tambah User Baru */}
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
                 <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                     Pencarian & Filter Pengguna
@@ -70,9 +57,7 @@ export function SiswaFilterBar({
                 </div>
             </div>
 
-            {/* Grid Input Filter 3 Kolom */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-3.5 text-xs">
-                {/* 1. Filter Nama Lengkap */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Nama Lengkap
@@ -87,7 +72,6 @@ export function SiswaFilterBar({
                     />
                 </div>
 
-                {/* 2. Filter Peran Akun */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Peran Akun
@@ -118,7 +102,6 @@ export function SiswaFilterBar({
                     </div>
                 </div>
 
-                {/* 3. Filter Kelas Siswa */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Kelas Siswa
@@ -152,7 +135,6 @@ export function SiswaFilterBar({
                     </div>
                 </div>
 
-                {/* 4. Filter Username Login */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Username
@@ -167,7 +149,6 @@ export function SiswaFilterBar({
                     />
                 </div>
 
-                {/* 5. Filter Nomor NISN */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         NISN
@@ -185,7 +166,6 @@ export function SiswaFilterBar({
                 <div className="hidden md:block"></div>
             </div>
 
-            {/* Bagian Bawah: Tombol Terapkan Filter & Reset */}
             <div className="flex items-center justify-end gap-2.5 mt-4 pt-3 border-t border-slate-100">
                 <button
                     type="button"

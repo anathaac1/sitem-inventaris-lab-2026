@@ -1,31 +1,16 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/inventory/
- * Fungsi  : Kumpulan komponen modular pendukung antarmuka inventaris dan peminjaman alat lab.
- * File    : dashboard-banner-carousel.tsx
- * Fungsi  : Menampilkan banner carousel interaktif pada dashboard siswa dengan rotasi
- *           otomatis (auto-play), navigasi swipe pada perangkat sentuh (touch/mobile),
- *           dan pesan edukatif seputar tata tertib peminjaman barang lab RPL.
- * ============================================================================
- */
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ChevronLeft, ChevronRight} from 'lucide-react';
 
-/**
- * Struktur data tiap slide pada banner carousel
- */
 interface SlideData {
-    number: string;              // Nomor urut slide (misal: '01', '02')
-    title: React.ReactNode;      // Judul headline teks
-    subtitle: React.ReactNode;   // Penjelasan singkat / slogan pendukung
-    theme: 'light' | 'dark';     // Skema warna tampilan (terang atau gelap)
-    image: string;               // Jalur file ilustrasi vektor banner
-    alt: string;                 // Teks alternatif untuk aksesibilitas gambar
+    number: string;
+    title: React.ReactNode;
+    subtitle: React.ReactNode;
+    theme: 'light' | 'dark';
+    image: string;
+    alt: string;
 }
 
 export function DashboardBannerCarousel() {
-    // Data daftar banner informasi dan tata tertib peminjaman fasilitas
     const slides: SlideData[] = [
         {
             number: '01',
@@ -109,32 +94,26 @@ export function DashboardBannerCarousel() {
         },
     ];
 
-    // State untuk slide aktif saat ini dan status jeda (pause saat hover)
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
 
-    // Ref untuk mencatat koordinat sentuhan swipe pada layar smartphone/tablet
     const touchStartX = useRef<number | null>(null);
     const touchEndX = useRef<number | null>(null);
 
     const totalSlides = slides.length;
 
-    // Fungsi bergulir ke slide berikutnya
     const nextSlide = useCallback(() => {
         setCurrentIndex((prev) => (prev + 1) % totalSlides);
     }, [totalSlides]);
 
-    // Fungsi bergulir ke slide sebelumnya
     const prevSlide = useCallback(() => {
         setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
     }, [totalSlides]);
 
-    // Berpindah langsung ke nomor slide tertentu lewat tombol indikator bulat
     const goToSlide = (idx: number) => {
         setCurrentIndex(idx);
     };
 
-    // Efek otomatis bergeser tiap 4.5 detik (akan dijeda jika pointer mouse berada di atas banner)
     useEffect(() => {
         if (isPaused) return;
 
@@ -145,7 +124,6 @@ export function DashboardBannerCarousel() {
         return () => clearInterval(timer);
     }, [isPaused, nextSlide]);
 
-    // Handler interaksi sentuhan layar sentuh (touch gesture)
     const handleTouchStart = (e: React.TouchEvent) => {
         touchStartX.current = e.targetTouches[0].clientX;
     };
@@ -157,7 +135,7 @@ export function DashboardBannerCarousel() {
     const handleTouchEnd = () => {
         if (!touchStartX.current || !touchEndX.current) return;
         const diff = touchStartX.current - touchEndX.current;
-        const minSwipeDistance = 50; // Jarak minimal usap layar agar slide berpindah
+        const minSwipeDistance = 50;
 
         if (diff > minSwipeDistance) {
             nextSlide();
@@ -185,7 +163,6 @@ export function DashboardBannerCarousel() {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
-            {/* Ilustrasi sisi kanan banner dengan efek transisi gradasi halus */}
             <div className="absolute right-0 top-0 bottom-0 w-[55%] sm:w-[58%] lg:w-[56%] pointer-events-none overflow-hidden">
                 <img
                     key={currentSlide.image}
@@ -203,7 +180,6 @@ export function DashboardBannerCarousel() {
                 />
             </div>
 
-            {/* Lapisan overlay gradasi untuk layar berukuran kecil (mobile) */}
             <div
                 className={`absolute inset-0 pointer-events-none sm:hidden transition-colors duration-500 ${
                     isDark
@@ -212,9 +188,7 @@ export function DashboardBannerCarousel() {
                 }`}
             />
 
-            {/* Bagian teks headline, nomor urut slide, dan tombol bullet navigasi */}
             <div className="relative z-10 px-5 py-5 sm:px-8 sm:py-7 flex flex-col justify-between min-h-[190px] sm:min-h-[220px]">
-                {/* Indikator nomor slide (contoh: 01 / 04) */}
                 <div className="flex items-center gap-3">
                     <span
                         className={`text-xs sm:text-sm font-bold tracking-wider transition-colors duration-300 ${
@@ -234,7 +208,6 @@ export function DashboardBannerCarousel() {
                     />
                 </div>
 
-                {/* Konten Judul Utama dan Deskripsi Singkat */}
                 <div className="my-2 sm:my-3 max-w-[56%] sm:max-w-[50%] lg:max-w-[48%]">
                     <h2
                         key={`title-${currentIndex}`}
@@ -255,7 +228,6 @@ export function DashboardBannerCarousel() {
                     </p>
                 </div>
 
-                {/* Titik indikator pagination slide bulat di bawah */}
                 <div className="flex items-center gap-2 pt-1">
                     {slides.map((_, idx) => {
                         const isActive = idx === currentIndex;
@@ -280,7 +252,6 @@ export function DashboardBannerCarousel() {
                 </div>
             </div>
 
-            {/* Tombol panah geser kiri dan kanan (tampil saat mouse diarahkan ke banner pada layar laptop/PC) */}
             <button
                 type="button"
                 onClick={prevSlide}

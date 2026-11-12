@@ -13,28 +13,12 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 
-/**
- * Catatan:
- * Service Provider khusus buat ngatur sistem autentikasi Laravel Fortify.
- * Fungsinya super penting di aplikasi ini:
- * 1. Logika login kustom: user bisa login pake username biasa ('siswa1', 'admin') atau alamat email lengkap.
- * 2. Smart Redirect setelah login: admin otomatis diarahkan ke '/admin', sedangkan siswa ke '/dashboard'.
- * 3. Rate limiting login: buat mencegah serangan brute force (dibatasi 5 kali coba per menit).
- * 4. Mapping view frontend Inertia untuk halaman Login, Lupa Password, dan Reset Password.
- */
 class FortifyServiceProvider extends ServiceProvider
 {
-    /**
-     * Registrasi service.
-     */
     public function register(): void
     {
     }
 
-    /**
-     * Dijalankan otomatis saat service provider dimuat:
-     * Menjalankan konfigurasi actions, views, rate limiting, dan autentikasi.
-     */
     public function boot(): void
     {
         $this->configureActions();
@@ -43,19 +27,13 @@ class FortifyServiceProvider extends ServiceProvider
         $this->configureAuthentication();
     }
 
-    /**
-     * Konfigurasi proses verifikasi login dan pengalihan (redirect) halaman setelah user berhasil login.
-     */
     private function configureAuthentication(): void
     {
-        // Custom logic buat verifikasi akun pas tombol login ditekan:
         Fortify::authenticateUsing(function (Request $request) {
-            // Ambil inputan user (bisa dari field email atau username)
             $input = trim((string) (
                 $request->input('email') ?? $request->input('username')
             ));
 
-            // Daftar akun demo bawaan untuk kebutuhan testing & kemudahan demo
             $defaultAccounts = [
                 'admin' => [
                     'username' => 'admin',
@@ -131,26 +109,22 @@ class FortifyServiceProvider extends ServiceProvider
             $cleanKey = strtolower(explode('@', $input)[0]);
 
             try {
-                // Cari akun di database (cocokkan dengan email, email sekolah, atau username)
                 $user = \App\Models\User::where('email', $input)
                     ->orWhere('email', $input . '@smkn1.sch.id')
                     ->orWhere('username', $input)
                     ->first();
 
                 if ($user) {
-                    // Kalau password cocok dengan hash di database -> Berhasil login!
                     if (\Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
                         return $user;
                     }
 
-                    // Fallback: kalau password hash beda tapi cocok dengan password default demo -> update hash dan izinkan login
                     if (isset($defaultAccounts[$cleanKey]) && $defaultAccounts[$cleanKey]['password'] === $request->password) {
                         $user->password = \Illuminate\Support\Facades\Hash::make($request->password);
                         $user->save();
                         return $user;
                     }
                 } else {
-                    // Kalau akun belum ada di database tapi cocok dengan daftar akun demo -> otomatis buatkan akunnya
                     if (isset($defaultAccounts[$cleanKey]) && $defaultAccounts[$cleanKey]['password'] === $request->password) {
                         $accountData = $defaultAccounts[$cleanKey];
                         $accountData['password'] = \Illuminate\Support\Facades\Hash::make($accountData['password']);
@@ -158,7 +132,6 @@ class FortifyServiceProvider extends ServiceProvider
                     }
                 }
             } catch (\Throwable) {
-                // Antisipasi kalau database lagi offline/error: bikin virtual user objek agar login demo tetap tembus
                 if (isset($defaultAccounts[$cleanKey]) && $defaultAccounts[$cleanKey]['password'] === $request->password) {
                     $accountData = $defaultAccounts[$cleanKey];
                     $accountData['id'] = $cleanKey === 'admin' ? 1 : 2;
@@ -170,11 +143,9 @@ class FortifyServiceProvider extends ServiceProvider
                 }
             }
 
-            // Kalau gak ada yang cocok sama sekali, tolak login
             return null;
         });
 
-        // Kustomisasi redirect setelah login berhasil:
         $this->app->singleton(
             \Laravel\Fortify\Contracts\LoginResponse::class,
             function () {
@@ -187,19 +158,16 @@ class FortifyServiceProvider extends ServiceProvider
                             return redirect('/login');
                         }
 
-                        // Cek apakah user adalah admin
                         $isAdmin = $user->role === 'admin'
                             || str_starts_with($user->email ?? '', 'admin')
                             || ($user->username ?? '') === 'admin';
 
                         session()->forget('url.intended');
 
-                        // Kalau admin, oper ke panel admin
                         if ($isAdmin) {
                             return redirect('/admin');
                         }
 
-                        // Kalau siswa, oper ke dashboard siswa
                         return redirect('/dashboard');
                     }
                 };
@@ -207,42 +175,29 @@ class FortifyServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Konfigurasi class action Fortify untuk reset password.
-     */
     private function configureActions(): void
     {
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
     }
 
-    /**
-     * Konfigurasi halaman frontend (Inertia React) untuk auth Fortify.
-     */
     private function configureViews(): void
     {
-        // Halaman Login
         Fortify::loginView(fn (Request $request) => Inertia::render('auth/login', [
             'canResetPassword' => Features::enabled(Features::resetPasswords()),
             'status' => $request->session()->get('status'),
         ]));
 
-        // Halaman Form Reset Password baru
         Fortify::resetPasswordView(fn (Request $request) => Inertia::render('auth/reset-password', [
             'email' => $request->email,
             'token' => $request->route('token'),
             'passwordRules' => Password::defaults()->toPasswordRulesString(),
         ]));
 
-        // Halaman Lupa Password (minta link reset)
         Fortify::requestPasswordResetLinkView(fn (Request $request) => Inertia::render('auth/forgot-password', [
             'status' => $request->session()->get('status'),
         ]));
     }
 
-    /**
-     * Batasan percobaan login (Rate Limiting):
-     * Maksimal 5 kali percobaan login per menit berdasarkan username dan IP address user.
-     */
     private function configureRateLimiting(): void
     {
         RateLimiter::for('login', function (Request $request) {

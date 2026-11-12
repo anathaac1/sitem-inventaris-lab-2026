@@ -1,13 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/profile/
- * Fungsi  : Kumpulan komponen antarmuka manajemen profil akun Administrator laboratorium.
- * File    : index.tsx
- * Fungsi  : Halaman utama profil administrator. Menampilkan data identitas admin (nama, username,
- *           jabatan, NIP), pintasan ubah data diri, ganti kata sandi, serta keluar sistem (logout).
- * ============================================================================
- */
-
 import React, { useState } from 'react';
 import { Head, router } from '@inertiajs/react';
 import { AdminLayout } from '@/layouts/admin-layout';
@@ -22,36 +12,31 @@ import { AdminProfileEditModal, type AdminProfileFormData } from './admin-profil
 interface AdminProfileProps {
     initialAdmin?: {
         id?: string;
-        name: string;                                          // Nama lengkap penanggung jawab lab
-        username: string;                                      // Username autentikasi akun
-        role: string;                                          // Peran akun dalam sistem (admin)
-        email?: string;                                        // Alamat surel resmi
-        class?: string;                                        // Jabatan atau unit kerja
-        phone?: string;                                        // Nomor kontak atau WhatsApp
+        name: string;
+        username: string;
+        role: string;
+        email?: string;
+        class?: string;
+        phone?: string;
     } | null;
 }
 
 export default function AdminProfile({ initialAdmin }: AdminProfileProps) {
-    // State kendali modal ubah profil dan modal ubah kata sandi
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
-    // State penampung masukan kata sandi
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    // Status pemuatan saat pengiriman data profil
     const [isSubmittingEdit, setIsSubmittingEdit] = useState(false);
 
-    // Data administrator dengan nilai fallback bawaan
     const adminName = initialAdmin?.name || 'Bambang Haryanto, S.T.';
     const adminUsername = initialAdmin?.username || 'admin';
     const adminEmail = initialAdmin?.email || 'admin@smkn1.sch.id';
     const adminClass = initialAdmin?.class || 'Kepala Lab RPL SMKN 1';
     const adminPhone = initialAdmin?.phone || '0811-2233-4455';
 
-    // Menangani pembaruan identitas profil admin via Inertia PUT request
     const handleEditProfileSubmit = (formData: AdminProfileFormData) => {
         setIsSubmittingEdit(true);
         router.post('/admin/profile', {
@@ -75,7 +60,6 @@ export default function AdminProfile({ initialAdmin }: AdminProfileProps) {
         });
     };
 
-    // Menangani penggantian kata sandi admin dengan validasi kecocokan dan panjang karakter
     const handleChangePassword = (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (newPassword !== confirmPassword) {
@@ -106,7 +90,6 @@ export default function AdminProfile({ initialAdmin }: AdminProfileProps) {
         });
     };
 
-    // Menangani proses keluar dari sesi aplikasi admin
     const handleLogout = () => {
         router.post('/logout', {}, {
             onFinish: () => {
@@ -116,7 +99,6 @@ export default function AdminProfile({ initialAdmin }: AdminProfileProps) {
         });
     };
 
-    // Ekstraksi 2 huruf inisial dari nama administrator untuk avatar
     const adminInitials = adminName
         .split(' ')
         .map((n) => n[0])
@@ -129,24 +111,19 @@ export default function AdminProfile({ initialAdmin }: AdminProfileProps) {
             currentTab="profile"
             title="Profil Administrator"
         >
-            {/* Metadata Judul Halaman Browser */}
             <Head title="Profil Administrator - Sistem Inventory Lab RPL" />
 
             <div className="max-w-4xl mx-auto space-y-4 pt-1 pb-8">
-                {/* 1. Header Halaman dengan Tombol Kembali dan Tombol Edit Profil */}
                 <ProfileHeader onOpenEditModal={() => setEditModalOpen(true)} />
 
-                {/* 2. Banner Kartu Profil Gradien dengan Inisial dan Identitas Singkat */}
                 <ProfileBanner
                     adminName={adminName}
                     adminUsername={adminUsername}
                     adminInitials={adminInitials}
                 />
 
-                {/* 3. Kartu Detail Informasi Penugasan dan Institusi */}
                 <ProfileInfoCard adminUsername={adminUsername} />
 
-                {/* 4. Kartu Pilihan Aksi Cepat (Edit Data, Ganti Sandi, Logout) */}
                 <ProfileActionCard
                     onOpenEditModal={() => setEditModalOpen(true)}
                     onOpenPasswordModal={() => setPasswordModalOpen(true)}
@@ -154,7 +131,6 @@ export default function AdminProfile({ initialAdmin }: AdminProfileProps) {
                 />
             </div>
 
-            {/* Dialog Modal Ubah Informasi Profil Admin */}
             <AdminProfileEditModal
                 isOpen={editModalOpen}
                 onClose={() => setEditModalOpen(false)}
@@ -169,7 +145,6 @@ export default function AdminProfile({ initialAdmin }: AdminProfileProps) {
                 }}
             />
 
-            {/* Dialog Modal Penggantian Kata Sandi Akun */}
             <ProfilePasswordModal
                 isOpen={passwordModalOpen}
                 onClose={() => setPasswordModalOpen(false)}

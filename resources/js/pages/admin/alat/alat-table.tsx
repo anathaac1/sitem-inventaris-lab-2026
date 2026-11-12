@@ -1,23 +1,13 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/alat/
- * Fungsi  : Kumpulan komponen antarmuka manajemen data barang inventaris laboratorium (CRUD Alat) untuk Administrator.
- * File    : alat-table.tsx
- * Fungsi  : Tabel visual penyajian inventaris alat, menampilkan thumbnail/ilustrasi ikon, kode, kategori,
- *           indikator ketersediaan stok warna-warni, sakelar status aktif/tidak aktif, serta tombol aksi Detail/Edit/Hapus.
- * ============================================================================
- */
-
 import { Eye, Edit2, Trash2 } from 'lucide-react';
 import type { InventoryItem } from '@/data/inventory-data';
 import { ItemIllustration } from '@/components/inventory/item-illustration';
 
 interface AlatTableProps {
-    items: InventoryItem[];                                    // Daftar item inventaris yang telah dipaginasi
-    onViewDetail: (item: InventoryItem) => void;               // Callback untuk melihat rincian alat
-    onEdit: (item: InventoryItem) => void;                     // Callback untuk mengedit data alat
-    onDelete: (item: InventoryItem) => void;                   // Callback untuk memicu dialog hapus
-    onToggleVisibility: (itemId: string) => void;              // Callback mengubah status aktif/tidak aktif
+    items: InventoryItem[];
+    onViewDetail: (item: InventoryItem) => void;
+    onEdit: (item: InventoryItem) => void;
+    onDelete: (item: InventoryItem) => void;
+    onToggleVisibility: (itemId: string) => void;
 }
 
 export function AlatTable({
@@ -30,7 +20,6 @@ export function AlatTable({
     return (
         <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-                {/* Header Kolom Tabel */}
                 <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider text-[10px]">
                     <tr>
                         <th className="py-3.5 px-5">Perangkat & Kode</th>
@@ -41,7 +30,6 @@ export function AlatTable({
                     </tr>
                 </thead>
 
-                {/* Tubuh Baris Tabel */}
                 <tbody className="divide-y divide-slate-100 text-slate-800">
                     {items.length === 0 ? (
                         <tr>
@@ -57,10 +45,8 @@ export function AlatTable({
 
                             return (
                                 <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
-                                    {/* Kolom 1: Gambar & Nama Perangkat */}
                                     <td className="py-3.5 px-5">
                                         <div className="flex items-center gap-3.5">
-                                            {/* Thumbnail Foto atau Ilustrasi Vektor */}
                                             <div
                                                 onClick={() => onViewDetail(item)}
                                                 className="w-10 h-10 rounded bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0 cursor-pointer hover:border-blue-400 transition-colors overflow-hidden"
@@ -77,7 +63,6 @@ export function AlatTable({
                                                 )}
                                             </div>
 
-                                            {/* Nama Barang dan Kode Registrasi */}
                                             <div className="min-w-0">
                                                 <button
                                                     type="button"
@@ -93,15 +78,12 @@ export function AlatTable({
                                         </div>
                                     </td>
 
-                                    {/* Kolom 2: Kategori Peralatan */}
                                     <td className="py-3.5 px-4 text-slate-700 font-medium">
                                         {item.category}
                                     </td>
 
-                                    {/* Kolom 3: Ketersediaan Stok */}
                                     <td className="py-3.5 px-4">
                                         <div className="flex items-center gap-2">
-                                            {/* Indikator Titik Warna (Merah: Habis, Kuning: Menipis, Hijau: Tersedia) */}
                                             <span
                                                 className={`w-2 h-2 rounded-full shrink-0 ${
                                                     isOutOfStock
@@ -122,7 +104,6 @@ export function AlatTable({
                                         </div>
                                     </td>
 
-                                    {/* Kolom 4: Sakelar Status (Aktif / Tidak Aktif) */}
                                     <td className="py-3.5 px-4 text-center">
                                         <button
                                             type="button"
@@ -138,10 +119,8 @@ export function AlatTable({
                                         </button>
                                     </td>
 
-                                    {/* Kolom 5: Tombol Aksi (Detail, Edit, Hapus) */}
                                     <td className="py-3.5 px-5 text-right">
                                         <div className="flex items-center justify-end gap-1.5">
-                                            {/* Tombol Lihat Detail */}
                                             <button
                                                 type="button"
                                                 onClick={() => onViewDetail(item)}
@@ -151,7 +130,6 @@ export function AlatTable({
                                                 <Eye className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                                             </button>
 
-                                            {/* Tombol Edit Perangkat */}
                                             <button
                                                 type="button"
                                                 onClick={() => onEdit(item)}
@@ -161,7 +139,6 @@ export function AlatTable({
                                                 <Edit2 className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                                             </button>
 
-                                            {/* Tombol Hapus Perangkat */}
                                             <button
                                                 type="button"
                                                 onClick={() => onDelete(item)}

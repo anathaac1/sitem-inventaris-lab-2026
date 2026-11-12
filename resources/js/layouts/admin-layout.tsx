@@ -1,14 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/layouts/
- * Fungsi  : Direktori penyedia kerangka tata letak utama (layout shell) untuk halaman aplikasi.
- * File    : admin-layout.tsx
- * Fungsi  : Layout khusus untuk panel Administrator Lab RPL. Menyediakan header bertema biru SMKN 1,
- *           tab navigasi modul (Dashboard, Data Alat, Log Peminjaman, Kelola Siswa) lengkap dengan badge
- *           penghitung data real-time, menu profil admin, dan footer hak cipta.
- * ============================================================================
- */
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, router, usePage } from '@inertiajs/react';
 import {
@@ -23,15 +12,12 @@ import {
 } from 'lucide-react';
 import { ProfileModal } from '@/pages/admin/profile/profile-modal';
 
-/**
- * Properti untuk AdminLayout
- */
 interface AdminLayoutProps {
-    children: React.ReactNode;                                              // Konten halaman yang dirender di dalam layout
-    currentTab?: 'dashboard' | 'alat' | 'peminjaman' | 'siswa' | 'profile';  // Tab modul yang sedang aktif
-    title?: string;                                                         // Judul sub-halaman pada breadcrumb header
-    description?: string;                                                   // Deskripsi modul (opsional)
-    actions?: React.ReactNode;                                              // Komponen aksi tombol tambahan (opsional)
+    children: React.ReactNode;
+    currentTab?: 'dashboard' | 'alat' | 'peminjaman' | 'siswa' | 'profile';
+    title?: string;
+    description?: string;
+    actions?: React.ReactNode;
 }
 
 export function AdminLayout({
@@ -39,12 +25,10 @@ export function AdminLayout({
     currentTab = 'dashboard',
     title = 'Dashboard Admin'
 }: AdminLayoutProps) {
-    // State pengelolaan modal profil dan dropdown akun admin
     const [profileModalOpen, setProfileModalOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // Menutup dropdown menu ketika klik terjadi di luar elemen dropdown
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -55,7 +39,6 @@ export function AdminLayout({
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    // Mengambil data user yang sedang login dan metrik hitungan (alat, pinjaman aktif, siswa) dari props Inertia
     const { auth, adminCounts } = usePage().props as unknown as {
         auth?: { user?: { name: string; username: string; role: string; class?: string } };
         adminCounts?: { items: number; activeLoans: number; students: number };
@@ -68,7 +51,6 @@ export function AdminLayout({
         students: 0
     };
 
-    // Fungsi aksi logout admin dan kembali ke halaman login
     const handleLogout = () => {
         router.post('/logout', {}, {
             onFinish: () => {
@@ -77,10 +59,8 @@ export function AdminLayout({
         });
     };
 
-    // Nama dan jabatan admin penanggung jawab
     const adminName = currentUser?.name || 'Bambang Haryanto, S.T.';
     const adminRole = currentUser?.class || 'Kepala Lab';
-    // Menghasilkan 2 huruf inisial avatar
     const adminInitials = adminName
         .split(' ')
         .map((n: string) => n[0])
@@ -88,7 +68,6 @@ export function AdminLayout({
         .join('')
         .toUpperCase();
 
-    // Konfigurasi daftar tab navigasi modul admin beserta badge jumlah data
     const navTabs = [
         {
             id: 'dashboard',
@@ -122,10 +101,8 @@ export function AdminLayout({
     ];
 
     return (
-        <div className="min-h-screen bg-[#F6F8FA] text-slate-800 flex flex-col font-sans antialiased selection:bg-[#0256D0] selection:text-white">
-            {/* Header utama atas dengan gradasi biru SMKN 1 Kota Bekasi */}
+        <div className="min-h-screen bg-white text-slate-800 flex flex-col font-sans antialiased selection:bg-[#0256D0] selection:text-white">
             <header className="relative bg-gradient-to-r from-[#0256D0] via-[#0448AB] to-[#0A1C38] text-white shadow-sm z-30 select-none">
-                {/* Pola dekorasi titik-titik (dot grid pattern) */}
                 <div
                     className="absolute inset-0 opacity-10 pointer-events-none"
                     style={{
@@ -135,7 +112,6 @@ export function AdminLayout({
                 />
 
                 <div className="relative px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-                    {/* Identitas sekolah & instansi laboratorium */}
                     <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                         <Link href="/admin" className="flex items-center gap-3 shrink-0">
                             <div className="w-9 h-9 rounded-xl bg-white/15 backdrop-blur-xs border border-white/25 flex items-center justify-center p-1 shadow-xs">
@@ -155,7 +131,6 @@ export function AdminLayout({
                             </div>
                         </Link>
 
-                        {/* Breadcrumb penanda halaman aktif pada layar desktop */}
                         <div className="hidden lg:flex items-center gap-2 text-xs pl-4 border-l border-white/20 text-blue-100/90">
                             <span className="font-medium opacity-80">Laboratorium RPL</span>
                             <ChevronRight className="w-3.5 h-3.5 text-blue-300/60" />
@@ -163,7 +138,6 @@ export function AdminLayout({
                         </div>
                     </div>
 
-                    {/* Menu profil akun admin di ujung kanan */}
                     <div className="relative shrink-0" ref={dropdownRef}>
                         <button
                             type="button"
@@ -190,7 +164,6 @@ export function AdminLayout({
                             />
                         </button>
 
-                        {/* Dropdown Menu Akun Admin */}
                         {dropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[#202C33] text-[#E9EDEF] shadow-2xl border border-slate-700/60 py-1.5 z-50 animate-in fade-in zoom-in-95 duration-100">
                                 <button
@@ -222,7 +195,6 @@ export function AdminLayout({
                 </div>
             </header>
 
-            {/* Modal Dialog Profil Admin */}
             <ProfileModal
                 isOpen={profileModalOpen}
                 onClose={() => setProfileModalOpen(false)}
@@ -231,7 +203,6 @@ export function AdminLayout({
                 onLogout={handleLogout}
             />
 
-            {/* Bilah tab navigasi antar modul admin (Sticky Tab Bar) */}
             <div className="sticky top-0 z-20 bg-white border-b border-slate-200/90 shadow-2xs select-none">
                 <div className="px-4 sm:px-6 flex items-center justify-between gap-4">
                     <nav className="flex items-center space-x-1 sm:space-x-2 overflow-x-auto scrollbar-none py-1">
@@ -270,14 +241,12 @@ export function AdminLayout({
                 </div>
             </div>
 
-            {/* Area Konten Utama Halaman (Children) */}
             <div className="flex-1 flex min-w-0">
                 <main className="flex-1 min-w-0 px-4 sm:px-6 py-5 sm:py-6 w-full">
                     {children}
                 </main>
             </div>
 
-            {/* Footer Hak Cipta Sistem */}
             <footer className="py-4 border-t border-slate-200/80 bg-white text-center text-xs text-slate-400 select-none">
                 Sistem Inventaris Lab Rekayasa Perangkat Lunak • SMKN 1 Kota Bekasi © 2026
             </footer>

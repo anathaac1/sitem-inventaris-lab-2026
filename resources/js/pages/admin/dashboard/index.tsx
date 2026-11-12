@@ -1,14 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/dashboard/
- * Fungsi  : Kumpulan komponen antarmuka dasbor analitik laboratorium untuk Administrator.
- * File    : index.tsx
- * Fungsi  : Halaman utama dasbor admin CMS. Menghitung ringkasan inventaris (total unit fisik,
- *           stok siap pakai, persentase ketersediaan), memonitor peminjaman aktif secara real-time,
- *           serta visualisasi distribusi peralatan per kategori dan sebaran peminjam per kelas.
- * ============================================================================
- */
-
 import { useState, useEffect } from 'react';
 import { Head } from '@inertiajs/react';
 import { Laptop, Mouse, Wrench, Zap } from 'lucide-react';
@@ -22,9 +11,6 @@ import { ActiveLoansMonitor } from './active-loans-monitor';
 import { CategoryDistribution, type CategoryStatItem } from './category-distribution';
 import { ClassDistribution, type ClassStatItem } from './class-distribution';
 
-/**
- * Custom Hook untuk menganimasikan pertambahan angka metrik secara halus (ease-out counter)
- */
 function useAnimatedCounter(target: number, duration: number = 1000) {
     const [value, setValue] = useState(0);
 
@@ -51,9 +37,9 @@ function useAnimatedCounter(target: number, duration: number = 1000) {
 }
 
 interface AdminDashboardProps {
-    initialItems?: InventoryItem[];                            // Data inventaris alat dari server
-    initialLoans?: LoanItem[];                                // Data transaksi peminjaman dari server
-    initialStudents?: any[];                                  // Data daftar akun siswa dari server
+    initialItems?: InventoryItem[];
+    initialLoans?: LoanItem[];
+    initialStudents?: any[];
 }
 
 export default function AdminDashboard({
@@ -65,7 +51,6 @@ export default function AdminDashboard({
     const loans = initialLoans;
     const students = initialStudents.filter((a: any) => a.role === 'siswa');
 
-    // State analitik tab dimensi aktif ('all', 'categories', 'loans', 'classes')
     const [activeTab, setActiveTab] = useState<DimensionTab>('all');
     const [isAnimated, setIsAnimated] = useState(false);
 
@@ -74,26 +59,22 @@ export default function AdminDashboard({
         return () => clearTimeout(timer);
     }, []);
 
-    // Perhitungan ringkasan statistik peralatan dan peminjaman
     const totalItems = items.length;
     const totalPhysicalUnits = items.reduce((sum, item) => sum + (item.total || 0), 0);
     const totalAvailableStock = items.reduce((sum, item) => sum + (item.stock || 0), 0);
     const activeLoans = loans.filter((loan) => loan.status === 'Sedang Dipinjam');
     const studentCount = students.length;
 
-    // Tingkat ketersediaan stok fisik dalam persen (%)
     const availabilityPercentage = totalPhysicalUnits > 0
         ? Math.round((totalAvailableStock / totalPhysicalUnits) * 100)
         : 100;
 
-    // Angka counter teranimasi saat halaman pertama kali dibuka
     const animatedAvailableStock = useAnimatedCounter(totalAvailableStock, 1100);
     const animatedTotalUnits = useAnimatedCounter(totalPhysicalUnits, 1200);
     const animatedCatalogCount = useAnimatedCounter(totalItems, 900);
     const animatedActiveLoans = useAnimatedCounter(activeLoans.length, 800);
     const animatedStudentCount = useAnimatedCounter(studentCount, 800);
 
-    // Agregasi statistik peralatan per kategori utama
     const categoryStats: CategoryStatItem[] = [
         {
             name: 'Laptop & Komputer',
@@ -125,7 +106,6 @@ export default function AdminDashboard({
         }
     ];
 
-    // Agregasi jumlah peminjaman aktif yang dilakukan per kelas jurusan RPL
     const classStats: ClassStatItem[] = [
         { name: 'X RPL A', active: activeLoans.filter((l) => l.borrowerClass.includes('X RPL A')).length },
         { name: 'X RPL B', active: activeLoans.filter((l) => l.borrowerClass.includes('X RPL B')).length },
@@ -137,11 +117,9 @@ export default function AdminDashboard({
 
     return (
         <AdminLayout currentTab="dashboard">
-            {/* Metadata judul halaman browser */}
             <Head title="Admin CMS - Ringkasan & Metrik Lab" />
 
             <div className="space-y-6">
-                {/* 1. Barisan Kartu Metrik Analitik (Total Unit, Katalog, Peminjaman Aktif, Jumlah Siswa) */}
                 <DimensionMetrics
                     activeTab={activeTab}
                     onTabChange={setActiveTab}
@@ -152,12 +130,9 @@ export default function AdminDashboard({
                     studentCount={animatedStudentCount}
                 />
 
-                {/* 2. Grid Area: Pemantauan Peminjaman Aktif (Kiri) & Distribusi Statistik (Kanan) */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                    {/* Log Pemantauan Sirkulasi Peralatan Sedang Dipinjam */}
                     <ActiveLoansMonitor activeLoans={activeLoans} />
 
-                    {/* Kolom Distribusi Kategori Alat dan Sebaran Siswa Per Kelas */}
                     <div className="space-y-6">
                         <CategoryDistribution
                             categoryStats={categoryStats}

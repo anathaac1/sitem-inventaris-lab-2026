@@ -1,14 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/inventory/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola fitur inventaris dan peminjaman alat lab.
- * File    : main-layout.tsx
- * Fungsi  : Tata letak utama (layout shell) untuk halaman siswa. Menyediakan header atas,
- *           navigasi responsif (desktop & bottom navigation bar mobile), dropdown profil siswa,
- *           modal profil, serta fungsi logout.
- * ============================================================================
- */
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, router, usePage } from '@inertiajs/react';
 import {
@@ -22,28 +11,22 @@ import {
 import { toast } from 'sonner';
 import { ProfileModal } from '@/pages/siswa/profile/profile-modal';
 
-/**
- * Properti untuk MainLayout siswa
- */
 interface MainLayoutProps {
-    children: React.ReactNode;                              // Komponen anak/halaman yang dibungkus layout
-    currentTab?: 'home' | 'alat' | 'peminjaman' | 'profile';// Tab aktif saat ini
-    title?: string;                                         // Judul halaman (opsional)
+    children: React.ReactNode;
+    currentTab?: 'home' | 'alat' | 'peminjaman' | 'profile';
+    title?: string;
 }
 
 export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
-    // Mengambil data user yang sedang login dari props Inertia
     const { auth } = usePage().props as any;
     const currentUser = auth?.user;
 
-    // State pengelolaan dropdown menu akun dan modal profil
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [profileModalOpen, setProfileModalOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-    // Menangani penutupan dropdown jika pengguna mengklik di luar area menu atau menekan tombol Escape
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -69,7 +52,6 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
         };
     }, []);
 
-    // Fungsi aksi logout siswa dan pengalihan ke rute login
     const handleLogout = () => {
         router.post('/logout', {}, {
             onFinish: () => {
@@ -79,10 +61,8 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
         });
     };
 
-    // Nama dan kelas siswa dengan nilai fallback
     const studentName = currentUser?.name || 'Ahmad Rizky Pratama';
     const studentClass = currentUser?.class || 'XII RPL A';
-    // Menghasilkan inisial 2 huruf untuk avatar profil
     const studentInitials = studentName
         .split(' ')
         .map((n: string) => n[0])
@@ -90,7 +70,6 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
         .join('')
         .toUpperCase();
 
-    // Daftar menu navigasi utama siswa
     const navItems = [
         { id: 'home', label: 'Home', href: '/dashboard', icon: Home },
         { id: 'alat', label: 'Alat', href: '/alat', icon: Box },
@@ -98,11 +77,9 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
     ];
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC] text-zinc-900 flex flex-col font-sans">
-            {/* Header navigasi atas (Desktop & Tablet) */}
+        <div className="min-h-screen bg-white text-zinc-900 flex flex-col font-sans">
             <header className="sticky top-0 z-30 bg-white border-b border-zinc-200">
                 <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-                    {/* Brand Logo & Nama Aplikasi */}
                     <Link href="/dashboard" className="flex items-center gap-2.5">
                         <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200/80 flex items-center justify-center p-1 shadow-xs">
                             <img
@@ -118,7 +95,6 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
                         </div>
                     </Link>
 
-                    {/* Navigasi menu tautan desktop */}
                     <nav className="hidden md:flex items-center gap-1">
                         {navItems.map((item) => {
                             const active = currentTab === item.id;
@@ -140,7 +116,6 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
                         })}
                     </nav>
 
-                    {/* Menu profil akun siswa di pojok kanan atas */}
                     <div className="relative shrink-0" ref={dropdownRef}>
                         <button
                             type="button"
@@ -171,7 +146,6 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
                             />
                         </button>
 
-                        {/* Dropdown Menu Akun */}
                         {dropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[#202C33] text-[#E9EDEF] shadow-2xl border border-slate-700/60 py-1.5 z-50 animate-in fade-in zoom-in-95 duration-100">
                                 <button
@@ -203,7 +177,6 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
                 </div>
             </header>
 
-            {/* Modal Detail Profil Siswa */}
             <ProfileModal
                 isOpen={profileModalOpen}
                 onClose={() => setProfileModalOpen(false)}
@@ -212,12 +185,10 @@ export function MainLayout({ children, currentTab = 'home' }: MainLayoutProps) {
                 onLogout={handleLogout}
             />
 
-            {/* Konten Halaman Aktif (Children) */}
             <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-5 pb-20 md:pb-8">
                 {children}
             </main>
 
-            {/* Bar Navigasi Bawah Khusus Layar Smartphone (Mobile Bottom Navigation) */}
             <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-zinc-200 px-4 py-1.5 flex items-center justify-center gap-6 translate-x-4">
                 {navItems.map((item) => {
                     const active = currentTab === item.id;

@@ -1,44 +1,27 @@
-/**
- * ============================================================================
- * Folder  : resources/js/data/
- * Fungsi  : Menyimpan model data tiruan (mock data), konstanta, dan fungsi penyimpanan lokal (localStorage).
- * File    : auth-store.ts
- * Fungsi  : Mengelola data akun pengguna (siswa & admin), validasi sesi, token autentikasi,
- *           serta operasi CRUD akun lokal untuk keperluan demo/offline atau fallback frontend.
- * ============================================================================
- */
-
-/**
- * Struktur data profil akun pengguna (UserAccount)
- */
 export interface UserAccount {
-    id: string;                               // ID unik akun pengguna
-    username: string;                         // Username untuk login
-    name: string;                             // Nama lengkap pemilik akun
-    class: string;                            // Kelas (untuk siswa) atau jabatan (untuk admin/guru)
-    email: string;                            // Alamat email aktif
-    password: string;                         // Kata sandi
-    role: 'siswa' | 'admin';                  // Hak akses: siswa atau admin
-    nisn?: string;                            // Nomor Induk Siswa Nasional (khusus siswa)
-    phone?: string;                           // Nomor kontak / WhatsApp
-    avatar?: string;                          // Inisial avatar profil
-    lastLogin?: string;                       // Waktu terakhir kali login
+    id: string;
+    username: string;
+    name: string;
+    class: string;
+    email: string;
+    password: string;
+    role: 'siswa' | 'admin';
+    nisn?: string;
+    phone?: string;
+    avatar?: string;
+    lastLogin?: string;
 }
 
-/**
- * Struktur token sesi pengguna aktif
- */
 export interface SessionToken {
-    token: string;                            // String token unik sesi
-    username: string;                         // Username pengguna yang login
-    role: 'siswa' | 'admin';                  // Hak akses
-    name: string;                             // Nama lengkap
-    class: string;                            // Kelas / Unit
-    createdAt: number;                        // Timestamp pembuatan sesi
-    expiresAt: number;                        // Timestamp kedaluwarsa sesi
+    token: string;
+    username: string;
+    role: 'siswa' | 'admin';
+    name: string;
+    class: string;
+    createdAt: number;
+    expiresAt: number;
 }
 
-// Daftar rombongan belajar (rombel) jurusan Rekayasa Perangkat Lunak
 export const RPL_CLASSES = [
     'X RPL A',
     'X RPL B',
@@ -50,15 +33,10 @@ export const RPL_CLASSES = [
 
 export type RplClass = (typeof RPL_CLASSES)[number];
 
-// Kunci penyimpanan pada localStorage browser
 const ACCOUNTS_STORAGE_KEY = 'lab_inventory_accounts_v4';
 const SESSION_STORAGE_KEY = 'lab_inventory_session_token_v1';
-// Masa berlaku token sesi (1 jam)
 export const TOKEN_DURATION_MS = 60 * 60 * 1000;
 
-/**
- * Akun default awal (dummy) untuk pengujian dan presentasi
- */
 export const DEFAULT_ACCOUNTS: UserAccount[] = [
     {
         id: 'acc-siswa-1',
@@ -145,9 +123,6 @@ export const DEFAULT_ACCOUNTS: UserAccount[] = [
     }
 ];
 
-/**
- * Menormalkan format penulisan kelas (misal: "RPL 1" menjadi "RPL A")
- */
 function normalizeClass(cls?: string): string {
     if (!cls) return 'X RPL A';
     return cls
@@ -155,9 +130,6 @@ function normalizeClass(cls?: string): string {
         .replace(/RPL\s*2\b/gi, 'RPL B');
 }
 
-/**
- * Mengambil daftar seluruh akun yang tersimpan di localStorage browser
- */
 export function getStoredAccounts(): UserAccount[] {
     if (typeof window === 'undefined') return DEFAULT_ACCOUNTS;
     try {
@@ -179,9 +151,6 @@ export function getStoredAccounts(): UserAccount[] {
     }
 }
 
-/**
- * Menyimpan pembaruan daftar akun ke localStorage dan memicu custom event sinkronisasi
- */
 export function saveStoredAccounts(accounts: UserAccount[]): void {
     if (typeof window === 'undefined') return;
     try {
@@ -192,9 +161,6 @@ export function saveStoredAccounts(accounts: UserAccount[]): void {
     }
 }
 
-/**
- * Memperbarui kata sandi akun siswa berdasarkan username
- */
 export function updateStudentPassword(username: string, newPassword: string): boolean {
     const accounts = getStoredAccounts();
     const targetIdx = accounts.findIndex(
@@ -211,9 +177,6 @@ export function updateStudentPassword(username: string, newPassword: string): bo
     return true;
 }
 
-/**
- * Membuat akun baru dengan validasi username unik dan panjang kata sandi
- */
 export function createUserAccount(newUserData: {
     username: string;
     name: string;
@@ -227,7 +190,6 @@ export function createUserAccount(newUserData: {
     const accounts = getStoredAccounts();
     const cleanUsername = newUserData.username.trim().toLowerCase();
 
-    // Validasi kelengkapan username
     if (!cleanUsername) {
         return { success: false, message: 'Username login wajib diisi.' };
     }
@@ -236,7 +198,6 @@ export function createUserAccount(newUserData: {
         return { success: false, message: 'Username tidak boleh mengandung spasi.' };
     }
 
-    // Validasi duplikasi username
     const existing = accounts.find((a) => a.username.toLowerCase() === cleanUsername);
     if (existing) {
         return { success: false, message: `Username "${cleanUsername}" sudah digunakan. Gunakan username lain.` };
@@ -246,7 +207,6 @@ export function createUserAccount(newUserData: {
         return { success: false, message: 'Password minimal 4 karakter.' };
     }
 
-    // Menghasilkan inisial avatar
     const initials = newUserData.name
         .trim()
         .split(/\s+/)
@@ -258,7 +218,6 @@ export function createUserAccount(newUserData: {
 
     const defaultEmail = newUserData.email?.trim() || `${cleanUsername}@smkn1.sch.id`;
 
-    // Objek akun baru
     const newAccount: UserAccount = {
         id: `acc-${newUserData.role}-${Date.now()}`,
         username: cleanUsername,
@@ -282,9 +241,6 @@ export function createUserAccount(newUserData: {
     };
 }
 
-/**
- * Membuat token sesi login sementara untuk pengguna
- */
 export function createSessionToken(user: UserAccount): SessionToken {
     const now = Date.now();
     const tokenStr = `tk_${user.username}_${Math.random().toString(36).substring(2, 10)}_${now}`;
@@ -306,9 +262,6 @@ export function createSessionToken(user: UserAccount): SessionToken {
     return session;
 }
 
-/**
- * Memeriksa dan mengambil sesi login aktif yang belum kedaluwarsa
- */
 export function getActiveSession(): SessionToken | null {
     if (typeof window === 'undefined') return null;
     try {
@@ -318,7 +271,6 @@ export function getActiveSession(): SessionToken | null {
         const session: SessionToken = JSON.parse(data);
         const now = Date.now();
 
-        // Hapus sesi jika sudah melewati batas waktu kedaluwarsa
         if (now >= session.expiresAt) {
             localStorage.removeItem(SESSION_STORAGE_KEY);
             window.dispatchEvent(new CustomEvent('session_token_expired'));
@@ -331,9 +283,6 @@ export function getActiveSession(): SessionToken | null {
     }
 }
 
-/**
- * Mengakhiri sesi login saat ini (logout)
- */
 export function terminateSession(): void {
     if (typeof window === 'undefined') return;
     localStorage.removeItem(SESSION_STORAGE_KEY);

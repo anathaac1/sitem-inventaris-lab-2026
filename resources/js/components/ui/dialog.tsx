@@ -1,49 +1,33 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : dialog.tsx
- * Fungsi  : Kumpulan komponen jendela dialog modal berbasis Radix UI Dialog (Dialog, Trigger,
- *           Content, Header, Footer, Title, Description, Close) untuk formulir pop-up dan konfirmasi aksi.
- * ============================================================================
- */
-
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { XIcon } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen pembungkus status dan logika modal dialog
 function Dialog({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
 }
 
-// Elemen pemicu klik pembuka dialog
 function DialogTrigger({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
-// Portal untuk merender konten modal di luar hierarki DOM reguler (di body)
 function DialogPortal({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
   return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
 }
 
-// Elemen penutup modal dialog
 function DialogClose({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Close>) {
   return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
 }
 
-// Latar belakang redup (backdrop overlay) yang menutupi konten halaman belakang
 function DialogOverlay({
   className,
   ...props
@@ -60,7 +44,6 @@ function DialogOverlay({
   )
 }
 
-// Wadah kotak konten modal yang berada di tengah layar
 function DialogContent({
   className,
   children,
@@ -92,7 +75,6 @@ function DialogContent({
   )
 }
 
-// Bagian header judul dan pengantar modal
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -103,7 +85,6 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Bagian footer bawah modal untuk tombol konfirmasi dan batal
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -117,7 +98,6 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Teks judul utama pada modal dialog (aksesibilitas screen reader)
 function DialogTitle({
   className,
   ...props
@@ -131,7 +111,6 @@ function DialogTitle({
   )
 }
 
-// Teks deskripsi penjelas pada modal dialog
 function DialogDescription({
   className,
   ...props

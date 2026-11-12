@@ -1,13 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/profile/
- * Fungsi  : Kumpulan komponen antarmuka manajemen profil akun Administrator laboratorium.
- * File    : profile-modal.tsx
- * Fungsi  : Dialog modal popup profil administrator yang dapat diakses langsung dari header navigasi
- *           atau pintasan cepat tanpa berpindah dari halaman kerja yang sedang dibuka.
- * ============================================================================
- */
-
 import React, { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { Edit3 } from 'lucide-react';
@@ -19,34 +9,29 @@ import { AdminProfileEditModal, type AdminProfileFormData } from './admin-profil
 import { toast } from 'sonner';
 
 interface ProfileModalProps {
-    isOpen: boolean;                                           // Penanda modal terbuka / tertutup
-    onClose: () => void;                                       // Callback untuk menutup dialog modal
-    session?: any;                                             // Data sesi autentikasi
-    user?: any;                                                // Data objek user admin
-    onLogout?: () => void;                                     // Callback logout
+    isOpen: boolean;
+    onClose: () => void;
+    session?: any;
+    user?: any;
+    onLogout?: () => void;
 }
 
 export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalProps) {
-    // State kendali pembukaan sub-modal edit profil & ganti kata sandi
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
-    // State input kata sandi
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    // Status pemuatan pengiriman edit data
     const [isSubmittingEdit, setIsSubmittingEdit] = useState(false);
 
-    // Identitas admin dengan nilai fallback
     const adminName = user?.name || session?.name || 'Bambang Haryanto, S.T.';
     const adminUsername = user?.username || session?.username || 'admin';
     const adminEmail = user?.email || session?.email || 'admin@smkn1.sch.id';
     const adminClass = user?.class || session?.class || 'Kepala Lab RPL SMKN 1';
     const adminPhone = user?.phone || session?.phone || '0811-2233-4455';
 
-    // Menangani aksi simpan perubahan profil administrator
     const handleEditProfileSubmit = (formData: AdminProfileFormData) => {
         setIsSubmittingEdit(true);
         router.post('/admin/profile', {
@@ -70,7 +55,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
         });
     };
 
-    // Menangani perubahan kata sandi admin
     const handleChangePassword = (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (newPassword !== confirmPassword) {
@@ -101,7 +85,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
         });
     };
 
-    // Inisial avatar dua huruf
     const adminInitials = adminName
         .split(' ')
         .map((n: string) => n[0])
@@ -111,10 +94,8 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
 
     return (
         <>
-            {/* Modal Dialog Ringkasan Profil Admin */}
             <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
                 <DialogContent showCloseButton={false} className="max-w-lg w-full rounded-2xl bg-white p-5 sm:p-6 border border-slate-200 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
-                    {/* Header Modal dengan Tombol Pemicu Edit Profil */}
                     <DialogHeader className="pb-3 border-b border-slate-100 flex flex-row items-center justify-between">
                         <DialogTitle className="text-base font-bold text-slate-900 flex items-center justify-between w-full">
                             <span>Profil Administrator</span>
@@ -129,7 +110,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
                         </DialogTitle>
                     </DialogHeader>
 
-                    {/* Konten Banner & Kartu Info Profil */}
                     <div className="space-y-4 pt-3">
                         <ProfileBanner
                             adminName={adminName}
@@ -142,7 +122,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
                 </DialogContent>
             </Dialog>
 
-            {/* Sub-Modal Formulir Pengeditan Data Diri Admin */}
             <AdminProfileEditModal
                 isOpen={editModalOpen}
                 onClose={() => setEditModalOpen(false)}
@@ -157,7 +136,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
                 }}
             />
 
-            {/* Sub-Modal Penggantian Kata Sandi */}
             <ProfilePasswordModal
                 isOpen={passwordModalOpen}
                 onClose={() => setPasswordModalOpen(false)}

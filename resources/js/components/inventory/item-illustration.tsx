@@ -1,29 +1,12 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/inventory/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola fitur inventaris dan peminjaman alat lab.
- * File    : item-illustration.tsx
- * Fungsi  : Menyediakan ilustrasi grafis SVG bawaan (fallback icon) untuk berbagai jenis alat
- *           lab seperti laptop, charger, mouse, kabel LAN, headset, obeng, dsb., jika foto asli belum diunggah.
- * ============================================================================
- */
-
 import React from 'react';
 
-/**
- * Properti untuk komponen ItemIllustration
- */
 interface ItemIllustrationProps {
-    type?: string | null;      // Tipe ikon ilustrasi (misal: 'laptop', 'charger', 'mouse')
-    className?: string;        // Kelas utility Tailwind untuk ukuran dan styling
+    type?: string | null;
+    className?: string;
 }
 
-/**
- * Menghasilkan ikon SVG vektor sesuai tipe peralatan lab
- */
 export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustrationProps) {
     switch (type) {
-        // Ilustrasi Laptop
         case 'laptop':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +22,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Adaptor / Charger
         case 'charger':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +35,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Mouse Komputer
         case 'mouse':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +46,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Kabel Jaringan LAN / RJ45
         case 'lan':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +58,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Headset Audio
         case 'headset':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +71,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Stop Kontak / Kabel Terminal Listrik
         case 'power':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +86,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Obeng Perkakas
         case 'screwdriver':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +98,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Speaker / Audio
         case 'speaker':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +109,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Keyboard
         case 'keyboard':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +120,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Gunting / Pemotong
         case 'scissors':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -157,7 +131,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Flashdisk Penyimpanan Data
         case 'flashdisk':
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -170,7 +143,6 @@ export function ItemIllustration({ type, className = 'w-16 h-16' }: ItemIllustra
                 </svg>
             );
 
-        // Ilustrasi Standar / Default (Peralatan Lab Umum)
         default:
             return (
                 <svg viewBox="0 0 100 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">

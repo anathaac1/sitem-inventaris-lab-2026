@@ -1,13 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/inventory/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola fitur inventaris dan peminjaman alat lab.
- * File    : item-detail-modal.tsx
- * Fungsi  : Menampilkan rincian lengkap barang (spesifikasi, stok, foto, deskripsi) serta
- *           formulir pengajuan peminjaman barang bagi siswa, dilengkapi fitur perbesaran gambar (zoom).
- * ============================================================================
- */
-
 import React, { useState } from 'react';
 import { CheckCircle2, ArrowRight, Info, ZoomIn, X } from 'lucide-react';
 import { ItemIllustration } from './item-illustration';
@@ -16,26 +6,20 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 
-/**
- * Properti untuk modal detail barang & peminjaman
- */
 interface ItemDetailModalProps {
-    item: InventoryItem | null;       // Data objek alat yang dipilih
-    open?: boolean;                   // Status tampil modal
-    isOpen?: boolean;                 // Alternatif penanda tampil modal
-    onClose: () => void;              // Fungsi menutup modal
-    onLoanSuccess?: (item: InventoryItem, borrowDate: string, returnEstimate: string, notes: string) => void; // Callback jika form disubmit
+    item: InventoryItem | null;
+    open?: boolean;
+    isOpen?: boolean;
+    onClose: () => void;
+    onLoanSuccess?: (item: InventoryItem, borrowDate: string, returnEstimate: string, notes: string) => void;
 }
 
 export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: ItemDetailModalProps) {
     const isModalOpen = open ?? isOpen ?? false;
 
-    // State transisi antara tampilan "Detail Alat" dan "Formulir Peminjaman"
     const [isBorrowing, setIsBorrowing] = useState(false);
-    // State pratinjau gambar dalam ukuran besar (lightbox zoom)
     const [isImageZoomed, setIsImageZoomed] = useState(false);
 
-    // Nilai default tanggal hari ini dan perkiraan tanggal kembali (2 hari kemudian)
     const getTodayString = () => new Date().toISOString().split('T')[0];
     const getEstimateString = () => {
         const d = new Date();
@@ -43,7 +27,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
         return d.toISOString().split('T')[0];
     };
 
-    // State field input formulir peminjaman
     const [borrowDate, setBorrowDate] = useState(getTodayString());
     const [returnEstimate, setReturnEstimate] = useState(getEstimateString());
     const [notes, setNotes] = useState('Praktikum Pemrograman Web & Aplikasi');
@@ -51,7 +34,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
 
     if (!item) return null;
 
-    // Menangani aksi konfirmasi submit peminjaman
     const handleConfirmBorrow = (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -67,20 +49,16 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
 
     return (
         <>
-            {/* Modal Utama: Detail Alat & Formulir Pinjam */}
             <Dialog open={isModalOpen} onOpenChange={(val) => !val && onClose()}>
                 <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto p-0 rounded-xl border border-zinc-200 bg-white">
-                    {/* Header dialog dengan judul dinamis sesuai mode aktif */}
                     <DialogHeader className="p-4 border-b border-zinc-100 flex flex-row items-center justify-between sticky top-0 bg-white z-20">
                         <DialogTitle className="text-sm font-bold text-zinc-900">
                             {isBorrowing ? 'Formulir Peminjaman' : 'Detail Alat'}
                         </DialogTitle>
                     </DialogHeader>
 
-                    {/* Mode 1: Tampilan Detail Informasi Alat */}
                     {!isBorrowing ? (
                         <div className="p-5 space-y-4">
-                            {/* Area Foto Barang / Ilustrasi Cadangan */}
                             <div className="rounded-lg bg-zinc-50 p-3 flex flex-col items-center justify-center border border-zinc-100 overflow-hidden relative group">
                                 {item.imageUrl ? (
                                     <>
@@ -104,7 +82,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                                 )}
                             </div>
 
-                            {/* Nama, Kategori, dan Status Ketersediaan */}
                             <div className="flex items-center justify-between gap-2">
                                 <div>
                                     <span className="text-[11px] font-semibold text-blue-600 uppercase">
@@ -120,7 +97,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                                 </span>
                             </div>
 
-                            {/* Ringkasan Jumlah Stok dan Kode Unik Barang */}
                             <div className="grid grid-cols-2 gap-2 text-xs">
                                 <div className="p-2.5 rounded bg-zinc-50 border border-zinc-100">
                                     <span className="text-zinc-500">Jumlah Tersedia</span>
@@ -136,7 +112,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                                 </div>
                             </div>
 
-                            {/* Deskripsi Barang */}
                             <div>
                                 <h3 className="text-xs font-bold text-zinc-800 mb-1">
                                     Deskripsi
@@ -146,7 +121,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                                 </p>
                             </div>
 
-                            {/* Rincian Spesifikasi Teknis Alat */}
                             <div>
                                 <h3 className="text-xs font-bold text-zinc-800 mb-1">
                                     Spesifikasi
@@ -161,7 +135,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                                 </div>
                             </div>
 
-                            {/* Tombol Lanjut ke Formulir Pinjam */}
                             <div className="pt-1">
                                 <Button
                                     onClick={() => setIsBorrowing(true)}
@@ -172,14 +145,12 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                             </div>
                         </div>
                     ) : (
-                        /* Mode 2: Formulir Pengisian Peminjaman */
                         <form onSubmit={handleConfirmBorrow} className="p-5 space-y-3 text-xs">
                             <div className="flex items-center gap-2 p-2.5 bg-blue-50 rounded border border-blue-100 text-blue-800">
                                 <Info className="w-3.5 h-3.5 shrink-0" />
                                 <span>Silakan lengkapi formulir peminjaman alat lab.</span>
                             </div>
 
-                            {/* Nama Barang (Hanya Baca / Readonly) */}
                             <div className="space-y-1">
                                 <label className="font-medium text-zinc-700">Nama Alat</label>
                                 <input
@@ -190,7 +161,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                                 />
                             </div>
 
-                            {/* Tanggal Peminjaman dan Estimasi Pengembalian */}
                             <div className="grid grid-cols-2 gap-2">
                                 <div className="space-y-1">
                                     <label className="font-medium text-zinc-700">Tanggal Pinjam</label>
@@ -214,7 +184,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                                 </div>
                             </div>
 
-                            {/* Catatan / Keperluan Praktikum */}
                             <div className="space-y-1">
                                 <label className="font-medium text-zinc-700">Keperluan</label>
                                 <textarea
@@ -227,7 +196,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                                 />
                             </div>
 
-                            {/* Tombol Navigasi Formulir */}
                             <div className="pt-2 flex gap-2">
                                 <Button
                                     type="button"
@@ -250,7 +218,6 @@ export function ItemDetailModal({ item, open, isOpen, onClose, onLoanSuccess }: 
                 </DialogContent>
             </Dialog>
 
-            {/* Modal Perbesaran Gambar Ukuran Penuh (Image Zoom) */}
             {item && item.imageUrl && (
                 <Dialog open={isImageZoomed} onOpenChange={setIsImageZoomed}>
                     <DialogContent className="max-w-2xl w-full p-2 bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200 shadow-2xl overflow-hidden">

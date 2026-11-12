@@ -1,17 +1,7 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/alat/
- * Fungsi  : Kumpulan komponen antarmuka yang menyusun halaman katalog peralatan lab versi siswa.
- * File    : alat-category-chips.tsx
- * Fungsi  : Menampilkan deretan filter berbentuk pil/chip horizontal yang dapat digeser (scrollable)
- *           untuk menyaring katalog berdasarkan kategori alat (Semua, Laptop, Peripheral, Tools, Elektrikal).
- * ============================================================================
- */
-
 interface AlatCategoryChipsProps {
-    categories: readonly string[];                            // Daftar nama kategori alat
-    selectedCategory: string;                                 // Kategori yang sedang aktif dipilih
-    onSelectCategory: (category: string) => void;             // Callback ketika chip kategori ditekan
+    categories: readonly string[];
+    selectedCategory: string;
+    onSelectCategory: (category: string) => void;
 }
 
 export function AlatCategoryChips({

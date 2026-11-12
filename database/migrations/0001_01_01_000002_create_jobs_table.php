@@ -4,18 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * Catatan Migrasi:
- * File migrasi buat bikin tabel-tabel antrean tugas latar belakang (queue jobs):
- * 1. 'jobs': menampung tugas-tugas antrean (misal kirim email, olah gambar).
- * 2. 'job_batches': melacak grup/batch dari beberapa tugas antrean yang dijalankan bersamaan.
- * 3. 'failed_jobs': mencatat riwayat tugas antrean yang gagal beserta pesan error-nya buat di-debug.
- */
 return new class extends Migration
 {
-    /**
-     * Menjalankan migrasi (membuat tabel jobs, job_batches, failed_jobs).
-     */
     public function up(): void
     {
         Schema::create('jobs', function (Blueprint $table) {
@@ -54,9 +44,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Membatalkan migrasi (menghapus tabel jobs, job_batches, failed_jobs).
-     */
     public function down(): void
     {
         Schema::dropIfExists('jobs');

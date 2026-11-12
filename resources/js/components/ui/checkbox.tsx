@@ -1,21 +1,9 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : checkbox.tsx
- * Fungsi  : Komponen kotak centang (Checkbox) berbasis Radix UI Checkbox untuk memilih
- *           opsi biner (aktif/nonaktif) atau seleksi jamak pada formulir dan filter tabel.
- * ============================================================================
- */
-
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
 import { CheckIcon } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen Checkbox interaktif dengan animasi centang
 function Checkbox({
   className,
   ...props
@@ -29,7 +17,6 @@ function Checkbox({
       )}
       {...props}
     >
-      {/* Indikator Ikon Tanda Centang Saat Status Terpilih */}
       <CheckboxPrimitive.Indicator
         data-slot="checkbox-indicator"
         className="flex items-center justify-center text-current transition-none"

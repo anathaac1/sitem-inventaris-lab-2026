@@ -1,20 +1,8 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : separator.tsx
- * Fungsi  : Komponen garis pemisah visual (Separator / Divider) berbasis Radix UI Separator,
- *           mendukung orientasi horizontal maupun vertikal untuk memisahkan konten antar seksi.
- * ============================================================================
- */
-
 import * as SeparatorPrimitive from "@radix-ui/react-separator"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen garis pemisah pembatas konten
 function Separator({
   className,
   orientation = "horizontal",

@@ -1,25 +1,14 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/profile/
- * Fungsi  : Kumpulan komponen antarmuka manajemen profil akun Administrator laboratorium.
- * File    : profile-action-card.tsx
- * Fungsi  : Kartu navigasi aksi cepat untuk profil admin: mengubah data diri,
- *           mengganti kata sandi, dan keluar dari sesi aplikasi laboratorium.
- * ============================================================================
- */
-
 import { Lock, LogOut, ChevronRight, Edit3 } from 'lucide-react';
 
 interface ProfileActionCardProps {
-    onOpenEditModal: () => void;                               // Callback membuka modal formulir edit profil
-    onOpenPasswordModal: () => void;                           // Callback membuka modal ganti kata sandi
-    onLogout: () => void;                                      // Callback memproses aksi logout admin
+    onOpenEditModal: () => void;
+    onOpenPasswordModal: () => void;
+    onLogout: () => void;
 }
 
 export function ProfileActionCard({ onOpenEditModal, onOpenPasswordModal, onLogout }: ProfileActionCardProps) {
     return (
         <div className="bg-white border border-slate-200/90 rounded-xl divide-y divide-slate-100 shadow-2xs overflow-hidden">
-            {/* Opsi 1: Edit Data Profil */}
             <button
                 type="button"
                 onClick={onOpenEditModal}
@@ -41,7 +30,6 @@ export function ProfileActionCard({ onOpenEditModal, onOpenPasswordModal, onLogo
                 <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-slate-600" />
             </button>
 
-            {/* Opsi 2: Ganti Kata Sandi */}
             <button
                 type="button"
                 onClick={onOpenPasswordModal}
@@ -63,7 +51,6 @@ export function ProfileActionCard({ onOpenEditModal, onOpenPasswordModal, onLogo
                 <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-slate-600" />
             </button>
 
-            {/* Opsi 3: Keluar / Logout */}
             <button
                 type="button"
                 onClick={onLogout}

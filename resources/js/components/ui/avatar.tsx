@@ -1,20 +1,8 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : avatar.tsx
- * Fungsi  : Komponen visual avatar profil pengguna berbasis Radix UI Avatar, mendukung gambar
- *           foto profil serta fallback teks inisial ketika gambar belum dimuat atau tidak tersedia.
- * ============================================================================
- */
-
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen pembungkus kontainer avatar melingkar
 function Avatar({
   className,
   ...props
@@ -31,7 +19,6 @@ function Avatar({
   )
 }
 
-// Komponen elemen gambar foto avatar
 function AvatarImage({
   className,
   ...props
@@ -45,7 +32,6 @@ function AvatarImage({
   )
 }
 
-// Komponen teks cadangan (inisial) jika gambar profil tidak tersedia
 function AvatarFallback({
   className,
   ...props

@@ -1,14 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : navigation-menu.tsx
- * Fungsi  : Kumpulan komponen menu navigasi tingkat atas (Navigation Menu) berbasis Radix UI
- *           Navigation Menu dengan animasi transisi konten viewport, chevron, dan indikator aktif.
- * ============================================================================
- */
-
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 import { cva } from "class-variance-authority"
 import { ChevronDownIcon } from "lucide-react"
@@ -16,7 +5,6 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen pembungkus kontainer utama navigation menu
 function NavigationMenu({
   className,
   children,
@@ -41,7 +29,6 @@ function NavigationMenu({
   )
 }
 
-// Elemen daftar baris menu navigasi horizontal
 function NavigationMenuList({
   className,
   ...props
@@ -58,7 +45,6 @@ function NavigationMenuList({
   )
 }
 
-// Item menu individu di dalam daftar navigasi
 function NavigationMenuItem({
   className,
   ...props
@@ -72,12 +58,10 @@ function NavigationMenuItem({
   )
 }
 
-// Format gaya visual tombol pemicu navigasi menggunakan CVA
 const navigationMenuTriggerStyle = cva(
   "group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[active=true]:bg-accent/50 data-[state=open]:bg-accent/50 data-[active=true]:text-accent-foreground ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 transition-[color,box-shadow] focus-visible:ring-4 focus-visible:outline-1"
 )
 
-// Tombol pemicu dropdown navigasi dengan ikon chevron yang berputar
 function NavigationMenuTrigger({
   className,
   children,
@@ -98,7 +82,6 @@ function NavigationMenuTrigger({
   )
 }
 
-// Wadah konten menu yang muncul saat tombol navigasi disentuh / diklik
 function NavigationMenuContent({
   className,
   ...props
@@ -116,7 +99,6 @@ function NavigationMenuContent({
   )
 }
 
-// Viewport jendela mengambang untuk menampilkan panel konten dengan transisi dinamis
 function NavigationMenuViewport({
   className,
   ...props
@@ -139,7 +121,6 @@ function NavigationMenuViewport({
   )
 }
 
-// Tautan anchor di dalam konten menu navigasi
 function NavigationMenuLink({
   className,
   ...props
@@ -156,7 +137,6 @@ function NavigationMenuLink({
   )
 }
 
-// Indikator visual panah kecil yang menunjuk ke menu item yang sedang aktif
 function NavigationMenuIndicator({
   className,
   ...props

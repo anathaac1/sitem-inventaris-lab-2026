@@ -1,14 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/profile/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola data profil, keamanan akun,
- *           dan preferensi siswa dalam aplikasi inventaris lab.
- * File    : profile-password-modal.tsx
- * Fungsi  : Dialog modal form untuk mengganti kata sandi akun siswa, memverifikasi kata sandi lama,
- *           kata sandi baru (minimal 4 karakter), dan konfirmasi kecocokan kata sandi.
- * ============================================================================
- */
-
 import React from 'react';
 import {
     Dialog,
@@ -19,15 +8,15 @@ import {
 import { Button } from '@/components/ui/button';
 
 interface ProfilePasswordModalProps {
-    isOpen: boolean;                                           // Penanda dialog modal terbuka/tertutup
-    onClose: () => void;                                       // Callback menutup dialog modal
-    onSubmit: (e: React.SyntheticEvent) => void;               // Callback aksi submit form ganti sandi
-    oldPassword: string;                                       // Nilai input kata sandi lama
-    onOldPasswordChange: (val: string) => void;                // Handler perubahan input kata sandi lama
-    newPassword: string;                                       // Nilai input kata sandi baru
-    onNewPasswordChange: (val: string) => void;                // Handler perubahan input kata sandi baru
-    confirmPassword: string;                                   // Nilai input konfirmasi kata sandi baru
-    onConfirmPasswordChange: (val: string) => void;            // Handler perubahan konfirmasi kata sandi
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (e: React.SyntheticEvent) => void;
+    oldPassword: string;
+    onOldPasswordChange: (val: string) => void;
+    newPassword: string;
+    onNewPasswordChange: (val: string) => void;
+    confirmPassword: string;
+    onConfirmPasswordChange: (val: string) => void;
 }
 
 export function ProfilePasswordModal({
@@ -44,16 +33,13 @@ export function ProfilePasswordModal({
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="max-w-md p-6 bg-white rounded-2xl">
-                {/* Header Judul Modal */}
                 <DialogHeader>
                     <DialogTitle className="text-base font-bold text-zinc-900">
                         Ubah Kata Sandi Akun
                     </DialogTitle>
                 </DialogHeader>
 
-                {/* Formulir Penggantian Kata Sandi */}
                 <form onSubmit={onSubmit} className="space-y-4 mt-2">
-                    {/* Input Kata Sandi Lama */}
                     <div>
                         <label className="block text-xs font-semibold text-zinc-700 mb-1">
                             Kata Sandi Lama
@@ -68,7 +54,6 @@ export function ProfilePasswordModal({
                         />
                     </div>
 
-                    {/* Input Kata Sandi Baru */}
                     <div>
                         <label className="block text-xs font-semibold text-zinc-700 mb-1">
                             Kata Sandi Baru
@@ -84,7 +69,6 @@ export function ProfilePasswordModal({
                         />
                     </div>
 
-                    {/* Input Konfirmasi Kata Sandi Baru */}
                     <div>
                         <label className="block text-xs font-semibold text-zinc-700 mb-1">
                             Konfirmasi Kata Sandi Baru
@@ -100,7 +84,6 @@ export function ProfilePasswordModal({
                         />
                     </div>
 
-                    {/* Tombol Aksi Batal dan Simpan */}
                     <div className="flex gap-2 justify-end pt-2">
                         <Button
                             type="button"

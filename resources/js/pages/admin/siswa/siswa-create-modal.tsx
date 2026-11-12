@@ -1,37 +1,26 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/siswa/
- * Fungsi  : Kumpulan komponen antarmuka manajemen akun pengguna lab (Siswa & Administrator) untuk Administrator.
- * File    : siswa-create-modal.tsx
- * Fungsi  : Dialog modal formulir pendaftaran pengguna baru, mendukung penetapan peran (Siswa / Administrator),
- *           otomatisasi format username & email sekolah, pemilihan kelas jurusan, input kontak, dan generator kata sandi acak.
- * ============================================================================
- */
-
 import React, { useState } from 'react';
 import { RPL_CLASSES } from '@/data/auth-store';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
 export interface NewUserFormData {
-    name: string;                                              // Nama lengkap pengguna
-    username: string;                                          // Username login
-    role: 'siswa' | 'admin';                                   // Peran akun
-    class: string;                                             // Kelas siswa atau jabatan staf admin
-    email: string;                                             // Alamat surel
-    password: string;                                          // Kata sandi awal
-    nisn: string;                                              // Nomor NISN (opsional untuk siswa)
-    phone: string;                                             // Nomor telepon / WA
+    name: string;
+    username: string;
+    role: 'siswa' | 'admin';
+    class: string;
+    email: string;
+    password: string;
+    nisn: string;
+    phone: string;
 }
 
 interface SiswaCreateModalProps {
-    isOpen: boolean;                                           // Status visibilitas modal
-    onClose: () => void;                                       // Callback untuk menutup dialog
-    onSubmit: (data: NewUserFormData) => void;                 // Callback aksi submit pembuatan user
-    isSubmitting: boolean;                                     // Status indikator proses kirim data
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (data: NewUserFormData) => void;
+    isSubmitting: boolean;
 }
 
-// Kondisi awal form registrasi user
 const INITIAL_FORM_STATE: NewUserFormData = {
     name: '',
     username: '',
@@ -51,7 +40,6 @@ export function SiswaCreateModal({
 }: SiswaCreateModalProps) {
     const [formData, setFormData] = useState<NewUserFormData>(INITIAL_FORM_STATE);
 
-    // Memperbarui nilai field form serta otomatisasi penyesuaian email dari username
     const handleFieldChange = (field: keyof NewUserFormData, value: string) => {
         setFormData((prev) => {
             const next = { ...prev, [field]: value };
@@ -66,19 +54,16 @@ export function SiswaCreateModal({
         });
     };
 
-    // Menghasilkan kata sandi acak rpl[4-digit]!
     const generateRandomPassword = () => {
         const rand = Math.floor(1000 + Math.random() * 9000);
         handleFieldChange('password', `rpl${rand}!`);
     };
 
-    // Menangani aksi pengiriman form
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(formData);
     };
 
-    // Menutup modal dan reset formulir
     const handleClose = () => {
         setFormData(INITIAL_FORM_STATE);
         onClose();
@@ -87,7 +72,6 @@ export function SiswaCreateModal({
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
             <DialogContent className="max-w-xl rounded-md bg-white p-6 border border-slate-300 shadow-xl max-h-[90vh] overflow-y-auto">
-                {/* Header Judul Modal */}
                 <DialogHeader className="border-b border-slate-200 pb-3">
                     <DialogTitle className="text-base font-bold text-slate-900 flex items-center gap-2.5">
                         <span>Tambah Akun Pengguna Baru</span>
@@ -95,13 +79,11 @@ export function SiswaCreateModal({
                 </DialogHeader>
 
                 <form onSubmit={handleFormSubmit} className="space-y-4 pt-3">
-                    {/* Seksi 1: Peran & Akses Akun */}
                     <div className="border border-slate-200 rounded p-3.5 bg-slate-50/50 space-y-3.5">
                         <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider block">
                             1. Peran & Akses Akun
                         </span>
 
-                        {/* Pilihan Toggle Peran: Siswa vs Admin */}
                         <div className="grid grid-cols-2 gap-2">
                             <button
                                 type="button"
@@ -133,7 +115,6 @@ export function SiswaCreateModal({
                             </button>
                         </div>
 
-                        {/* Input Identitas Dasar */}
                         <div className="space-y-3">
                             <div className="space-y-1">
                                 <label className="text-xs font-semibold text-slate-700 block">
@@ -199,7 +180,6 @@ export function SiswaCreateModal({
                         </div>
                     </div>
 
-                    {/* Seksi 2: Kontak & Identitas Tambahan */}
                     <div className="border border-slate-200 rounded p-3.5 bg-slate-50/50 space-y-3">
                         <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider block">
                             2. Kontak & Identitas
@@ -248,7 +228,6 @@ export function SiswaCreateModal({
                         </div>
                     </div>
 
-                    {/* Seksi 3: Password Akun */}
                     <div className="border border-slate-200 rounded p-3.5 bg-slate-50/50 space-y-2.5">
                         <div className="flex items-center justify-between">
                             <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider block">
@@ -272,7 +251,6 @@ export function SiswaCreateModal({
                         />
                     </div>
 
-                    {/* Tombol Aksi Batal dan Simpan */}
                     <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
                         <Button
                             type="button"

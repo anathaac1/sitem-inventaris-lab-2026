@@ -1,19 +1,9 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/dashboard/
- * Fungsi  : Kumpulan komponen modular penyusun halaman beranda (dashboard) siswa.
- * File    : dashboard-greeting.tsx
- * Fungsi  : Menampilkan ucapan sapaan personal ("Hi, [Nama Siswa]!") di bagian atas beranda
- *           berserta informasi tanggal dan waktu login terakhir dalam zona waktu WIB.
- * ============================================================================
- */
-
 import { Clock } from 'lucide-react';
 
 interface DashboardGreetingProps {
-    studentName: string;                      // Nama siswa yang sedang login
-    loginDateStr: string;                     // Tanggal terformat (misal: "8 Nov 2026")
-    loginTimeStr: string;                     // Jam terformat (misal: "13:45 WIB")
+    studentName: string;
+    loginDateStr: string;
+    loginTimeStr: string;
 }
 
 export function DashboardGreeting({
@@ -23,7 +13,6 @@ export function DashboardGreeting({
 }: DashboardGreetingProps) {
     return (
         <div className="flex items-center justify-between gap-3">
-            {/* Sapaan Nama Siswa */}
             <div className="min-w-0">
                 <h1 className="text-lg font-bold tracking-tight text-zinc-900 truncate">
                     Hi, {studentName}!
@@ -33,7 +22,6 @@ export function DashboardGreeting({
                 </p>
             </div>
 
-            {/* Indikator Waktu Login Terakhir */}
             <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
                 <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400" />
 

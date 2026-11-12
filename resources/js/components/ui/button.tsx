@@ -1,21 +1,9 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : button.tsx
- * Fungsi  : Komponen tombol interaktif utama aplikasi dengan variasi tema visual (default,
- *           destructive, outline, secondary, ghost, link) dan berbagai ukuran (default, sm, lg, icon).
- * ============================================================================
- */
-
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Konfigurasi varian gaya dan ukuran tombol menggunakan class-variance-authority (CVA)
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
@@ -46,7 +34,6 @@ const buttonVariants = cva(
   }
 )
 
-// Komponen Button dengan fleksibilitas render sebagai elemen button asli atau komponen turunan melalui asChild
 function Button({
   className,
   variant,

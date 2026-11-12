@@ -1,21 +1,10 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/profile/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola data profil, keamanan akun,
- *           dan preferensi siswa dalam aplikasi inventaris lab.
- * File    : profile-security-card.tsx
- * Fungsi  : Kartu opsi pengaturan akun dan keamanan untuk siswa, mencakup tombol aksi
- *           untuk mengedit informasi profil, mengganti kata sandi akun, serta keluar dari aplikasi (logout).
- * ============================================================================
- */
-
 import { Lock, LogOut, Edit3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ProfileSecurityCardProps {
-    onOpenEditModal: () => void;                               // Aksi membuka modal formulir edit profil siswa
-    onOpenPasswordModal: () => void;                           // Aksi membuka modal ubah kata sandi
-    onLogout: () => void;                                      // Aksi konfirmasi keluar dari aplikasi
+    onOpenEditModal: () => void;
+    onOpenPasswordModal: () => void;
+    onLogout: () => void;
 }
 
 export function ProfileSecurityCard({
@@ -25,14 +14,11 @@ export function ProfileSecurityCard({
 }: ProfileSecurityCardProps) {
     return (
         <div className="bg-white rounded-xl border border-zinc-200 p-4 space-y-3 shadow-2xs">
-            {/* Judul Seksi Pengaturan Akun */}
             <h3 className="text-xs font-bold text-zinc-900 uppercase tracking-wider text-slate-400">
                 Pengaturan Akun & Keamanan
             </h3>
 
-            {/* Daftar Tombol Aksi Pengaturan */}
             <div className="space-y-2">
-                {/* 1. Tombol Edit Informasi Profil */}
                 <Button
                     variant="outline"
                     onClick={onOpenEditModal}
@@ -42,7 +28,6 @@ export function ProfileSecurityCard({
                     Edit Informasi Profil
                 </Button>
 
-                {/* 2. Tombol Ubah Kata Sandi */}
                 <Button
                     variant="outline"
                     onClick={onOpenPasswordModal}
@@ -52,7 +37,6 @@ export function ProfileSecurityCard({
                     Ubah Kata Sandi
                 </Button>
 
-                {/* 3. Tombol Logout Akun */}
                 <Button
                     variant="outline"
                     onClick={onLogout}

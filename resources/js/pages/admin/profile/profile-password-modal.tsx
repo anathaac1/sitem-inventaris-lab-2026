@@ -1,28 +1,18 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/profile/
- * Fungsi  : Kumpulan komponen antarmuka manajemen profil akun Administrator laboratorium.
- * File    : profile-password-modal.tsx
- * Fungsi  : Dialog modal untuk mengubah kata sandi akun administrator, dilengkapi fitur
- *           toggle lihat/sembunyikan karakter untuk sandi lama, sandi baru, dan konfirmasi sandi.
- * ============================================================================
- */
-
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
 interface ProfilePasswordModalProps {
-    isOpen: boolean;                                           // Penanda modal terbuka / tertutup
-    onClose: () => void;                                       // Callback untuk menutup modal
-    oldPassword: string;                                       // Nilai input kata sandi lama
-    onOldPasswordChange: (val: string) => void;                // Handler perubahan input kata sandi lama
-    newPassword: string;                                       // Nilai input kata sandi baru
-    onNewPasswordChange: (val: string) => void;                // Handler perubahan input kata sandi baru
-    confirmPassword: string;                                   // Nilai input konfirmasi kata sandi baru
-    onConfirmPasswordChange: (val: string) => void;            // Handler perubahan konfirmasi kata sandi baru
-    onSubmit: (e: React.SyntheticEvent) => void;               // Handler pengiriman perubahan kata sandi
+    isOpen: boolean;
+    onClose: () => void;
+    oldPassword: string;
+    onOldPasswordChange: (val: string) => void;
+    newPassword: string;
+    onNewPasswordChange: (val: string) => void;
+    confirmPassword: string;
+    onConfirmPasswordChange: (val: string) => void;
+    onSubmit: (e: React.SyntheticEvent) => void;
 }
 
 export function ProfilePasswordModal({
@@ -36,7 +26,6 @@ export function ProfilePasswordModal({
     onConfirmPasswordChange,
     onSubmit
 }: ProfilePasswordModalProps) {
-    // State kendali visibilitas teks password (lihat / sembunyikan)
     const [showOldPassword, setShowOldPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -44,7 +33,6 @@ export function ProfilePasswordModal({
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
             <DialogContent className="max-w-sm rounded-2xl bg-white p-5 border border-slate-200 shadow-xl">
-                {/* Header Judul Modal */}
                 <DialogHeader>
                     <DialogTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
                         <span>Ganti Kata Sandi Admin</span>
@@ -52,7 +40,6 @@ export function ProfilePasswordModal({
                 </DialogHeader>
 
                 <form onSubmit={onSubmit} className="space-y-3 pt-2 text-xs">
-                    {/* 1. Input Kata Sandi Lama */}
                     <div className="space-y-1">
                         <label className="font-semibold text-slate-700">Kata Sandi Saat Ini</label>
                         <div className="relative">
@@ -80,7 +67,6 @@ export function ProfilePasswordModal({
                         </div>
                     </div>
 
-                    {/* 2. Input Kata Sandi Baru */}
                     <div className="space-y-1">
                         <label className="font-semibold text-slate-700">Kata Sandi Baru</label>
                         <div className="relative">
@@ -108,7 +94,6 @@ export function ProfilePasswordModal({
                         </div>
                     </div>
 
-                    {/* 3. Input Konfirmasi Kata Sandi Baru */}
                     <div className="space-y-1">
                         <label className="font-semibold text-slate-700">Konfirmasi Kata Sandi Baru</label>
                         <div className="relative">
@@ -136,7 +121,6 @@ export function ProfilePasswordModal({
                         </div>
                     </div>
 
-                    {/* Tombol Aksi Batal dan Simpan */}
                     <div className="pt-2 flex gap-2">
                         <Button
                             type="button"

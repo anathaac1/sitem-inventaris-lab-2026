@@ -1,28 +1,17 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/peminjaman/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola data peminjaman dan pengembalian alat oleh siswa.
- * File    : peminjaman-active-list.tsx
- * Fungsi  : Menampilkan daftar peminjaman aktif yang sedang dipinjam oleh siswa,
- *           informasi tenggat waktu (estimasi kembali), catatan keperluan, serta tombol aksi "Kembalikan".
- * ============================================================================
- */
-
 import { Clock, Calendar, Box } from 'lucide-react';
 import { ItemIllustration } from '@/components/inventory/item-illustration';
 import { Button } from '@/components/ui/button';
 import type { LoanItem } from '@/data/inventory-data';
 
 interface PeminjamanActiveListProps {
-    loans: LoanItem[];                                        // Daftar data peminjaman yang masih aktif
-    onReturnItem: (loan: LoanItem) => void;                   // Callback ketika tombol "Kembalikan" diklik
+    loans: LoanItem[];
+    onReturnItem: (loan: LoanItem) => void;
 }
 
 export function PeminjamanActiveList({
     loans,
     onReturnItem
 }: PeminjamanActiveListProps) {
-    // Tampilan kosong jika tidak ada pinjaman aktif
     if (loans.length === 0) {
         return (
             <div className="text-center py-12 bg-white rounded-xl border border-zinc-200 p-8">
@@ -46,7 +35,6 @@ export function PeminjamanActiveList({
                     key={loan.id}
                     className="p-4 rounded-xl bg-white border border-zinc-200 shadow-2xs hover:border-zinc-300 transition-colors"
                 >
-                    {/* Header Kartu: Ikon Barang, Kode, Nama Alat, dan Tombol Kembalikan */}
                     <div className="flex items-start justify-between gap-3">
                         <div className="flex gap-3">
                             <div className="w-12 h-12 rounded bg-zinc-50 border border-zinc-100 flex items-center justify-center shrink-0">
@@ -71,7 +59,6 @@ export function PeminjamanActiveList({
                             </div>
                         </div>
 
-                        {/* Tombol Pengembalian Alat */}
                         <Button
                             variant="outline"
                             size="sm"
@@ -82,7 +69,6 @@ export function PeminjamanActiveList({
                         </Button>
                     </div>
 
-                    {/* Rincian Tanggal Peminjaman & Estimasi Pengembalian */}
                     <div className="mt-3 pt-3 border-t border-zinc-100 grid gap-2 text-xs">
                         <div className="flex items-center gap-1.5 text-zinc-500">
                             <Calendar className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
@@ -94,7 +80,6 @@ export function PeminjamanActiveList({
                         </div>
                     </div>
 
-                    {/* Catatan / Keterangan Keperluan */}
                     {loan.notes && (
                         <div className="mt-2 text-[11px] text-zinc-500 bg-zinc-50 p-2 rounded border border-zinc-100">
                             <span className="font-semibold text-zinc-700">Keperluan:</span> {loan.notes}

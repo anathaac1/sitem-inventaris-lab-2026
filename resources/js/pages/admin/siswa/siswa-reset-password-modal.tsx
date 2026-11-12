@@ -1,12 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/siswa/
- * Fungsi  : Kumpulan komponen antarmuka manajemen akun pengguna lab (Siswa & Administrator) untuk Administrator.
- * File    : siswa-reset-password-modal.tsx
- * Fungsi  : Dialog modal untuk menyetel ulang kata sandi pengguna secara manual atau otomatis melalui generator sandi acak.
- * ============================================================================
- */
-
 import React from 'react';
 import { Check } from 'lucide-react';
 import type { UserAccount } from '@/data/auth-store';
@@ -14,14 +5,14 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
 interface SiswaResetPasswordModalProps {
-    isOpen: boolean;                                           // Penanda dialog modal terbuka/tertutup
-    onClose: () => void;                                       // Callback untuk menutup modal
-    student: UserAccount | null;                               // Akun siswa/user yang sedang diatur ulang sandinya
-    newPassword: string;                                       // Nilai input kata sandi baru
-    onNewPasswordChange: (val: string) => void;                // Handler perubahan input kata sandi baru
-    onGenerateRandom: () => void;                              // Handler pembuatan kata sandi acak
-    onSubmit: (e: React.SyntheticEvent) => void;               // Handler pengiriman perubahan kata sandi
-    isSubmitting: boolean;                                     // Status indikator proses pengiriman data
+    isOpen: boolean;
+    onClose: () => void;
+    student: UserAccount | null;
+    newPassword: string;
+    onNewPasswordChange: (val: string) => void;
+    onGenerateRandom: () => void;
+    onSubmit: (e: React.SyntheticEvent) => void;
+    isSubmitting: boolean;
 }
 
 export function SiswaResetPasswordModal({
@@ -41,7 +32,6 @@ export function SiswaResetPasswordModal({
 
                 {student && (
                     <form onSubmit={onSubmit} className="space-y-4">
-                        {/* Info Ringkas Akun Pengguna */}
                         <div className="p-3 rounded bg-slate-50 border border-slate-200 text-xs flex items-center gap-3">
                             <div className="w-9 h-9 rounded bg-slate-900 text-white font-bold flex items-center justify-center shrink-0">
                                 {student.avatar}
@@ -54,7 +44,6 @@ export function SiswaResetPasswordModal({
                             </div>
                         </div>
 
-                        {/* Input Password Baru & Tombol Generator Acak */}
                         <div className="space-y-1.5 border border-slate-200 rounded p-3.5 bg-slate-50/50">
                             <label className="text-xs font-semibold text-slate-700 block">
                                 Password Baru
@@ -78,7 +67,6 @@ export function SiswaResetPasswordModal({
                             </button>
                         </div>
 
-                        {/* Tombol Aksi Batal dan Simpan */}
                         <div className="flex items-center justify-end gap-2 pt-1">
                             <Button
                                 type="button"

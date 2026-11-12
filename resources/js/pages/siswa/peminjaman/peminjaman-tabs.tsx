@@ -1,18 +1,8 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/peminjaman/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola transaksi peminjaman alat oleh siswa.
- * File    : peminjaman-tabs.tsx
- * Fungsi  : Tab navigasi peralihan antara daftar peminjaman "Aktif" dan "Riwayat" pengembalian,
- *           dilengkapi dengan badge penghitung jumlah transaksi untuk masing-masing tab.
- * ============================================================================
- */
-
 interface PeminjamanTabsProps {
-    activeTab: 'aktif' | 'riwayat';                            // Tab yang sedang aktif dipilih
-    onTabChange: (tab: 'aktif' | 'riwayat') => void;           // Callback ketika tab diklik berganti
-    activeCount: number;                                      // Jumlah peminjaman aktif
-    historyCount: number;                                     // Jumlah riwayat pengembalian
+    activeTab: 'aktif' | 'riwayat';
+    onTabChange: (tab: 'aktif' | 'riwayat') => void;
+    activeCount: number;
+    historyCount: number;
 }
 
 export function PeminjamanTabs({
@@ -23,7 +13,6 @@ export function PeminjamanTabs({
 }: PeminjamanTabsProps) {
     return (
         <div className="flex border-b border-zinc-200">
-            {/* Tombol Tab Peminjaman Aktif */}
             <button
                 type="button"
                 onClick={() => onTabChange('aktif')}
@@ -45,7 +34,6 @@ export function PeminjamanTabs({
                 </span>
             </button>
 
-            {/* Tombol Tab Riwayat Pengembalian */}
             <button
                 type="button"
                 onClick={() => onTabChange('riwayat')}

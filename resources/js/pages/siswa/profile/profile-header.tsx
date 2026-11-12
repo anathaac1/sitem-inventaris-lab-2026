@@ -1,25 +1,13 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/profile/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola data profil, keamanan akun,
- *           dan preferensi siswa dalam aplikasi inventaris lab.
- * File    : profile-header.tsx
- * Fungsi  : Komponen header untuk halaman profil siswa, menyediakan tombol kembali
- *           ke beranda, judul halaman, dan tombol pemicu modal edit profil.
- * ============================================================================
- */
-
 import { Link } from '@inertiajs/react';
 import { ChevronLeft, Edit3 } from 'lucide-react';
 
 interface ProfileHeaderProps {
-    onOpenEditModal?: () => void;                              // Callback untuk membuka dialog edit profil
+    onOpenEditModal?: () => void;
 }
 
 export function ProfileHeader({ onOpenEditModal }: ProfileHeaderProps) {
     return (
         <div className="flex items-center justify-between">
-            {/* Bagian Kiri: Tombol Back dan Judul Halaman */}
             <div className="flex items-center gap-3">
                 <Link
                     href="/dashboard"
@@ -33,7 +21,6 @@ export function ProfileHeader({ onOpenEditModal }: ProfileHeaderProps) {
                 </h1>
             </div>
 
-            {/* Bagian Kanan: Tombol Edit Profil */}
             {onOpenEditModal && (
                 <button
                     type="button"

@@ -1,26 +1,13 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : breadcrumb.tsx
- * Fungsi  : Komponen navigasi hierarki remah roti (Breadcrumb) untuk membantu orientasi pengguna
- *           mengenai lokasi halaman aktif dalam struktur pohon navigasi aplikasi.
- * ============================================================================
- */
-
 import { Slot } from "@radix-ui/react-slot"
 import { ChevronRight, MoreHorizontal } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen pembungkus navigasi utama breadcrumb
 function Breadcrumb({ ...props }: React.ComponentProps<"nav">) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />
 }
 
-// Daftar tautan breadcrumb dalam elemen ordered list
 function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
   return (
     <ol
@@ -34,7 +21,6 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
   )
 }
 
-// Elemen item individu dalam breadcrumb
 function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
@@ -45,7 +31,6 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
   )
 }
 
-// Tautan navigasi breadcrumb menuju halaman induk
 function BreadcrumbLink({
   asChild,
   className,
@@ -64,7 +49,6 @@ function BreadcrumbLink({
   )
 }
 
-// Penanda halaman aktif saat ini pada breadcrumb
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
@@ -78,7 +62,6 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
   )
 }
 
-// Karakter / ikon pemisah antar item breadcrumb
 function BreadcrumbSeparator({
   children,
   className,
@@ -91,13 +74,10 @@ function BreadcrumbSeparator({
       aria-hidden="true"
       className={cn("[&>svg]:size-3.5", className)}
       {...props}
-    >
-      {children ?? <ChevronRight />}
-    </li>
+    />
   )
 }
 
-// Indikator elipsis untuk menyembunyikan sebagian hierarki halaman yang panjang
 function BreadcrumbEllipsis({
   className,
   ...props

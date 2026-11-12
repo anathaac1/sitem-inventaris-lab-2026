@@ -1,13 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/dashboard/
- * Fungsi  : Kumpulan komponen antarmuka yang menyusun halaman beranda (dashboard) siswa.
- * File    : index.tsx
- * Fungsi  : Halaman utama beranda siswa. Menyatukan sapaan user, bilah pencarian, banner informasi bergerak,
- *           kategori alat cepat, daftar barang tersedia, cuplikan peminjaman aktif, serta alur pengajuan peminjaman barang.
- * ============================================================================
- */
-
 import { useState, useMemo } from 'react';
 import { Head, router, usePage } from '@inertiajs/react';
 import { Laptop, Mouse, Wrench, Zap } from 'lucide-react';
@@ -28,26 +18,23 @@ import { DashboardAvailableTools } from './dashboard-available-tools';
 import { DashboardActiveLoans } from './dashboard-active-loans';
 
 interface DashboardProps {
-    initialItems?: InventoryItem[];                           // Data awal alat lab dari server Laravel
-    initialActiveLoans?: LoanItem[];                          // Data peminjaman aktif siswa
+    initialItems?: InventoryItem[];
+    initialActiveLoans?: LoanItem[];
 }
 
 export default function Dashboard({ initialItems = [], initialActiveLoans = [] }: DashboardProps) {
     const { auth } = usePage().props as any;
     const items = initialItems;
 
-    // State pencarian dan filter kategori / status
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('Semua');
     const [selectedStatus, setSelectedStatus] = useState('Semua');
     const [filterSheetOpen, setFilterSheetOpen] = useState(false);
 
-    // State pengelolaan modal detail dan peminjaman alat
     const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
     const [detailModalOpen, setDetailModalOpen] = useState(false);
     const activeLoans = initialActiveLoans;
 
-    // Daftar opsi kategori dengan ikon pendukung
     const categories: CategoryOption[] = [
         { name: 'Laptop', icon: Laptop },
         { name: 'Peripheral', icon: Mouse },
@@ -55,10 +42,8 @@ export default function Dashboard({ initialItems = [], initialActiveLoans = [] }
         { name: 'Elektrikal', icon: Zap }
     ];
 
-    // Filter daftar barang secara komputasi (pencarian kata kunci, kategori, dan visibilitas siswa)
     const filteredItems = useMemo(() => {
         return items.filter((item) => {
-            // Sembunyikan barang jika diatur tidak terlihat oleh siswa oleh admin
             if (item.isVisibleToStudents === false) return false;
 
             const matchSearch =
@@ -74,13 +59,11 @@ export default function Dashboard({ initialItems = [], initialActiveLoans = [] }
         });
     }, [items, searchQuery, selectedCategory, selectedStatus]);
 
-    // Membuka modal detail barang saat item diklik
     const handleOpenDetail = (item: InventoryItem) => {
         setSelectedItem(item);
         setDetailModalOpen(true);
     };
 
-    // Mengirim formulir peminjaman ke server Laravel via POST /peminjaman
     const handleLoanSuccess = (
         item: InventoryItem,
         borrowDate: string,
@@ -109,7 +92,6 @@ export default function Dashboard({ initialItems = [], initialActiveLoans = [] }
         });
     };
 
-    // Format tanggal dan jam login siswa
     const studentName = auth?.user?.name || 'Ahmad Rizky Pratama';
     const loginDate = new Date();
 
@@ -130,14 +112,12 @@ export default function Dashboard({ initialItems = [], initialActiveLoans = [] }
             <Head title="Beranda - Sistem Inventory Lab RPL" />
 
             <div className="space-y-5">
-                {/* 1. Baris Sapaan Siswa */}
                 <DashboardGreeting
                     studentName={studentName}
                     loginDateStr={loginDateStr}
                     loginTimeStr={loginTimeStr}
                 />
 
-                {/* 2. Bilah Pencarian & Tombol Filter */}
                 <DashboardSearchBar
                     searchQuery={searchQuery}
                     onSearchChange={setSearchQuery}
@@ -145,27 +125,22 @@ export default function Dashboard({ initialItems = [], initialActiveLoans = [] }
                     onOpenFilter={() => setFilterSheetOpen(true)}
                 />
 
-                {/* 3. Banner Carousel Informasi */}
                 <DashboardBannerCarousel />
 
-                {/* 4. Grid Pilihan Cepat Kategori */}
                 <DashboardCategoryGrid
                     categories={categories}
                     selectedCategory={selectedCategory}
                     onSelectCategory={setSelectedCategory}
                 />
 
-                {/* 5. Daftar Kartu Barang yang Tersedia */}
                 <DashboardAvailableTools
                     items={filteredItems}
                     onOpenDetail={handleOpenDetail}
                 />
 
-                {/* 6. Daftar Transaksi Peminjaman Siswa yang Sedang Berjalan */}
                 <DashboardActiveLoans loans={activeLoans} />
             </div>
 
-            {/* Modal Filter Geser Samping */}
             <FilterSheet
                 isOpen={filterSheetOpen}
                 onClose={() => setFilterSheetOpen(false)}
@@ -180,7 +155,6 @@ export default function Dashboard({ initialItems = [], initialActiveLoans = [] }
                 }}
             />
 
-            {/* Modal Detail Barang & Formulir Pengajuan Pinjam */}
             {selectedItem && (
                 <ItemDetailModal
                     item={selectedItem}

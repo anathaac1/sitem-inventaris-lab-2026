@@ -1,14 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/profile/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola data profil, keamanan akun,
- *           dan preferensi siswa dalam aplikasi inventaris lab.
- * File    : profile-modal.tsx
- * Fungsi  : Dialog modal popup profil siswa yang dapat dipanggil dari header navigasi utama,
- *           menampilkan data sekolah SMKN 1 Kota Bekasi, program keahlian RPL, kontak, serta tombol ubah profil.
- * ============================================================================
- */
-
 import React, { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { School, BookOpen, Edit3, Mail, Phone, Hash } from 'lucide-react';
@@ -20,25 +9,22 @@ import { USER_PROFILE } from '@/data/inventory-data';
 import { toast } from 'sonner';
 
 interface ProfileModalProps {
-    isOpen: boolean;                                           // Penanda apakah modal profil sedang dibuka
-    onClose: () => void;                                       // Callback untuk menutup dialog modal
-    session?: any;                                             // Data session user
-    user?: any;                                                // Data objek user login
-    onLogout?: () => void;                                     // Callback saat logout dipicu
+    isOpen: boolean;
+    onClose: () => void;
+    session?: any;
+    user?: any;
+    onLogout?: () => void;
 }
 
 export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalProps) {
-    // State kendali modal edit profil dan ubah kata sandi siswa
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
-    // State form input pergantian kata sandi
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isSubmittingEdit, setIsSubmittingEdit] = useState(false);
 
-    // Menentukan nilai fallback identitas siswa
     const studentName = user?.name || session?.name || USER_PROFILE.name;
     const studentClass = user?.class || session?.class || USER_PROFILE.class;
     const studentUsername = user?.username || session?.username || (user?.email ? user.email.split('@')[0] : 'siswa1');
@@ -46,7 +32,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
     const studentNisn = user?.nisn || session?.nisn || '0067829101';
     const studentPhone = user?.phone || session?.phone || '0812-9876-1101';
 
-    // Menangani aksi pengiriman formulir pembaruan profil siswa ke server
     const handleEditProfileSubmit = (formData: StudentProfileFormData) => {
         setIsSubmittingEdit(true);
         router.post('/profile', {
@@ -71,7 +56,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
         });
     };
 
-    // Menangani validasi dan pengiriman formulir ubah kata sandi siswa
     const handleChangePassword = (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (newPassword !== confirmPassword) {
@@ -102,7 +86,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
         });
     };
 
-    // Inisial 2 huruf nama siswa untuk avatar
     const avatarInitials = studentName
         .split(' ')
         .map((n: string) => n[0])
@@ -114,7 +97,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
         <>
             <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
                 <DialogContent showCloseButton={false} className="max-w-lg w-full rounded-2xl bg-white p-5 sm:p-6 border border-slate-200 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
-                    {/* Header Modal Profil Siswa */}
                     <DialogHeader className="pb-3 border-b border-slate-100">
                         <DialogTitle className="text-base font-bold text-slate-900 flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -132,7 +114,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
                     </DialogHeader>
 
                     <div className="space-y-4 pt-3">
-                        {/* Kartu Ringkas Siswa */}
                         <ProfileStudentCard
                             studentName={studentName}
                             studentClass={studentClass}
@@ -140,7 +121,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
                             avatarInitials={avatarInitials}
                         />
 
-                        {/* Rincian Informasi Akademik dan Akun Siswa */}
                         <div className="bg-slate-50/80 rounded p-4 border border-slate-200/80 space-y-3">
                             <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
                                 Informasi Akademik & Akun
@@ -187,7 +167,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
                 </DialogContent>
             </Dialog>
 
-            {/* Modal Edit Formulir Profil Siswa */}
             <ProfileEditModal
                 isOpen={editModalOpen}
                 onClose={() => setEditModalOpen(false)}
@@ -203,7 +182,6 @@ export function ProfileModal({ isOpen, onClose, session, user }: ProfileModalPro
                 }}
             />
 
-            {/* Modal Ubah Kata Sandi Akun Siswa */}
             <ProfilePasswordModal
                 isOpen={passwordModalOpen}
                 onClose={() => setPasswordModalOpen(false)}

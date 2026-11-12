@@ -1,42 +1,27 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : select.tsx
- * Fungsi  : Kumpulan komponen menu pemilih opsi (Select / Dropdown Select) berbasis Radix UI Select
- *           dengan dukungan penyorotan opsi terpilih, scroll button atas/bawah, dan label kelompok.
- * ============================================================================
- */
-
 import * as SelectPrimitive from "@radix-ui/react-select"
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen pembungkus kontrol logika select (Select Root)
 function Select({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Root>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />
 }
 
-// Pengelompokan opsi-opsi pilihan yang saling terkait
 function SelectGroup({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Group>) {
   return <SelectPrimitive.Group data-slot="select-group" {...props} />
 }
 
-// Elemen penampil nilai teks dari opsi yang sedang terpilih
 function SelectValue({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Value>) {
   return <SelectPrimitive.Value data-slot="select-value" {...props} />
 }
 
-// Tombol pemicu yang menampilkan opsi terpilih dan panah chevron
 function SelectTrigger({
   className,
   size = "default",
@@ -63,7 +48,6 @@ function SelectTrigger({
   )
 }
 
-// Wadah popover daftar item opsi yang dapat dipilih
 function SelectContent({
   className,
   children,
@@ -106,7 +90,6 @@ function SelectContent({
   )
 }
 
-// Label judul kelompok opsi
 function SelectLabel({
   className,
   ...props
@@ -120,7 +103,6 @@ function SelectLabel({
   )
 }
 
-// Item opsi individual di dalam daftar select
 function SelectItem({
   className,
   children,
@@ -148,7 +130,6 @@ function SelectItem({
   )
 }
 
-// Garis batas pemisah antar item / kelompok select
 function SelectSeparator({
   className,
   ...props
@@ -162,7 +143,6 @@ function SelectSeparator({
   )
 }
 
-// Tombol gulir ke atas jika daftar opsi melebihi batas tinggi
 function SelectScrollUpButton({
   className,
   ...props
@@ -181,7 +161,6 @@ function SelectScrollUpButton({
   )
 }
 
-// Tombol gulir ke bawah jika daftar opsi melebihi batas tinggi
 function SelectScrollDownButton({
   className,
   ...props

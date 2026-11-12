@@ -1,23 +1,12 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/peminjaman/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola transaksi peminjaman alat oleh siswa.
- * File    : peminjaman-history-list.tsx
- * Fungsi  : Menampilkan daftar riwayat peminjaman masa lalu yang barangnya telah berhasil dikembalikan ke lab,
- *           lengkap dengan tanggal pinjam dan tanggal aktual barang dikembalikan.
- * ============================================================================
- */
-
 import { Clock } from 'lucide-react';
 import { ItemIllustration } from '@/components/inventory/item-illustration';
 import type { LoanItem } from '@/data/inventory-data';
 
 interface PeminjamanHistoryListProps {
-    loans: LoanItem[];                                        // Daftar data peminjaman yang sudah selesai/dikembalikan
+    loans: LoanItem[];
 }
 
 export function PeminjamanHistoryList({ loans }: PeminjamanHistoryListProps) {
-    // Tampilan kosong jika siswa belum pernah meminjam atau belum ada riwayat pengembalian
     if (loans.length === 0) {
         return (
             <div className="text-center py-12 bg-white rounded-xl border border-zinc-200 p-8">
@@ -41,7 +30,6 @@ export function PeminjamanHistoryList({ loans }: PeminjamanHistoryListProps) {
                     key={loan.id}
                     className="p-4 rounded-xl bg-white border border-zinc-200 shadow-2xs opacity-90 hover:opacity-100 transition-opacity"
                 >
-                    {/* Header Baris Riwayat: Ikon, Kode, Nama Alat, dan Badge Hijau "Dikembalikan" */}
                     <div className="flex items-start justify-between gap-3">
                         <div className="flex gap-3">
                             <div className="w-12 h-12 rounded bg-zinc-50 border border-zinc-100 flex items-center justify-center shrink-0">
@@ -67,7 +55,6 @@ export function PeminjamanHistoryList({ loans }: PeminjamanHistoryListProps) {
                         </div>
                     </div>
 
-                    {/* Catatan Waktu: Tanggal Pinjam dan Tanggal Kembali Aktual */}
                     <div className="mt-3 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-500">
                         <span>Pinjam: {loan.borrowDate}</span>
                         {loan.returnDate && (

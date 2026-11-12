@@ -1,47 +1,31 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : sheet.tsx
- * Fungsi  : Kumpulan komponen panel geser sisi layar (Sheet / Drawer / Slide-over) berbasis
- *           Radix UI Dialog untuk filter responsif, formulir samping, dan navigasi seluler.
- * ============================================================================
- */
-
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { XIcon } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen pembungkus kontrol logika panel slide-over
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />
 }
 
-// Elemen tombol pemicu pembuka panel sheet
 function SheetTrigger({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Trigger>) {
   return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
 }
 
-// Elemen tombol penutup panel sheet
 function SheetClose({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Close>) {
   return <SheetPrimitive.Close data-slot="sheet-close" {...props} />
 }
 
-// Portal perenderan sheet di luar hirarki DOM lokal
 function SheetPortal({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Portal>) {
   return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
 }
 
-// Latar belakang redup gelap di balik panel sheet
 function SheetOverlay({
   className,
   ...props
@@ -58,7 +42,6 @@ function SheetOverlay({
   )
 }
 
-// Wadah kotak konten utama panel samping (mendukung posisi right, left, top, bottom)
 function SheetContent({
   className,
   children,
@@ -96,7 +79,6 @@ function SheetContent({
   )
 }
 
-// Bagian header atas panel samping
 function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -107,7 +89,6 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Bagian footer bawah panel samping
 function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -118,7 +99,6 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Judul panel samping untuk aksesibilitas
 function SheetTitle({
   className,
   ...props
@@ -132,7 +112,6 @@ function SheetTitle({
   )
 }
 
-// Deskripsi penjelas panel samping
 function SheetDescription({
   className,
   ...props

@@ -1,28 +1,18 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/alat/
- * Fungsi  : Kumpulan komponen antarmuka manajemen data barang inventaris laboratorium (CRUD Alat) untuk Administrator.
- * File    : alat-delete-modal.tsx
- * Fungsi  : Dialog modal konfirmasi untuk menghapus perangkat inventaris dari sistem secara permanen.
- * ============================================================================
- */
-
 import { AlertCircle } from 'lucide-react';
 import type { InventoryItem } from '@/data/inventory-data';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
 interface AlatDeleteModalProps {
-    item: InventoryItem | null;                                // Data alat yang akan dihapus (null jika modal tertutup)
-    onClose: () => void;                                       // Callback untuk membatalkan dan menutup dialog
-    onConfirm: () => void;                                     // Callback saat tombol konfirmasi hapus diklik
+    item: InventoryItem | null;
+    onClose: () => void;
+    onConfirm: () => void;
 }
 
 export function AlatDeleteModal({ item, onClose, onConfirm }: AlatDeleteModalProps) {
     return (
         <Dialog open={!!item} onOpenChange={(open) => !open && onClose()}>
             <DialogContent className="max-w-sm p-5 rounded-2xl border border-slate-200 bg-white shadow-xl">
-                {/* Header Judul Modal Peringatan */}
                 <DialogHeader>
                     <DialogTitle className="text-sm font-bold text-slate-900 flex items-center gap-2">
                         <AlertCircle className="w-4 h-4 text-rose-600" />
@@ -30,12 +20,10 @@ export function AlatDeleteModal({ item, onClose, onConfirm }: AlatDeleteModalPro
                     </DialogTitle>
                 </DialogHeader>
 
-                {/* Pesan Konfirmasi */}
                 <p className="text-xs text-slate-600 py-2">
                     Apakah Anda yakin ingin menghapus perangkat <strong className="text-slate-900">{item?.name}</strong> ({item?.code}) dari daftar inventaris laboratorium? Tindakan ini tidak dapat dibatalkan.
                 </p>
 
-                {/* Tombol Aksi Batal dan Hapus */}
                 <DialogFooter className="pt-2 flex justify-end gap-2">
                     <Button
                         type="button"

@@ -1,19 +1,7 @@
-/**
- * ============================================================================
- * Folder  : resources/js/components/ui/
- * Fungsi  : Kumpulan komponen antarmuka pengguna dasar (UI Primitives) berbasis Tailwind CSS
- *           dan Radix UI yang dapat digunakan kembali (reusable) di seluruh aplikasi inventaris lab.
- * File    : card.tsx
- * Fungsi  : Kumpulan komponen kartu modular (Card, CardHeader, CardTitle, CardDescription,
- *           CardContent, CardFooter) untuk mengelompokkan konten dan data secara terstruktur.
- * ============================================================================
- */
-
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-// Komponen pembungkus kontainer kartu utama
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -27,7 +15,6 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Komponen header bagian atas kartu
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -38,7 +25,6 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Komponen teks judul kartu
 function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -49,7 +35,6 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Komponen teks deskripsi atau subjudul penjelas kartu
 function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -60,7 +45,6 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Komponen area badan utama untuk meletakkan konten kartu
 function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -71,7 +55,6 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// Komponen footer bagian bawah kartu untuk tombol aksi atau informasi tambahan
 function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

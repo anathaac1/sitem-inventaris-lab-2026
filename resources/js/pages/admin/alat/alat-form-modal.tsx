@@ -1,13 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/alat/
- * Fungsi  : Kumpulan komponen antarmuka manajemen data barang inventaris laboratorium (CRUD Alat) untuk Administrator.
- * File    : alat-form-modal.tsx
- * Fungsi  : Dialog modal formulir penambahan dan penyuntingan alat laboratorium. Mendukung unggah foto alat (maks 2MB),
- *           penyesuaian stok siap pakai dan total unit fisik, deskripsi, sakelar visibilitas, serta baris spesifikasi teknis dinamis.
- * ============================================================================
- */
-
 import React, { useRef } from 'react';
 import { X, Plus, ChevronDown, Upload, Image as ImageIcon, Trash2 } from 'lucide-react';
 import type { InventoryItem } from '@/data/inventory-data';
@@ -16,33 +6,33 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Button } from '@/components/ui/button';
 
 export interface SpecRow {
-    key: string;                                               // Nama spesifikasi (misal: Processor, RAM, Daya)
-    value: string;                                             // Nilai spesifikasi (misal: Intel Core i5, 16 GB, 65W)
+    key: string;
+    value: string;
 }
 
 export interface AlatFormData {
-    name: string;                                              // Nama perangkat
-    code: string;                                              // Kode inventaris unik (misal: LP-001)
-    category: 'Laptop' | 'Peripheral' | 'Tools' | 'Elektrikal';// Kategori alat
-    stock: number | '';                                        // Stok unit yang tersedia di rak
-    total: number | '';                                        // Total unit fisik lab keseluruhan
-    description: string;                                       // Keterangan atau panduan alat
-    iconType?: string;                                         // Tipe ikon ilustrasi jika tidak ada foto
-    isVisibleToStudents: boolean;                              // Visibilitas untuk siswa
-    specs: SpecRow[];                                          // Baris spesifikasi dinamis
-    imageFile?: File | null;                                   // File gambar yang diunggah
-    imagePreview?: string | null;                              // URL pratinjau gambar
-    imageSizeText?: string | null;                             // Teks ukuran file gambar
-    removeImage?: boolean;                                     // Flag hapus gambar saat ini
+    name: string;
+    code: string;
+    category: 'Laptop' | 'Peripheral' | 'Tools' | 'Elektrikal';
+    stock: number | '';
+    total: number | '';
+    description: string;
+    iconType?: string;
+    isVisibleToStudents: boolean;
+    specs: SpecRow[];
+    imageFile?: File | null;
+    imagePreview?: string | null;
+    imageSizeText?: string | null;
+    removeImage?: boolean;
 }
 
 interface AlatFormModalProps {
-    isOpen: boolean;                                           // Status buka-tutup modal form
-    onClose: () => void;                                       // Callback untuk menutup modal
-    editingItem: InventoryItem | null;                         // Data alat yang sedang diedit (null jika tambah baru)
-    formData: AlatFormData;                                    // State formulir data alat
-    setFormData: React.Dispatch<React.SetStateAction<AlatFormData>>; // Setter data formulir
-    onSubmit: (e: React.FormEvent) => void;                    // Callback pengiriman formulir
+    isOpen: boolean;
+    onClose: () => void;
+    editingItem: InventoryItem | null;
+    formData: AlatFormData;
+    setFormData: React.Dispatch<React.SetStateAction<AlatFormData>>;
+    onSubmit: (e: React.FormEvent) => void;
 }
 
 export function AlatFormModal({
@@ -55,7 +45,6 @@ export function AlatFormModal({
 }: AlatFormModalProps) {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-    // Menambah baris spesifikasi teknis baru
     const handleAddSpecRow = () => {
         setFormData({
             ...formData,
@@ -63,14 +52,12 @@ export function AlatFormModal({
         });
     };
 
-    // Memperbarui nilai pada baris spesifikasi tertentu
     const handleUpdateSpecRow = (index: number, field: 'key' | 'value', val: string) => {
         const updated = [...formData.specs];
         updated[index][field] = val;
         setFormData({ ...formData, specs: updated });
     };
 
-    // Menghapus salah satu baris spesifikasi
     const handleRemoveSpecRow = (index: number) => {
         const updated = formData.specs.filter((_, i) => i !== index);
         setFormData({
@@ -79,12 +66,10 @@ export function AlatFormModal({
         });
     };
 
-    // Memproses pemilihan file gambar baru dan membuat URL pratinjau
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
-        // Validasi ukuran berkas maksimal 2 Megabyte
         if (file.size > 2 * 1024 * 1024) {
             alert('Ukuran gambar maksimal 2MB');
             return;
@@ -104,7 +89,6 @@ export function AlatFormModal({
         });
     };
 
-    // Menghapus gambar yang sudah terunggah
     const handleRemoveImage = () => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
@@ -121,7 +105,6 @@ export function AlatFormModal({
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
             <DialogContent className="max-w-lg p-5 rounded-2xl border border-slate-200 bg-white shadow-xl max-h-[90vh] overflow-y-auto">
-                {/* Header Judul Modal */}
                 <DialogHeader>
                     <DialogTitle className="text-base font-bold text-slate-900">
                         {editingItem ? 'Perbarui Data Perangkat' : 'Tambah Perangkat Inventaris Baru'}
@@ -133,7 +116,6 @@ export function AlatFormModal({
                     </p>
                 </DialogHeader>
 
-                {/* Banner Pratinjau Singkat Saat Mode Edit */}
                 {editingItem && (
                     <div className="p-3 rounded-xl bg-blue-50/60 border border-blue-200/80 flex items-center gap-3">
                         <div className="w-12 h-12 rounded-lg bg-white border border-blue-200 flex items-center justify-center shrink-0 overflow-hidden">
@@ -158,9 +140,7 @@ export function AlatFormModal({
                     </div>
                 )}
 
-                {/* Formulir Input Data Inventaris */}
                 <form onSubmit={onSubmit} className="space-y-4 text-xs pt-2">
-                    {/* Baris 1: Nama Perangkat dan Kode Inventaris */}
                     <div className="grid grid-cols-3 gap-3">
                         <div className="col-span-2 space-y-2">
                             <label className="mb-1 block font-semibold text-slate-700">Nama Perangkat</label>
@@ -186,7 +166,6 @@ export function AlatFormModal({
                         </div>
                     </div>
 
-                    {/* Baris 2: Unggah Foto/Gambar Perangkat */}
                     <div className="space-y-1.5 p-3 rounded-lg border border-slate-200 bg-slate-50/60">
                         <div className="flex items-center justify-between">
                             <label className="font-semibold text-slate-700 flex items-center gap-1.5">
@@ -256,7 +235,6 @@ export function AlatFormModal({
                         )}
                     </div>
 
-                    {/* Baris 3: Pilihan Kategori Alat */}
                     <div className="space-y-1">
                         <label className="mb-1 block font-semibold text-slate-700">Kategori</label>
                         <div className="relative">
@@ -279,10 +257,8 @@ export function AlatFormModal({
                         </div>
                     </div>
 
-                    {/* Baris 4: Pengaturan Stok Siap Pakai dan Total Fisik */}
                     <div className="space-y-1">
                         <div className="grid grid-cols-2 gap-3">
-                            {/* Counter Stok Siap Pakai */}
                             <div className="space-y-1">
                                 <label className="mb-1 block font-semibold text-slate-700">Stok Siap Pakai</label>
                                 <div className={`flex items-center justify-between rounded border bg-white p-1 ${
@@ -328,7 +304,6 @@ export function AlatFormModal({
                                 </div>
                             </div>
 
-                            {/* Counter Total Fisik Unit Lab */}
                             <div className="space-y-1">
                                 <label className="mb-1 block font-semibold text-slate-700">Total Unit Fisik Lab</label>
                                 <div className="flex items-center justify-between rounded border border-slate-200 bg-white p-1">
@@ -377,7 +352,6 @@ export function AlatFormModal({
                         )}
                     </div>
 
-                    {/* Baris 5: Deskripsi Perangkat */}
                     <div className="space-y-1">
                         <label className="mb-1 block font-semibold text-slate-700">Deskripsi Alat</label>
                         <textarea
@@ -390,7 +364,6 @@ export function AlatFormModal({
                         />
                     </div>
 
-                    {/* Baris 6: Spesifikasi Teknis Dinamis */}
                     <div className="space-y-2 p-3 rounded bg-slate-50 border border-slate-200">
                         <div className="flex items-center justify-between">
                             <label className="font-semibold text-slate-800 block">
@@ -442,7 +415,6 @@ export function AlatFormModal({
                         </div>
                     </div>
 
-                    {/* Baris 7: Sakelar Keaktifan (Visibilitas Siswa) */}
                     <div className="p-3.5 rounded border border-slate-200 bg-slate-50 flex items-center justify-between">
                         <div>
                             <p className="font-semibold text-slate-900">Status Alat (Aktif)</p>
@@ -466,7 +438,6 @@ export function AlatFormModal({
                         </label>
                     </div>
 
-                    {/* Tombol Aksi Batal dan Simpan */}
                     <DialogFooter className="pt-2 flex justify-end gap-2">
                         <Button
                             type="button"

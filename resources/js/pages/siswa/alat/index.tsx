@@ -1,14 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/alat/
- * Fungsi  : Kumpulan komponen antarmuka yang menyusun halaman katalog peralatan lab versi siswa.
- * File    : index.tsx
- * Fungsi  : Halaman utama katalog alat untuk siswa. Menyediakan pencarian barang lengkap,
- *           filter kategori chips horizontal, modal filter ketersediaan, tampilan kisi kartu barang,
- *           serta formulir pengajuan pinjaman barang langsung ke server.
- * ============================================================================
- */
-
 import { useState, useMemo } from 'react';
 import { Head, router, usePage } from '@inertiajs/react';
 import { MainLayout } from '@/components/inventory/main-layout';
@@ -25,10 +14,10 @@ import { AlatCategoryChips } from './alat-category-chips';
 import { AlatGrid } from './alat-grid';
 
 interface AlatProps {
-    initialItems?: InventoryItem[];                           // Data awal seluruh peralatan dari backend
+    initialItems?: InventoryItem[];
     filters?: {
-        search?: string;                                      // Filter pencarian awal (opsional)
-        category?: string;                                    // Kategori awal (opsional)
+        search?: string;
+        category?: string;
     };
 }
 
@@ -36,20 +25,16 @@ export default function Alat({ initialItems = [], filters }: AlatProps) {
     const { auth } = usePage().props as any;
     const items = initialItems;
 
-    // State pengelolaan pencarian teks dan filter aktif
     const [searchQuery, setSearchQuery] = useState(filters?.search || '');
     const [selectedCategory, setSelectedCategory] = useState<string>(filters?.category || 'Semua');
     const [selectedStatus, setSelectedStatus] = useState<string>('Semua');
     const [filterSheetOpen, setFilterSheetOpen] = useState(false);
 
-    // State detail barang yang sedang dibuka
     const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
     const [detailModalOpen, setDetailModalOpen] = useState(false);
 
-    // Filter daftar barang secara komputasi berdasarkan input siswa
     const filteredItems = useMemo(() => {
         return items.filter((item) => {
-            // Sembunyikan jika admin mengatur alat ini tidak boleh dilihat siswa
             if (item.isVisibleToStudents === false) return false;
 
             const matchSearch =
@@ -65,13 +50,11 @@ export default function Alat({ initialItems = [], filters }: AlatProps) {
         });
     }, [items, searchQuery, selectedCategory, selectedStatus]);
 
-    // Membuka modal rincian spesifikasi barang
     const handleOpenDetail = (item: InventoryItem) => {
         setSelectedItem(item);
         setDetailModalOpen(true);
     };
 
-    // Mengirim permintaan peminjaman ke endpoint POST /peminjaman
     const handleLoanSuccess = (
         item: InventoryItem,
         borrowDate: string,
@@ -105,7 +88,6 @@ export default function Alat({ initialItems = [], filters }: AlatProps) {
             <Head title="Semua Alat - Sistem Inventory Lab RPL" />
 
             <div className="space-y-4">
-                {/* 1. Baris Input Pencarian & Tombol Filter Dialog */}
                 <AlatSearchBar
                     searchQuery={searchQuery}
                     onSearchChange={setSearchQuery}
@@ -113,21 +95,18 @@ export default function Alat({ initialItems = [], filters }: AlatProps) {
                     onOpenFilter={() => setFilterSheetOpen(true)}
                 />
 
-                {/* 2. Chip Pilihan Kategori Cepat (Horizontal Scroll) */}
                 <AlatCategoryChips
                     categories={CATEGORIES}
                     selectedCategory={selectedCategory}
                     onSelectCategory={setSelectedCategory}
                 />
 
-                {/* 3. Grid Kartu Daftar Alat */}
                 <AlatGrid
                     items={filteredItems}
                     onOpenDetail={handleOpenDetail}
                 />
             </div>
 
-            {/* Modal Filter Kategori & Ketersediaan */}
             <FilterSheet
                 isOpen={filterSheetOpen}
                 onClose={() => setFilterSheetOpen(false)}
@@ -142,7 +121,6 @@ export default function Alat({ initialItems = [], filters }: AlatProps) {
                 }}
             />
 
-            {/* Modal Detail Alat & Formulir Pengajuan Pinjam */}
             {selectedItem && (
                 <ItemDetailModal
                     item={selectedItem}

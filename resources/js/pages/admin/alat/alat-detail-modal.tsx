@@ -1,13 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/alat/
- * Fungsi  : Kumpulan komponen antarmuka manajemen data barang inventaris laboratorium (CRUD Alat) untuk Administrator.
- * File    : alat-detail-modal.tsx
- * Fungsi  : Dialog modal untuk memeriksa informasi detail dan spesifikasi lengkap perangkat inventaris,
- *           dilengkapi pratinjau gambar dengan fitur zoom lightbox dan tombol pintas ubah data.
- * ============================================================================
- */
-
 import { useState } from 'react';
 import { Info, ZoomIn, X } from 'lucide-react';
 import type { InventoryItem } from '@/data/inventory-data';
@@ -16,13 +6,12 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
 interface AlatDetailModalProps {
-    item: InventoryItem | null;                                // Objek data alat yang sedang ditampilkan
-    onClose: () => void;                                       // Callback untuk menutup dialog modal
-    onEdit: (item: InventoryItem) => void;                     // Callback untuk beralih ke modal edit alat
+    item: InventoryItem | null;
+    onClose: () => void;
+    onEdit: (item: InventoryItem) => void;
 }
 
 export function AlatDetailModal({ item, onClose, onEdit }: AlatDetailModalProps) {
-    // State kendali pembesaran foto perangkat (lightbox zoom)
     const [isImageZoomed, setIsImageZoomed] = useState(false);
 
     return (
@@ -31,7 +20,6 @@ export function AlatDetailModal({ item, onClose, onEdit }: AlatDetailModalProps)
                 <DialogContent className="max-w-md w-full p-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl">
                     {item && (
                         <div>
-                            {/* Header Gradasi Biru: Thumbnail Foto, Kategori, Nama, dan Kode Alat */}
                             <div className="bg-gradient-to-r from-[#0256D0] to-[#0A1C38] text-white p-5 flex items-center justify-between">
                                 <div className="flex items-center gap-3.5">
                                     <div
@@ -70,9 +58,7 @@ export function AlatDetailModal({ item, onClose, onEdit }: AlatDetailModalProps)
                                 </div>
                             </div>
 
-                            {/* Konten Detail Spesifikasi */}
                             <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto text-xs">
-                                {/* Baris Statistik Stok dan Status Keaktifan */}
                                 <div className="grid grid-cols-2 gap-3">
                                     <div className="p-3 rounded bg-slate-50 border border-slate-200">
                                         <span className="text-[11px] text-slate-500 block mb-1">Ketersediaan Unit Lab</span>
@@ -108,7 +94,6 @@ export function AlatDetailModal({ item, onClose, onEdit }: AlatDetailModalProps)
                                     </div>
                                 </div>
 
-                                {/* Deskripsi Perangkat */}
                                 <div className="space-y-1">
                                     <span className="font-bold text-slate-900 flex items-center gap-1.5">
                                         <Info className="w-3.5 h-3.5 text-[#0256D0]" />
@@ -119,7 +104,6 @@ export function AlatDetailModal({ item, onClose, onEdit }: AlatDetailModalProps)
                                     </p>
                                 </div>
 
-                                {/* Tabel Rincian Spesifikasi Teknis */}
                                 <div className="space-y-2">
                                     <span className="font-bold text-slate-900 block">
                                         Spesifikasi Teknis & Rincian Lab
@@ -141,7 +125,6 @@ export function AlatDetailModal({ item, onClose, onEdit }: AlatDetailModalProps)
                                 </div>
                             </div>
 
-                            {/* Tombol Aksi Bawah: Menuju Mode Ubah Data Alat */}
                             <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
                                 <Button
                                     type="button"
@@ -156,7 +139,6 @@ export function AlatDetailModal({ item, onClose, onEdit }: AlatDetailModalProps)
                 </DialogContent>
             </Dialog>
 
-            {/* Modal Lightbox Zoom Foto Alat */}
             {item && item.imageUrl && (
                 <Dialog open={isImageZoomed} onOpenChange={setIsImageZoomed}>
                     <DialogContent className="max-w-2xl w-full p-2 bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200 shadow-2xl overflow-hidden">

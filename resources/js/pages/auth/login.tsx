@@ -1,14 +1,3 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/auth/
- * Fungsi  : Direktori halaman autentikasi pengguna (masuk akun, lupa sandi, registrasi).
- * File    : login.tsx
- * Fungsi  : Halaman formulir login interaktif dengan efek amplop origami terbelah saat kursor diarahkan (hover),
- *           mendukung autentikasi role Siswa dan Admin ke backend Laravel Fortify, toggle lihat kata sandi,
- *           checkbox 'Ingat Saya', serta penanganan pesan galat kredensial.
- * ============================================================================
- */
-
 import React, { useState } from 'react';
 import { Head, router } from '@inertiajs/react';
 import { Eye, EyeOff, MousePointer } from 'lucide-react';
@@ -18,11 +7,10 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 
 type Props = {
-    status?: string;                          // Status pesan dari sesi Laravel (misal: "Password berhasil direset")
+    status?: string;
 };
 
 export default function Login({ status }: Props) {
-    // State input formulir
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -30,15 +18,12 @@ export default function Login({ status }: Props) {
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    // State interaksi efek animasi lipatan kartu login (hover, fokus input, atau sentuhan mobile)
     const [isHovered, setIsHovered] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const [isTouchOpen, setIsTouchOpen] = useState(false);
 
-    // Kartu amplop terbuka jika disentuh, kursor diarahkan, atau ada teks yang sedang diketik
     const isOpen = isHovered || isTouchOpen || (isFocused && (username.length > 0 || password.length > 0));
 
-    // Menangani pengiriman formulir login ke endpoint POST /login
     const handleLogin = (e: React.SyntheticEvent) => {
         e.preventDefault();
         setErrorMessage('');
@@ -66,10 +51,8 @@ export default function Login({ status }: Props) {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#F0F7FF] via-[#E4EFFD] to-[#D8E8FA] flex flex-col justify-center items-center px-4 py-8 sm:p-6 selection:bg-[#0256D0] selection:text-white relative overflow-hidden">
-            {/* Tag metadata judul halaman browser */}
             <Head title="Masuk - Sistem Inventaris Lab RPL" />
 
-            {/* Elemen latar belakang lingkaran blur gradasi biru modern */}
             <div className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-[#0284C7] via-[#38BDF8] to-[#0256D0] rounded-full blur-3xl opacity-40 pointer-events-none animate-pulse" />
             <div className="absolute -top-20 -right-20 w-[420px] h-[420px] bg-gradient-to-bl from-[#0369A1] via-[#0256D0] to-[#1D4ED8] rounded-full blur-3xl opacity-35 pointer-events-none" />
             <div className="absolute -bottom-24 -left-20 w-[440px] h-[440px] bg-gradient-to-tr from-[#38BDF8] via-[#0284C7] to-[#0256D0] rounded-full blur-3xl opacity-35 pointer-events-none" />
@@ -78,7 +61,6 @@ export default function Login({ status }: Props) {
             <div className="absolute top-1/4 right-[12%] w-28 h-28 rounded-full border-2 border-blue-400/25 blur-[0.5px] pointer-events-none hidden md:block" />
             <div className="absolute bottom-1/4 left-[10%] w-36 h-36 rounded-full border-2 border-sky-300/30 blur-[0.5px] pointer-events-none hidden md:block" />
 
-            {/* Kotak Kontainer Kartu Login Utama */}
             <div
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => {
@@ -97,12 +79,10 @@ export default function Login({ status }: Props) {
                         : 'shadow-2xl shadow-blue-900/20 ring-4 ring-white/50 hover:shadow-blue-700/30 active:scale-[0.99]'
                 }`}
             >
-                {/* Konten Formulir Bagian Dalam */}
                 <div
                     className="absolute inset-0 bg-white z-10 flex flex-col justify-between p-5 sm:p-7 cursor-default overflow-y-auto"
                     onClick={(e) => e.stopPropagation()}
                 >
-                    {/* Header Logo dan Salam Pembuka */}
                     <div className="flex flex-col items-center text-center pt-1">
                         <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl border border-blue-100 bg-blue-50/70 flex items-center justify-center p-2 mb-2 shadow-xs">
                             <img
@@ -119,9 +99,7 @@ export default function Login({ status }: Props) {
                         </p>
                     </div>
 
-                    {/* Formulir Input Kredensial */}
                     <form onSubmit={handleLogin} className="space-y-3.5 my-auto py-2">
-                        {/* Input Username */}
                         <div className="space-y-1">
                             <Label htmlFor="username" className="text-xs font-semibold text-slate-700">
                                 Username
@@ -143,7 +121,6 @@ export default function Login({ status }: Props) {
                             />
                         </div>
 
-                        {/* Input Password dengan Toggle Lihat/Sembunyi */}
                         <div className="space-y-1">
                             <Label htmlFor="password" className="text-xs font-semibold text-slate-700">
                                 Password
@@ -179,7 +156,6 @@ export default function Login({ status }: Props) {
                             </div>
                         </div>
 
-                        {/* Checkbox Ingat Saya */}
                         <div className="flex items-center space-x-2 pt-0.5">
                             <Checkbox
                                 id="remember"
@@ -195,21 +171,18 @@ export default function Login({ status }: Props) {
                             </Label>
                         </div>
 
-                        {/* Notifikasi Pesan Kesalahan */}
                         {errorMessage && (
                             <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium leading-relaxed">
                                 {errorMessage}
                             </div>
                         )}
 
-                        {/* Notifikasi Status Sesi */}
                         {status && (
                             <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium">
                                 {status}
                             </div>
                         )}
 
-                        {/* Tombol Masuk */}
                         <Button
                             type="submit"
                             disabled={isLoading}
@@ -219,7 +192,6 @@ export default function Login({ status }: Props) {
                         </Button>
                     </form>
 
-                    {/* Footer Hak Cipta */}
                     <div className="pt-3 border-t border-slate-100 text-center">
                         <p className="text-[11px] text-slate-400 font-medium">
                             Copyright 2026 © All rights reserved.
@@ -227,8 +199,6 @@ export default function Login({ status }: Props) {
                     </div>
                 </div>
 
-                {/* Layer Animasi Amplop Origami 4 Sisi (Membuka ke sudut luar saat disentuh/hover) */}
-                {/* Segitiga Atas-Kiri */}
                 <div
                     style={{
                         clipPath: 'polygon(0 0, 100% 0, 50% 50%, 0 50%)',
@@ -242,7 +212,6 @@ export default function Login({ status }: Props) {
                     <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px]" />
                 </div>
 
-                {/* Segitiga Atas-Kanan */}
                 <div
                     style={{
                         clipPath: 'polygon(50% 0, 100% 0, 100% 50%, 50% 50%)',
@@ -256,7 +225,6 @@ export default function Login({ status }: Props) {
                     <div className="absolute inset-0 bg-black/5" />
                 </div>
 
-                {/* Segitiga Bawah-Kiri */}
                 <div
                     style={{
                         clipPath: 'polygon(0 50%, 50% 50%, 50% 100%, 0 100%)',
@@ -270,7 +238,6 @@ export default function Login({ status }: Props) {
                     <div className="absolute inset-0 bg-black/10" />
                 </div>
 
-                {/* Segitiga Bawah-Kanan */}
                 <div
                     style={{
                         clipPath: 'polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%)',
@@ -284,7 +251,6 @@ export default function Login({ status }: Props) {
                     <div className="absolute inset-0 bg-white/5" />
                 </div>
 
-                {/* Segel Ikon Logo PinjamYuk di Tengah Amplop Sebelum Terbuka */}
                 <div
                     className={`absolute inset-0 z-30 flex flex-col items-center justify-center transition-all duration-500 pointer-events-none ${
                         isOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-100'

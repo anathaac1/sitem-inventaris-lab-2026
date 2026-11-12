@@ -1,26 +1,14 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/siswa/profile/
- * Fungsi  : Kumpulan komponen antarmuka yang mengelola data profil, keamanan akun,
- *           dan preferensi siswa dalam aplikasi inventaris lab.
- * File    : profile-nav-links.tsx
- * Fungsi  : Komponen daftar tautan navigasi pintas (shortcut) dari halaman profil
- *           menuju modul Peminjaman, Beranda Katalog, dan Seluruh Alat Laboratorium.
- * ============================================================================
- */
-
 import { Link } from '@inertiajs/react';
 import { ClipboardList, Home, Box, ChevronRight, type LucideIcon } from 'lucide-react';
 
 interface NavLinkItem {
-    title: string;                                             // Judul tautan navigasi
-    desc: string;                                              // Keterangan singkat fungsi halaman
-    icon: LucideIcon;                                          // Ikon Lucide React
-    href: string;                                              // Rute tujuan URL
+    title: string;
+    desc: string;
+    icon: LucideIcon;
+    href: string;
 }
 
 export function ProfileNavLinks() {
-    // Definisi rute menu navigasi pintas
     const menuLinks: NavLinkItem[] = [
         {
             title: 'Peminjaman Saya',
@@ -52,7 +40,6 @@ export function ProfileNavLinks() {
                         href={item.href}
                         className="flex items-center justify-between p-3.5 hover:bg-zinc-50 transition-colors cursor-pointer group"
                     >
-                        {/* Bagian Kiri: Ikon Berwarna dan Deskripsi Modul */}
                         <div className="flex items-center gap-3">
                             <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                                 <Icon className="w-4 h-4" />
@@ -65,7 +52,6 @@ export function ProfileNavLinks() {
                             </div>
                         </div>
 
-                        {/* Ikon Panah Navigasi */}
                         <ChevronRight className="w-4 h-4 text-zinc-400 group-hover:text-zinc-600 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                 );

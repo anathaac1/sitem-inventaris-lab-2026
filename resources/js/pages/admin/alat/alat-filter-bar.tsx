@@ -1,31 +1,21 @@
-/**
- * ============================================================================
- * Folder  : resources/js/pages/admin/alat/
- * Fungsi  : Kumpulan komponen antarmuka manajemen data barang inventaris laboratorium (CRUD Alat) untuk Administrator.
- * File    : alat-filter-bar.tsx
- * Fungsi  : Bilah kontrol penyaringan inventaris mencakup pencarian nama alat, kode alat,
- *           kategori dropdown, status stok, status keaktifan, tombol reset filter, dan tombol tambah alat baru.
- * ============================================================================
- */
-
 import React from 'react';
 import { Plus, ChevronDown, X } from 'lucide-react';
 import { CATEGORIES } from '@/data/inventory-data';
 
 export interface AlatFilterValues {
-    name: string;                                              // Kata kunci nama alat
-    code: string;                                              // Kata kunci kode alat
-    category: string;                                          // Kategori terpilih atau 'Semua'
-    stockStatus: 'all' | 'in_stock' | 'low_stock' | 'out_of_stock'; // Status ketersediaan stok
-    visibility: 'all' | 'visible' | 'hidden';                  // Status visibilitas alat (Aktif / Tidak Aktif)
+    name: string;
+    code: string;
+    category: string;
+    stockStatus: 'all' | 'in_stock' | 'low_stock' | 'out_of_stock';
+    visibility: 'all' | 'visible' | 'hidden';
 }
 
 interface AlatFilterBarProps {
-    filters: AlatFilterValues;                                 // Nilai filter saat ini
-    onFilterChange: (filters: AlatFilterValues) => void;       // Handler saat nilai filter diubah
-    onReset: () => void;                                       // Callback untuk mengosongkan filter
-    onApply: () => void;                                       // Callback untuk menerapkan filter
-    onOpenAdd: () => void;                                     // Callback untuk membuka form tambah alat baru
+    filters: AlatFilterValues;
+    onFilterChange: (filters: AlatFilterValues) => void;
+    onReset: () => void;
+    onApply: () => void;
+    onOpenAdd: () => void;
 }
 
 export function AlatFilterBar({
@@ -35,7 +25,6 @@ export function AlatFilterBar({
     onApply,
     onOpenAdd
 }: AlatFilterBarProps) {
-    // Memperbarui nilai salah satu field filter secara dinamis
     const handleFieldChange = (field: keyof AlatFilterValues, value: string) => {
         onFilterChange({
             ...filters,
@@ -43,7 +32,6 @@ export function AlatFilterBar({
         });
     };
 
-    // Menerapkan filter saat pengguna menekan tombol Enter pada input pencarian
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
             onApply();
@@ -52,7 +40,6 @@ export function AlatFilterBar({
 
     return (
         <div className="p-4 sm:p-5 border-b border-slate-200 bg-white">
-            {/* Bagian Atas: Tombol Aksi Tambah Alat Baru */}
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
                 <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                     Pencarian & Filter Inventaris
@@ -67,9 +54,7 @@ export function AlatFilterBar({
                 </button>
             </div>
 
-            {/* Grid Input Filter 3 Kolom */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-3.5 text-xs">
-                {/* 1. Filter Nama Alat */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Nama Alat
@@ -84,7 +69,6 @@ export function AlatFilterBar({
                     />
                 </div>
 
-                {/* 2. Filter Kategori */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Kategori
@@ -118,7 +102,6 @@ export function AlatFilterBar({
                     </div>
                 </div>
 
-                {/* 3. Filter Status Stok */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Status Stok
@@ -150,7 +133,6 @@ export function AlatFilterBar({
                     </div>
                 </div>
 
-                {/* 4. Filter Kode Alat */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Kode Alat
@@ -165,7 +147,6 @@ export function AlatFilterBar({
                     />
                 </div>
 
-                {/* 5. Filter Status Keaktifan (Visibilitas) */}
                 <div className="flex items-center gap-3">
                     <label className="w-32 shrink-0 font-medium text-slate-600 text-[11px] sm:text-xs">
                         Status Alat
@@ -199,7 +180,6 @@ export function AlatFilterBar({
                 <div className="hidden md:block"></div>
             </div>
 
-            {/* Bagian Bawah: Tombol Terapkan Filter & Reset */}
             <div className="flex items-center justify-end gap-2.5 mt-4 pt-3 border-t border-slate-100">
                 <button
                     type="button"
